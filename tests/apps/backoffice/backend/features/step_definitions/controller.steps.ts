@@ -26,11 +26,11 @@ Then('the response should be empty', () => {
 	assert.deepStrictEqual(_response.body, {});
 });
 
-BeforeAll(() => {
+BeforeAll(async () => {
 	application = new BackofficeBackendApp();
-	application.start();
+	await application.start();
 });
 
-AfterAll(() => {
-	application.stop();
+AfterAll(async () => {
+	await application.stop();
 });

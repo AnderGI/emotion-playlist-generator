@@ -4,7 +4,7 @@ import StatusGetController from '../controllers/status-health-check/StatusGetCon
 import container from '../dependency-injection';
 
 export const register = (router: Router): void => {
-	const controller = container.get<StatusGetController>('apps.mooc.StatusGetController');
+	const controller = container.get<StatusGetController>('apps.backoffice.StatusGetController');
 	router.get('/status', (req: Request, res: Response) => {
 		controller.run(req, res);
 	});
