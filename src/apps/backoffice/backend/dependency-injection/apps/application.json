@@ -6,7 +6,15 @@
     },
     "apps.backoffice.ImagePutController": {
       "class": "../../controllers/submit-image/ImagePutController",
-      "arguments": [""]     
+      "arguments": ["@backoffice.image.ImageSaver"]     
+    },
+    "backoffice.image.ImageSaver": {
+      "class": "../../../../../contexts/backoffice/image/application/save/ImageSaver",
+      "arguments": ["@backoffice.image.ImageRepository"]
+    },
+    "backoffice.image.ImageRepository": {
+      "class": "../../../../../contexts/backoffice/image/infrastructure/persistence/InMemoryImageRepository",
+      "arguments": [""]
     }
   }
 }
