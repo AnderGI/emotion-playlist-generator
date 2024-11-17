@@ -1,7 +1,7 @@
 import { AfterAll, BeforeAll, Given, Then } from '@cucumber/cucumber';
 import assert from 'assert';
 import { createReadStream, unlink } from 'fs';
-import { readdir } from 'fs/promises';
+import { mkdir, readdir, rmdir } from 'fs/promises';
 import path from 'path';
 import request from 'supertest';
 
@@ -43,6 +43,13 @@ Then('the response should be:', (body: string) => {
 BeforeAll(async () => {
 	application = new BackofficeBackendApp();
 	await application.start();
+	// Ensure .uploads directory exists
+	const uploadsPath = path.resolve(__dirname, '..', '..', '..', '..', '..', '..', '.test-uploads');
+	try {
+		await mkdir(uploadsPath, { recursive: true });
+	} catch (error) {
+		console.log('Error creating .uploads directory:', error);
+	}
 });
 
 AfterAll(async () => {
@@ -52,7 +59,16 @@ AfterAll(async () => {
 
 async function removeUploadFiles() {
 	try {
-		const uploadsPath = path.resolve(__dirname, '..', '..', '..', '..', '..', '..', '.uploads');
+		const uploadsPath = path.resolve(
+			__dirname,
+			'..',
+			'..',
+			'..',
+			'..',
+			'..',
+			'..',
+			'.test-uploads'
+		);
 		const filePaths = await readdir(uploadsPath);
 		for (const filePath of filePaths) {
 			unlink(path.resolve(uploadsPath, filePath), err => {
@@ -61,6 +77,7 @@ async function removeUploadFiles() {
 				}
 			});
 		}
+		await rmdir(uploadsPath);
 	} catch (error) {
 		console.log(error);
 	}
