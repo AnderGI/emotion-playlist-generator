@@ -6,7 +6,7 @@
     },
     "apps.backoffice.ImagePutController": {
       "class": "../../controllers/submit-image/ImagePutController",
-      "arguments": ["@backoffice.image.ImageSaver"]     
+      "arguments": ["@shared.command.CommandBus"]     
     },
     "backoffice.image.ImageSaver": {
       "class": "../../../../../contexts/backoffice/image/application/save/ImageSaver",
@@ -15,6 +15,19 @@
     "backoffice.image.ImageRepository": {
       "class": "../../../../../contexts/backoffice/image/infrastructure/persistence/InMemoryImageRepository",
       "arguments": [""]
+    },
+    "shared.command.CommandBus": {
+      "class": "../../../../../shared/infrastructure/bus/command/InMemoryCommandBus",
+      "arguments": ["@shared.command.CommandHandlers"]
+    },
+    "shared.command.CommandHandlers": {
+      "class": "../../../../../shared/domain/bus/command/CommandHandlers",
+      "arguments": ["!tagged commandHandler"]
+    },
+    "backoffice.image.CreateImageCommandHandler": {
+      "class": "../../../../../contexts/backoffice/image/application/save/CreateImageCommandHandler",
+      "arguments": ["@backoffice.image.ImageSaver"],
+      "tags": [{"name":"commandHandler"}]
     }
   }
 }

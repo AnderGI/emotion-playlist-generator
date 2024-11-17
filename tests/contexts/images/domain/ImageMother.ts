@@ -1,4 +1,4 @@
-import CreateImageReq from '../../../../src/apps/backoffice/backend/controllers/submit-image/CreateImageReq';
+import CreateImageCommand from '../../../../src/apps/backoffice/backend/controllers/submit-image/CreateImageCommand';
 import { Image } from '../../../../src/contexts/backoffice/image/domain/Image';
 import { ImageIdMother } from './ImageIdMother';
 import { ImagePathMother } from './ImagePathMother';
@@ -11,10 +11,10 @@ export class ImageMother {
 		});
 	}
 
-	static fromRequest(createImageReq: CreateImageReq): Image {
+	static fromCommand(createImageCommand: CreateImageCommand): Image {
 		return Image.create({
-			id: createImageReq.id,
-			path: createImageReq.path
+			id: createImageCommand.id,
+			path: createImageCommand.path
 		});
 	}
 }
