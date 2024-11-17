@@ -1,0 +1,13 @@
+import { ControllerRequest } from '../../../../../contexts/backoffice/image/domain/ControllerRequest';
+
+export default interface CreateImageReq extends ControllerRequest {
+	id: string; // uuid
+	path: string; // file path
+	fieldname: string; // 'image'
+	originalname: string; // 'artist-white.jpg'
+	encoding: string; // '7bit'
+	mimetype: string; // 'image/jpeg'
+	destination: string; // directory path
+	filename: string; // 'image-1731751422764-87172861'
+	size: number; // 4495911
+}

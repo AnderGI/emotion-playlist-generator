@@ -1,15 +1,13 @@
-import { Request, Response } from 'express';
-import httpStatus from 'http-status';
+import { Response } from 'express';
 
 import { ImageSaver } from '../../../../../contexts/backoffice/image/application/save/ImageSaver';
 import { Controller } from '../Controller';
+import CreateImageReq from './CreateImageReq';
 
-export class ImagePutController implements Controller {
+export default class ImagePutController implements Controller {
 	constructor(private readonly imageSaver: ImageSaver) {}
-	async run(req: Request, res: Response): Promise<void> {
-		const { id } = req.params;
-		const { path } = req.body as { path: string };
-		await this.imageSaver.save(id, path);
-		res.status(httpStatus.CREATED).send();
+	async run(req: CreateImageReq, res: Response): Promise<void> {
+		await this.imageSaver.save(req);
+		res.status(201).send();
 	}
 }

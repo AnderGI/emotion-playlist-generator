@@ -7,7 +7,7 @@ export class Image {
 		this.path;
 	}
 
-	public static create(id: string, path: string): Image {
+	public static create({ id, path }: { id: string; path: string }): Image {
 		const image: Image = new Image(ImageId.create(id), ImagePath.create(path));
 
 		return image;

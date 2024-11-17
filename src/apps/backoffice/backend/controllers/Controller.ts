@@ -1,5 +1,7 @@
-import { Request, Response } from 'express';
+import { Response } from 'express';
+
+import { ControllerRequest } from '../../../../contexts/backoffice/image/domain/ControllerRequest';
 
 export interface Controller {
-	run(req: Request, res: Response): Promise<void> | void;
+	run(req: ControllerRequest, res: Response): Promise<void> | void;
 }

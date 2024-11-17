@@ -1,7 +1,7 @@
 export class ImageId {
 	private constructor(private readonly id: string) {}
-	public static create(path: string): ImageId {
-		return new ImageId(path);
+	public static create(id: string): ImageId {
+		return new ImageId(id);
 	}
 
 	public getId(): string {

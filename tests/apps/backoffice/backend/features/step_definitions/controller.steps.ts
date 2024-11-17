@@ -1,5 +1,8 @@
 import { AfterAll, BeforeAll, Given, Then } from '@cucumber/cucumber';
 import assert from 'assert';
+import { createReadStream, unlink } from 'fs';
+import { readdir } from 'fs/promises';
+import path from 'path';
 import request from 'supertest';
 
 import { BackofficeBackendApp } from '../../../../../../src/apps/backoffice/backend/BackofficeBackendApp';
@@ -22,8 +25,19 @@ Given('I send a PUT request to {string} with body:', (route: string, body: strin
 		.send(JSON.parse(body) as object);
 });
 
+Given('I send a PUT request via form to {string}', (route: string) => {
+	// Prepare the headers and the form data
+	_request = request(application.httpServer)
+		.put(route)
+		.attach('image', createReadStream(path.join(__dirname, '/tmp/artist-white.jpg')));
+});
+
 Then('the response should be empty', () => {
 	assert.deepStrictEqual(_response.body, {});
+});
+
+Then('the response should be:', (body: string) => {
+	assert.deepStrictEqual(_response.body, JSON.parse(body));
 });
 
 BeforeAll(async () => {
@@ -33,4 +47,21 @@ BeforeAll(async () => {
 
 AfterAll(async () => {
 	await application.stop();
+	await removeUploadFiles();
 });
+
+async function removeUploadFiles() {
+	try {
+		const uploadsPath = path.resolve(__dirname, '..', '..', '..', '..', '..', '..', '.uploads');
+		const filePaths = await readdir(uploadsPath);
+		for (const filePath of filePaths) {
+			unlink(path.resolve(uploadsPath, filePath), err => {
+				if (err) {
+					console.log(err);
+				}
+			});
+		}
+	} catch (error) {
+		console.log(error);
+	}
+}
