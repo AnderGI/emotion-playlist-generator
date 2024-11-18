@@ -25,7 +25,7 @@ Feature: Submit an Image endpoint
     """
 
 
-  Scenario: Put request with invalid uuid in request params.
+  Scenario: Invalid request content type.
     Given I send a PUT request to "/images/d9c76966-a514-4245-a53b-347353fa6927" with body:
     """
     {
