@@ -1,4 +1,4 @@
-import { UUID } from 'bson';
+import { v4, validate } from 'uuid';
 
 import { StringValueObject } from './StringValueObject';
 
@@ -9,13 +9,13 @@ export class UuidValueObject extends StringValueObject {
 	}
 
 	public static random(): string {
-		const uuid = new UuidValueObject(UUID.generate().toString());
+		const uuid = new UuidValueObject(v4());
 
 		return uuid.getValue();
 	}
 
 	private ensureIsValid(value: string): void {
-		if (!UUID.isValid(value)) {
+		if (!validate(value)) {
 			throw new Error(`Invalid uuid ${value}`);
 		}
 	}

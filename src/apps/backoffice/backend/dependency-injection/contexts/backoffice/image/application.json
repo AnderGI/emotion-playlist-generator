@@ -1,0 +1,18 @@
+{
+  "services": {
+    "backoffice.image.ImageSaver": {
+      "class": "../../../../../../../contexts/backoffice/image/application/save/ImageSaver",
+      "arguments": ["@backoffice.image.ImageRepository", "@shared.event.EventBus"]
+    },
+    "backoffice.image.ImageRepository": {
+      "class": "../../../../../../../contexts/backoffice/image/infrastructure/persistence/InMemoryImageRepository",
+      "arguments": [""]
+    },
+    "backoffice.image.CreateImageCommandHandler": {
+      "class": "../../../../../../../contexts/backoffice/image/application/save/CreateImageCommandHandler",
+      "arguments": ["@backoffice.image.ImageSaver"],
+      "tags": [{"name":"commandHandler"}]
+    }
+  }
+}
+

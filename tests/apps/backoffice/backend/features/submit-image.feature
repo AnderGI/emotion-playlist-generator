@@ -3,7 +3,7 @@ Feature: Submit an Image endpoint
   An authenticated user must be able to submit images
 
   Scenario: Happy Path.
-    Given I send a PUT request via form to "/images/a554fa96-792c-475d-8b4f-4bf055a6fe79"
+    Given I send a PUT request via form to "/images/4224d249-e721-4f1d-b32b-ce8eefaaf6dc"
     Then the response status code should be 201
     Then the response should be empty
 
@@ -26,7 +26,7 @@ Feature: Submit an Image endpoint
 
 
   Scenario: Invalid request content type.
-    Given I send a PUT request to "/images/d9c76966-a514-4245-a53b-347353fa6927" with body:
+    Given I send a PUT request to "/images/4224d249-e721-4f1d-b32b-ce8eefaaf6dc" with body:
     """
     {
       "mock":"nhjagshvh"

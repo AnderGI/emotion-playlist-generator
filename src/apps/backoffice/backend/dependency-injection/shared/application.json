@@ -1,0 +1,17 @@
+{
+  "services": {
+    "shared.command.CommandBus": {
+      "class": "../../../../../shared/infrastructure/bus/command/InMemoryCommandBus",
+      "arguments": ["@shared.command.CommandHandlers"]
+    },
+    "shared.command.CommandHandlers": {
+      "class": "../../../../../shared/domain/bus/command/CommandHandlers",
+      "arguments": ["!tagged commandHandler"]
+    },
+    "shared.event.EventBus": {
+      "class": "../../../../../shared/infrastructure/bus/event/InMemorySyncEventBus",
+      "arguments": [""]
+    }
+  }
+}
+

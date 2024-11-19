@@ -1,3 +1,7 @@
 {
-  "imports": [{ "resource": "./apps/application.json" }]
+  "imports": [
+    { "resource": "./shared/application.json" },
+    { "resource": "./apps/application.json" },
+    { "resource": "./contexts/backoffice/image/application.json" }
+  ]
 }
