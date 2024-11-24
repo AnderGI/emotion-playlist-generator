@@ -6,7 +6,7 @@
     },
     "apps.backoffice.ImagePutController": {
       "class": "../../controllers/submit-image/ImagePutController",
-      "arguments": ["@shared.command.CommandBus"]     
+      "arguments": ["@shared.CommandBus"]     
     }
   }
 }

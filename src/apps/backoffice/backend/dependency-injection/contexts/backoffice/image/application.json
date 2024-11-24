@@ -1,12 +1,12 @@
 {
   "services": {
+    "backoffice.image.ImageRepository": {
+      "class": "../../../../../../../contexts/backoffice/image/infrastructure/persistence/typeorm/TypeOrmImageRepository",
+      "arguments": ["@backoffice.shared.TypeOrmClientFactory"]
+    },
     "backoffice.image.ImageSaver": {
       "class": "../../../../../../../contexts/backoffice/image/application/save/ImageSaver",
-      "arguments": ["@backoffice.image.ImageRepository", "@shared.event.EventBus"]
-    },
-    "backoffice.image.ImageRepository": {
-      "class": "../../../../../../../contexts/backoffice/image/infrastructure/persistence/InMemoryImageRepository",
-      "arguments": [""]
+      "arguments": ["@backoffice.image.ImageRepository", "@backoffice.shared.EventBus"]
     },
     "backoffice.image.CreateImageCommandHandler": {
       "class": "../../../../../../../contexts/backoffice/image/application/save/CreateImageCommandHandler",
@@ -15,4 +15,7 @@
     }
   }
 }
+
+
+
 

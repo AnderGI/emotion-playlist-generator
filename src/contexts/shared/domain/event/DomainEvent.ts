@@ -1,4 +1,4 @@
-import { UuidValueObject } from '../../value-object/UuidValueObject';
+import { UuidValueObject } from '../value-object/UuidValueObject';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type DomainEventAttributes = any;

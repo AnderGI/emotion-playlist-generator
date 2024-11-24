@@ -1,6 +1,6 @@
-import { Image } from '../../domain/Image';
-import { ImageId } from '../../domain/ImageId';
-import { ImageRepository } from '../../domain/ImageRepository';
+import { Image } from '../../../domain/Image';
+import { ImageId } from '../../../domain/ImageId';
+import { ImageRepository } from '../../../domain/ImageRepository';
 
 export class InMemoryImageRepository extends Map<string, Image> implements ImageRepository {
 	async save(image: Image): Promise<void> {

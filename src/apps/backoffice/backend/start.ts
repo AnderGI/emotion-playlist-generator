@@ -1,4 +1,4 @@
-import { BackofficeBackendApp } from './BackofficeBackendApp';
+import BackofficeBackendApp from './BackofficeBackendApp';
 
 try {
 	new BackofficeBackendApp().start();

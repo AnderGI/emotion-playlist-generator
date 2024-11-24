@@ -1,6 +1,6 @@
-import { DomainEvent } from '../../../domain/bus/event/DomainEvent';
-import { DomainEventSubscriber } from '../../../domain/bus/event/DomainEventSubscriber';
-import { EventBus } from '../../../domain/bus/event/EventBus';
+import { DomainEvent } from '../../domain/event/DomainEvent';
+import { DomainEventSubscriber } from '../../domain/event/DomainEventSubscriber';
+import { EventBus } from '../../domain/event/EventBus';
 import { DomainEventSubscribers } from './DomainEventSubscribers';
 
 export class InMemorySyncEventBus

@@ -1,7 +1,7 @@
 import { ImageCreatedDomainEvent } from '../../../../src/contexts/backoffice/image/application/save/ImageCreatedDomainEvent';
-import { DomainEvent } from '../../../../src/shared/domain/bus/event/DomainEvent';
-import { EventBus } from '../../../../src/shared/domain/bus/event/EventBus';
-import { DomainEventSubscribers } from '../../../../src/shared/infrastructure/bus/event/DomainEventSubscribers';
+import { DomainEvent } from '../../../../src/contexts/shared/domain/event/DomainEvent';
+import { EventBus } from '../../../../src/contexts/shared/domain/event/EventBus';
+import { DomainEventSubscribers } from '../../../../src/contexts/shared/infrastructure/event/DomainEventSubscribers';
 
 export class MockEventBus implements EventBus {
 	private readonly publishMock: jest.Mock;

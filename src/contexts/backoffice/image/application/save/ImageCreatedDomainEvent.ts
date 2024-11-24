@@ -1,4 +1,4 @@
-import { DomainEvent } from '../../../../../shared/domain/bus/event/DomainEvent';
+import { DomainEvent } from '../../../../shared/domain/event/DomainEvent';
 import { Image } from '../../domain/Image';
 
 export class ImageCreatedDomainEvent extends DomainEvent {

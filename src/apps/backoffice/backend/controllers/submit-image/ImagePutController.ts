@@ -1,7 +1,7 @@
 import { Response } from 'express';
 
-import CommandBus from '../../../../../shared/domain/bus/command/CommandBus';
-import { Controller } from '../Controller';
+import CommandBus from '../../../../../shared/domain/command/CommandBus';
+import { Controller } from '../../../../../shared/domain/Controller';
 import CreateImageCommand from './CreateImageCommand';
 import CreateImageReq from './CreateImageReq';
 

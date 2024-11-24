@@ -1,0 +1,21 @@
+{
+  "services": {
+    "backoffice.shared.TypeOrmConfig":{
+      "factory":{
+        "class": "../../../../../../../contexts/shared/infrastructure/persistence/typeorm/TypeOrmConfigFactory",
+        "method": "createConfig"
+      }
+    },
+    "backoffice.shared.TypeOrmClientFactory":{
+      "factory":{
+        "class": "../../../../../../../contexts/shared/infrastructure/persistence/typeorm/TypeOrmClientFactory",
+        "method": "createClient"
+      },
+      "arguments": ["backoffice", "@backoffice.shared.TypeOrmConfig"]
+    },
+    "backoffice.shared.EventBus": {
+      "class": "../../../../../../../contexts/shared/infrastructure/event/InMemorySyncEventBus",
+      "arguments": [""]
+    }
+  }
+}

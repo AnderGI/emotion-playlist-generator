@@ -5,7 +5,7 @@ import { mkdir, readdir, rmdir } from 'fs/promises';
 import path from 'path';
 import request from 'supertest';
 
-import { BackofficeBackendApp } from '../../../../../../src/apps/backoffice/backend/BackofficeBackendApp';
+import BackofficeBackendApp from '../../../../../../src/apps/backoffice/backend/BackofficeBackendApp';
 
 let _request: request.Test;
 let application: BackofficeBackendApp;

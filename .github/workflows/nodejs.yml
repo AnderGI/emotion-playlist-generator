@@ -16,9 +16,14 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: Create image-uploads
-        run: mkdir -p image-uploads
+        run: /
+          mkdir -p image-uploads
       - name: List files in the current directory
-        run: ls -la
+        run: /
+          ls -la
+      - name: Start docker
+        run: /
+          docker compose up -d
       - name: npm install
         run: |
           npm install
@@ -31,3 +36,7 @@ jobs:
       - name: npm test
         run: |
           npm test
+      - name: Stop docker container
+        if: always()
+        run: /
+          docker compose down 

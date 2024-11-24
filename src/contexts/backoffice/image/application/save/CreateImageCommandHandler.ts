@@ -1,6 +1,6 @@
 import CreateImageCommand from '../../../../../apps/backoffice/backend/controllers/submit-image/CreateImageCommand';
-import Command from '../../../../../shared/domain/bus/command/Command';
-import CommandHandler from '../../../../../shared/domain/bus/command/CommandHandler';
+import Command from '../../../../../shared/domain/command/Command';
+import CommandHandler from '../../../../../shared/domain/command/CommandHandler';
 import { ImageSaver } from './ImageSaver';
 
 export default class CreateImageCommandHandler implements CommandHandler<CreateImageCommand> {
@@ -10,6 +10,6 @@ export default class CreateImageCommandHandler implements CommandHandler<CreateI
 	}
 
 	async handle(command: CreateImageCommand): Promise<void> {
-		await this.imageSaver.save(command);
+		await this.imageSaver.run(command);
 	}
 }

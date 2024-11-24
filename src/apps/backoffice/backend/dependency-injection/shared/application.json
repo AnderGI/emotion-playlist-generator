@@ -1,17 +1,14 @@
 {
   "services": {
-    "shared.command.CommandBus": {
-      "class": "../../../../../shared/infrastructure/bus/command/InMemoryCommandBus",
-      "arguments": ["@shared.command.CommandHandlers"]
+    "shared.CommandBus": {
+      "class": "../../../../../shared/infrastructure/command/InMemoryCommandBus",
+      "arguments": ["@shared.CommandHandlers"]
     },
-    "shared.command.CommandHandlers": {
-      "class": "../../../../../shared/domain/bus/command/CommandHandlers",
+    "shared.CommandHandlers": {
+      "class": "../../../../../shared/domain/command/CommandHandlers",
       "arguments": ["!tagged commandHandler"]
-    },
-    "shared.event.EventBus": {
-      "class": "../../../../../shared/infrastructure/bus/event/InMemorySyncEventBus",
-      "arguments": [""]
     }
   }
 }
+
 

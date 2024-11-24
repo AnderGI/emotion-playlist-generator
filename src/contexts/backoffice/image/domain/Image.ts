@@ -1,8 +1,9 @@
+import { AggregateRoot } from '../../../shared/domain/AggregateRoot';
 import { ImageId } from './ImageId';
 import { ImagePath } from './ImagePath';
 
-export class Image {
-	private constructor(private readonly id: ImageId, private readonly path: ImagePath) {
+export class Image implements AggregateRoot {
+	constructor(readonly id: ImageId, readonly path: ImagePath) {
 		this.id;
 		this.path;
 	}
@@ -11,6 +12,13 @@ export class Image {
 		const image: Image = new Image(ImageId.create(id), ImagePath.create(path));
 
 		return image;
+	}
+
+	toPrimitives(): { id: string; path: string } {
+		return {
+			id: this.getId(),
+			path: this.getPath()
+		};
 	}
 
 	public equals(other: Image): boolean {

@@ -1,5 +1,5 @@
 import CreateImageCommand from '../../../../../apps/backoffice/backend/controllers/submit-image/CreateImageCommand';
-import { EventBus } from '../../../../../shared/domain/bus/event/EventBus';
+import { EventBus } from '../../../../shared/domain/event/EventBus';
 import { ImageCreatedDomainEvent } from '../../application/save/ImageCreatedDomainEvent';
 import { Image } from '../Image';
 import { ImageRepository } from '../ImageRepository';

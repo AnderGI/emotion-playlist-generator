@@ -1,7 +1,7 @@
-import { UuidValueObject } from '../../../../shared/domain/value-object/UuidValueObject';
+import { UuidValueObject } from '../../../shared/domain/value-object/UuidValueObject';
 
 export class ImageId extends UuidValueObject {
-	private constructor(private readonly id: string) {
+	constructor(private readonly id: string) {
 		super(id);
 	}
 

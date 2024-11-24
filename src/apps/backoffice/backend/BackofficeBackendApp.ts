@@ -1,6 +1,6 @@
 import { Server } from './server';
 
-export class BackofficeBackendApp {
+export default class BackofficeBackendApp {
 	server?: Server;
 
 	async start(): Promise<void> {

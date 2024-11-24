@@ -1,4 +1,4 @@
-import { ControllerRequest } from '../../../../../contexts/backoffice/image/domain/ControllerRequest';
+import { ControllerRequest } from '../../../../../shared/domain/ControllerRequest';
 
 export default interface CreateImageReq extends ControllerRequest {
 	id: string; // uuid
