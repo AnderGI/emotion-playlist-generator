@@ -24,7 +24,7 @@ export class TypeOrmClientFactory {
 		try {
 			return connection.initialize();
 		} catch (error) {
-			console.log(`Error in TypeOrm factory ${error}`);
+			console.log(`Error in TypeOrm factory`);
 			process.exit(1);
 		}
 	}
