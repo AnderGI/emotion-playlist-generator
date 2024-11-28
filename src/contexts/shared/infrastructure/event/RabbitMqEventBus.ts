@@ -1,42 +1,21 @@
-import * as amqplib from 'amqplib';
-
 import { DomainEvent } from '../../domain/event/DomainEvent';
 import { EventBus } from '../../domain/event/EventBus';
+import { AmqpWrapper } from './AmqpWrapper';
 import { DomainEventSubscribers } from './DomainEventSubscribers';
 
 export class RabbitMqEventBus implements EventBus {
-	// constructor() {}
-	async publish(event: DomainEvent): Promise<void> {
-		const connection = await this.createConnection();
-		const channel = await this.createChannel(connection);
-		await channel.prefetch(1);
+	private readonly exchange: string;
 
-		return new Promise((resolve, reject) => {
-			channel.publish(
-				'amq.topic',
-				event.eventName, // andergi.backoffice.image.event.image_created.1
-				Buffer.from(
-					JSON.stringify({
-						aggregateId: event.eventId,
-						eventId: event.aggregateId,
-						occurredOn: event.occurredOn,
-						eventName: event.eventName,
-						// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-						attributes: event.toPrimitives()
-					})
-				),
-				{
-					contentType: 'application/json',
-					contentEncoding: 'utf-8',
-					messageId: event.eventId
-				},
-				err => {
-					if (err) {
-						reject(err);
-					}
-					resolve();
-				}
-			);
+	constructor(private readonly amqpWrapper: AmqpWrapper) {
+		this.exchange = 'amq.topic';
+	}
+
+	async publish(event: DomainEvent): Promise<void> {
+		await this.amqpWrapper.publish({
+			exchange: this.exchange,
+			routingKey: event.eventName,
+			messageId: event.eventId,
+			data: this.serialize(event)
 		});
 	}
 
@@ -44,30 +23,14 @@ export class RabbitMqEventBus implements EventBus {
 		throw new Error('Method not implemented.');
 	}
 
-	private async createConnection() {
-		const connection = await amqplib.connect({
-			protocol: 'amqp',
-			hostname: 'localhost',
-			port: 5672,
-			username: 'admin',
-			password: 'p@ssw0rd',
-			vhost: '/'
+	private serialize(event: DomainEvent): string {
+		return JSON.stringify({
+			aggregateId: event.eventId,
+			eventId: event.aggregateId,
+			occurredOn: event.occurredOn,
+			eventName: event.eventName,
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+			attributes: event.toPrimitives()
 		});
-		connection.on('error', err => {
-			console.log(err);
-			process.exit(1);
-		});
-
-		return connection;
-	}
-
-	private async createChannel(connection: amqplib.Connection) {
-		const channel = await connection.createConfirmChannel();
-		channel.on('error', err => {
-			console.log(err);
-			process.exit(1);
-		});
-
-		return channel;
 	}
 }

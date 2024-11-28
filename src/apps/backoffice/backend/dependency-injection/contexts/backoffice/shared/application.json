@@ -13,9 +13,25 @@
       },
       "arguments": ["backoffice", "@backoffice.shared.TypeOrmConfig"]
     },
+    "backoffice.shared.AmqpChannelPublishOptionsFactory": {
+      "factory":{
+        "class": "../../../../../../../contexts/shared/infrastructure/event/AmqpChannelPublishOptionsFactory",
+        "method": "createOptions"
+      }
+    },
+    "backoffice.shared.AmqpConnectionSettingsFactory": {
+      "factory":{
+        "class": "../../../../../../../contexts/shared/infrastructure/event/AmqpConnectionSettingsFactory",
+        "method": "createConnection"
+      }
+    },
+    "backoffice.shared.AmqpWrapper": {
+      "class": "../../../../../../../contexts/shared/infrastructure/event/AmqpWrapper",
+      "arguments": ["@backoffice.shared.AmqpConnectionSettingsFactory", "@backoffice.shared.AmqpChannelPublishOptionsFactory"]
+    },
     "backoffice.shared.EventBus": {
-      "class": "../../../../../../../contexts/shared/infrastructure/event/InMemorySyncEventBus",
-      "arguments": [""]
+      "class": "../../../../../../../contexts/shared/infrastructure/event/RabbitMqEventBus",
+      "arguments": ["@backoffice.shared.AmqpWrapper"]
     }
   }
 }
