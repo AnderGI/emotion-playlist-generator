@@ -3,20 +3,21 @@ import { Image } from '../../domain/Image';
 
 export class ImageCreatedDomainEvent extends DomainEvent {
 	static readonly EVENT_NAME: string = 'andergi.backoffice.image.event.image_created.1';
-	private constructor(private readonly id: string, private readonly path: string) {
+	private readonly path: string;
+	private constructor({ id, path }: { id: string; path: string }) {
 		super({
 			eventName: ImageCreatedDomainEvent.EVENT_NAME,
 			aggregateId: id
 		});
+		this.path = path;
 	}
 
 	static fromAggregate(image: Image): ImageCreatedDomainEvent {
-		return new ImageCreatedDomainEvent(image.getId(), image.getPath());
+		return new ImageCreatedDomainEvent({ id: image.getId(), path: image.getPath() });
 	}
 
-	toPrimitives(): { id: string; path: string } {
+	toPrimitives(): { path: string } {
 		return {
-			id: this.id,
 			path: this.path
 		};
 	}
