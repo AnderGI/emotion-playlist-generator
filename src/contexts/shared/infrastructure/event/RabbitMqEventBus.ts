@@ -1,8 +1,8 @@
 import * as amqplib from 'amqplib';
 
-import { DomainEvent } from '../../../contexts/shared/domain/event/DomainEvent';
-import { EventBus } from '../../../contexts/shared/domain/event/EventBus';
-import { DomainEventSubscribers } from '../../../contexts/shared/infrastructure/event/DomainEventSubscribers';
+import { DomainEvent } from '../../domain/event/DomainEvent';
+import { EventBus } from '../../domain/event/EventBus';
+import { DomainEventSubscribers } from './DomainEventSubscribers';
 
 export class RabbitMqEventBus implements EventBus {
 	// constructor() {}

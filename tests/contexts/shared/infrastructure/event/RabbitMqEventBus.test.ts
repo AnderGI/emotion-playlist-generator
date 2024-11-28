@@ -1,4 +1,4 @@
-import { RabbitMqEventBus } from '../../../../../src/shared/infrastructure/event/RabbitMqEventBus';
+import { RabbitMqEventBus } from '../../../../../src/contexts/shared/infrastructure/event/RabbitMqEventBus';
 import { ImageCreatedDomainEventMother } from '../../../images/domain/ImageCreatedDomainEventMother';
 import { ImageMother } from '../../../images/domain/ImageMother';
 
