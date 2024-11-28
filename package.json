@@ -26,6 +26,8 @@
     "build:clean": "rm -r dist; exit 0"
   },
   "dependencies": {
+    "@types/amqplib": "^0.10.5",
+    "amqplib": "^0.10.5",
     "body-parser": "^1.19.0",
     "bodybuilder": "^2.4.0",
     "bson": "^4.5.2",
