@@ -62,7 +62,7 @@ export class AmqpWrapper {
 		const connection = await amqplib.connect(this.amqpConnectionSettings);
 		connection.on('error', err => {
 			console.log(err);
-			process.exit(1);
+			Promise.reject(err);
 		});
 
 		return connection;
@@ -73,7 +73,7 @@ export class AmqpWrapper {
 		await channel.prefetch(1);
 		channel.on('error', err => {
 			console.log(err);
-			process.exit(1);
+			Promise.reject(err);
 		});
 
 		return channel;

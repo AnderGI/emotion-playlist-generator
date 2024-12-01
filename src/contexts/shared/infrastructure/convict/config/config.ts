@@ -45,6 +45,52 @@ const config = convict({
 			env: 'TYPEORM_DATABASE',
 			default: 'backoffice-backend-dev'
 		}
+	},
+	rabbitmq: {
+		connectionSettings: {
+			protocol: {
+				doc: 'RabbitMQ communictaion protocol',
+				format: String,
+				default: 'amqp'
+			},
+			hostname: {
+				doc: 'RabbitMQ hostname',
+				format: String,
+				default: 'localhost'
+			},
+			port: {
+				doc: 'RabbitMQ communication port',
+				format: Number,
+				default: 5672
+			},
+			username: {
+				doc: 'RabbitMQ username',
+				format: String,
+				default: 'admin'
+			},
+			password: {
+				doc: 'RabbitMQ password',
+				format: String,
+				default: 'p@ssw0rd'
+			},
+			vhost: {
+				doc: 'RabbitMQ vhost',
+				format: String,
+				default: '/'
+			}
+		},
+		publishOptions: {
+			contentType: {
+				doc: 'Content type for published messages',
+				format: String,
+				default: 'application/json'
+			},
+			contentEncoding: {
+				doc: 'Content encoding for published messages',
+				format: String,
+				default: 'utf-8'
+			}
+		}
 	}
 });
 
