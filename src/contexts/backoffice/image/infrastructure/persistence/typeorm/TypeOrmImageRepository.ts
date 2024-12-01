@@ -4,7 +4,7 @@ import { Nullable } from '../../../../../../shared/domain/Nullable';
 import { Image } from '../../../domain/Image';
 import { ImageId } from '../../../domain/ImageId';
 import { ImageRepository } from '../../../domain/ImageRepository';
-import { ImageEntity } from './ImageEntity';
+import { ImageEntity } from './ImageEntity.entity';
 
 export class TypeOrmImageRepository implements ImageRepository {
 	constructor(private readonly _client: Promise<DataSource>) {}

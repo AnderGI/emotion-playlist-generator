@@ -1,6 +1,6 @@
 import { DataSource } from 'typeorm';
 
-import { ImageEntity } from '../../../../backoffice/image/infrastructure/persistence/typeorm/ImageEntity';
+import { ImageEntity } from '../../../../backoffice/image/infrastructure/persistence/typeorm/ImageEntity.entity';
 import { TypeOrmConfig } from './TypeOrmConfig';
 
 ImageEntity;
@@ -15,9 +15,7 @@ export class TypeOrmClientFactory {
 			username: config.username,
 			password: config.password,
 			database: config.database,
-			entities: [
-				`${__dirname}/../../../../backoffice/image/infrastructure/persistence/typeorm/*.ts`
-			],
+			entities: [`${__dirname}/../../../../**/*.entity.ts`],
 			synchronize: true,
 			logging: true
 		});

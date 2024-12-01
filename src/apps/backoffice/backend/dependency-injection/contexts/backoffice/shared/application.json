@@ -29,9 +29,13 @@
       "class": "../../../../../../../contexts/shared/infrastructure/event/AmqpWrapper",
       "arguments": ["@backoffice.shared.AmqpConnectionSettingsFactory", "@backoffice.shared.AmqpChannelPublishOptionsFactory"]
     },
+    "backoffice.shared.DomainEventsFallback": {
+      "class": "../../../../../../../contexts/shared/infrastructure/event/DomainEventsFallback",
+      "arguments": ["@backoffice.shared.TypeOrmClientFactory"]
+    },
     "backoffice.shared.EventBus": {
       "class": "../../../../../../../contexts/shared/infrastructure/event/RabbitMqEventBus",
-      "arguments": ["@backoffice.shared.AmqpWrapper"]
+      "arguments": ["@backoffice.shared.AmqpWrapper","@backoffice.shared.DomainEventsFallback"]
     }
   }
 }

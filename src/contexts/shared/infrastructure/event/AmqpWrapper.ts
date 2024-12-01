@@ -34,7 +34,7 @@ export class AmqpWrapper {
 		messageId: string;
 		data: string;
 	}): Promise<void> {
-		await this.connect();
+		//await this.connect();
 
 		await new Promise((resolve, reject) => {
 			this.channel.publish(
@@ -51,7 +51,7 @@ export class AmqpWrapper {
 			);
 		});
 
-		await this.close();
+		//await this.close();
 	}
 
 	addSubscribers(subscribers: DomainEventSubscribers): void {
