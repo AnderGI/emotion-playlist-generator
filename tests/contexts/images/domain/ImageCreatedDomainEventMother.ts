@@ -3,6 +3,11 @@ import { Image } from '../../../../src/contexts/backoffice/image/domain/Image';
 
 export class ImageCreatedDomainEventMother {
 	static create(image: Image): ImageCreatedDomainEvent {
-		return ImageCreatedDomainEvent.fromAggregate(image);
+		return ImageCreatedDomainEvent.fromPrimitives({
+			aggregateId: image.getId(),
+			attributes: {
+				path: image.getPath()
+			}
+		});
 	}
 }

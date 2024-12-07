@@ -10,7 +10,15 @@ export class DomainImageSaver {
 			const { id, path } = command;
 			const image = Image.create({ id, path });
 			await imageRepository.save(image);
-			await eventBus.publish(ImageCreatedDomainEvent.fromAggregate(image));
+
+			await eventBus.publish(
+				ImageCreatedDomainEvent.fromPrimitives({
+					aggregateId: image.getId(),
+					attributes: {
+						path: image.getPath()
+					}
+				})
+			);
 
 			return Promise.resolve();
 		};

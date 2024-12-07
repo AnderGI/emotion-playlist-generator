@@ -1,0 +1,10 @@
+{
+  "services": {
+    "scripts.RabbitMqSetupConfigurator": {
+      "class": "../../../../../scripts/configure-rabbitmq/RabbitMqSetupConfigurator",
+      "arguments": ["@backoffice.shared.AmqpConnectionSettingsFactory"]
+    }
+  }
+}
+
+

@@ -1,0 +1,13 @@
+{
+  "services": {
+    "backoffice.image.CreateImageCommandHandler": {
+      "class": "../../../../../../../contexts/backoffice/image-to-emotion/application/relate/RelateImageToEmotionOnImageCreated",
+      "arguments": [""],
+      "tags": [{"name":"subscriber"}]
+    }
+  }
+}
+
+
+
+

@@ -22,20 +22,12 @@ services:
       - '5050:80'
     restart: always
   rabbitmq:
-    image: rabbitmq:latest
+    image: rabbitmq:4.0.4-management
     container_name: rabbitmq-service
     environment:
       - RABBITMQ_DEFAULT_USER=admin 
       - RABBITMQ_DEFAULT_PASS=p@ssw0rd 
     ports:
       - '5672:5672'
-    restart: always
-  rabbitmq-management:
-    image: rabbitmq:management
-    container_name: rabbitmq-management-ui
-    environment:
-      - RABBITMQ_DEFAULT_USER=admin 
-      - RABBITMQ_DEFAULT_PASS=p@ssw0rd 
-    ports:
       - '15672:15672'
     restart: always

@@ -25,6 +25,8 @@ jobs:
         run: npm install
       - name: Run linter
         run: npm run lint
+      - name: Configure RabbitMQ exchanges and queues from subcribers
+        run: npm run rabbitmq:configure
       - name: Build process
         run: npm run build
       - name: Unit tests

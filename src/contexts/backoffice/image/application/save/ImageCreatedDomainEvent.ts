@@ -1,24 +1,50 @@
 import { DomainEvent } from '../../../../shared/domain/event/DomainEvent';
-import { Image } from '../../domain/Image';
+
+type ImageCreatedDomainEventAttributes = {
+	readonly path: string;
+};
 
 export class ImageCreatedDomainEvent extends DomainEvent {
 	static readonly EVENT_NAME: string = 'andergi.backoffice.image.event.image_created.1';
-	private readonly path: string;
-	private constructor({ id, path }: { id: string; path: string }) {
-		super({
-			eventName: ImageCreatedDomainEvent.EVENT_NAME,
-			aggregateId: id
-		});
+
+	readonly path: string;
+
+	constructor({
+		aggregateId,
+		path,
+		eventId,
+		occurredOn
+	}: {
+		aggregateId: string;
+		path: string;
+		eventId?: string;
+		occurredOn?: Date;
+	}) {
+		super({ eventName: ImageCreatedDomainEvent.EVENT_NAME, aggregateId, eventId, occurredOn });
 		this.path = path;
 	}
 
-	static fromAggregate(image: Image): ImageCreatedDomainEvent {
-		return new ImageCreatedDomainEvent({ id: image.getId(), path: image.getPath() });
+	static fromPrimitives(params: {
+		aggregateId: string;
+		attributes: ImageCreatedDomainEventAttributes;
+		eventId?: string;
+		occurredOn?: Date;
+	}): ImageCreatedDomainEvent {
+		const { aggregateId, attributes, occurredOn, eventId } = params;
+
+		return new ImageCreatedDomainEvent({
+			aggregateId,
+			path: attributes.path,
+			eventId,
+			occurredOn
+		});
 	}
 
-	toPrimitives(): { path: string } {
+	toPrimitives(): ImageCreatedDomainEventAttributes {
+		const { path } = this;
+
 		return {
-			path: this.path
+			path
 		};
 	}
 }

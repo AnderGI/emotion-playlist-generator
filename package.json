@@ -11,6 +11,7 @@
     "npm": ">=10.0.0"
   },
   "scripts": {
+    "rabbitmq:configure" :"npx ts-node ./src/scripts/configure-rabbitmq/configure-rabbitmq.ts",
     "dev:backoffice:backend": "cross-env NODE_ENV=dev ts-node-dev --ignore-watch node_modules  ./src/apps/backoffice/backend/start.ts",
     "lint": "eslint --ignore-path .gitignore .",
     "lint:fix": "npm run lint -- --fix",
