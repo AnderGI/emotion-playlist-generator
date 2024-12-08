@@ -191,7 +191,7 @@ export class AmqpWrapper {
 		data: string
 	): Promise<void> {
 		return new Promise((resolve, reject) => {
-			this.channel!.publish(
+			this.channel?.publish(
 				exchange,
 				routingKey,
 				Buffer.from(data),

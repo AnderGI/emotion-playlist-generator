@@ -22,7 +22,7 @@ export class InMemorySyncEventBus
 		subscribers.items.forEach(subscriber => {
 			const events = subscriber.subscribedTo();
 			events.forEach(event => {
-				const eventName = event.EVENT_NAME;
+				const eventName = event.name;
 				if (!this.get(eventName)) {
 					this.set(eventName, []);
 				}

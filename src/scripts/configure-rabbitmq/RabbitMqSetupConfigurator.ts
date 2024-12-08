@@ -51,7 +51,7 @@ export class RabbitMqSetupConfigurator {
 
 		await Promise.all(
 			exchanges.map(name =>
-				this.channel!.assertExchange(name, 'topic', {
+				this.channel?.assertExchange(name, 'topic', {
 					durable: true,
 					autoDelete: false
 				})
