@@ -17,21 +17,34 @@ export class TypeOrmEnvironmentArranger implements EnvironmentArranger {
 		await this.cleanDatabase();
 	}
 
+	// private async cleanDatabase(): Promise<void> {
+	// 	const entities = await this.entities();
+	// 	const client = await this.client();
+	// 	const repositories = entities.map(entity => ({
+	// 		repository: client.getRepository(entity.name),
+	// 		tableName: entity.tableName
+	// 	}));
+
+	// 	await Promise.all(
+	// 		repositories.map(async ({ repository, tableName }) => {
+	// 			await repository.query(`TRUNCATE TABLE ${tableName};`);
+	// 		})
+	// 	).catch(error => {
+	// 		// eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+	// 		throw new Error(`Unable to clean test database: ${error}`);
+	// 	});
+	// }
+
 	private async cleanDatabase(): Promise<void> {
 		const entities = await this.entities();
 		const client = await this.client();
-		const repositories = entities.map(entity => ({
-			repository: client.getRepository(entity.name),
-			tableName: entity.tableName
-		}));
 
-		await Promise.all(
-			repositories.map(async ({ repository, tableName }) => {
-				await repository.query(`TRUNCATE TABLE ${tableName};`);
-			})
-		).catch(error => {
-			// eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-			throw new Error(`Unable to clean test database: ${error}`);
+		await client.transaction(async transactionalEntityManager => {
+			await Promise.all(
+				entities.map(entity =>
+					transactionalEntityManager.query(`DELETE FROM "${entity.tableName}";`)
+				)
+			);
 		});
 	}
 
