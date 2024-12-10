@@ -1,6 +1,7 @@
 import { DomainEvent } from '../../domain/event/DomainEvent';
 import { EventBus } from '../../domain/event/EventBus';
 import { AmqpWrapper } from './AmqpWrapper';
+import DomainEventJsonSerializer from './DomainEventJsonSerializer';
 import { DomainEventsFallback } from './DomainEventsFallback';
 import { DomainEventSubscribers } from './DomainEventSubscribers';
 
@@ -9,9 +10,10 @@ export class RabbitMqEventBus implements EventBus {
 
 	constructor(
 		private readonly amqpWrapper: AmqpWrapper,
-		private readonly domainEventsFallback: DomainEventsFallback
+		private readonly domainEventsFallback: DomainEventsFallback,
+		private readonly domainEventJsonSerializer: DomainEventJsonSerializer
 	) {
-		this.exchange = 'amq.topic';
+		this.exchange = 'domain_events';
 	}
 
 	async publish(event: DomainEvent): Promise<void> {
@@ -22,7 +24,8 @@ export class RabbitMqEventBus implements EventBus {
 				messageId: event.eventId,
 				data: this.serialize(event)
 			});
-		} catch {
+		} catch (err) {
+			console.log(err);
 			await this.domainEventsFallback.fallback(event);
 		}
 	}
@@ -32,13 +35,6 @@ export class RabbitMqEventBus implements EventBus {
 	}
 
 	private serialize(event: DomainEvent): string {
-		return JSON.stringify({
-			aggregateId: event.eventId,
-			eventId: event.aggregateId,
-			occurredOn: event.occurredOn,
-			eventName: event.eventName,
-			// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-			attributes: event.toPrimitives()
-		});
+		return this.domainEventJsonSerializer.serialize(event);
 	}
 }

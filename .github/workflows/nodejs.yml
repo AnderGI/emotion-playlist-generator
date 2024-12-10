@@ -27,6 +27,8 @@ jobs:
         run: npm run lint
       - name: Configure RabbitMQ exchanges and queues from subcribers
         run: npm run rabbitmq:configure
+      - name: Open a consumption channel for RabbitMQ subscribers
+        run: npm run rabbitmq:consume
       - name: Build process
         run: npm run build
       - name: Unit tests

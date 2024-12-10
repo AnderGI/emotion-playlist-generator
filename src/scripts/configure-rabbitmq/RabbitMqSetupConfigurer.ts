@@ -1,17 +1,32 @@
 import * as amqplib from 'amqplib';
 
-import { AmqpChannelPublishOptions } from './AmqpChannelPublishOptionsFactory';
-import { AmqpConnectionSettings } from './AmqpConnectionSettingsFactory';
+import { AmqpConnectionSettings } from '../../contexts/shared/infrastructure/event/AmqpConnectionSettingsFactory';
 
-export class AmqpWrapper {
+const EXCHANGE_BASE_OPTIONS: amqplib.Options.AssertExchange = {
+	durable: true,
+	autoDelete: false
+};
+
+const QUEUE_BASE_OPTIONS: amqplib.Options.AssertQueue = {
+	durable: true,
+	autoDelete: false,
+	exclusive: false
+};
+
+const QUEUE_RETRY_OPTIONS = (exchangeName: string, queue: string): amqplib.Options.AssertQueue => ({
+	...QUEUE_BASE_OPTIONS,
+	messageTtl: 5000,
+	deadLetterExchange: exchangeName,
+	deadLetterRoutingKey: queue
+});
+
+export default class RabbitMqSetupConfigurer {
 	private connection?: amqplib.Connection;
 	private channel?: amqplib.ConfirmChannel;
 	private readonly retrySuffix = 'retry';
 	private readonly deadLetterSuffix = 'dead_letter';
-	constructor(
-		private readonly amqpConnectionSettings: AmqpConnectionSettings,
-		private readonly amqpChannelPublishOptions: AmqpChannelPublishOptions
-	) {}
+
+	constructor(private readonly amqpConnectionSettings: AmqpConnectionSettings) {}
 
 	async connect(): Promise<void> {
 		if (this.connection && this.channel) {
@@ -21,6 +36,7 @@ export class AmqpWrapper {
 		try {
 			this.connection = await this.createConnection();
 			this.channel = await this.createChannel(this.connection);
+			console.log('Conexión y canal establecidos exitosamente.');
 		} catch (err) {
 			console.error('Error al conectar con RabbitMQ:', err);
 			await this.close();
@@ -28,33 +44,6 @@ export class AmqpWrapper {
 		}
 	}
 
-	/**
-	 * Publica un mensaje en un exchange de RabbitMQ.
-	 * Lanza un error si no hay un canal activo.
-	 *
-	 * @param params Objeto con exchange, routingKey, messageId y datos del mensaje.
-	 */
-	async publish(params: {
-		exchange: string;
-		routingKey: string;
-		messageId: string;
-		data: string;
-	}): Promise<void> {
-		await this.connect();
-		this.ensureChannelAvailable();
-
-		const { exchange, routingKey, messageId, data } = params;
-		try {
-			await this.publishMessage(exchange, routingKey, messageId, data);
-		} catch (err) {
-			console.error('Error al publicar el mensaje:', err);
-			throw err;
-		}
-	}
-
-	/**
-	 * Cierra la conexión y el canal, liberando recursos.
-	 */
 	async close(): Promise<void> {
 		try {
 			if (this.channel) {
@@ -62,7 +51,6 @@ export class AmqpWrapper {
 			}
 			if (this.connection) {
 				await this.connection.close();
-				console.log('Conexión cerrada.');
 			}
 		} catch (err) {
 			console.error('Error al cerrar la conexión o el canal:', err);
@@ -94,11 +82,7 @@ export class AmqpWrapper {
 
 	private async setupBaseQueue(exchangeName: string, queue: string, bindings: string[]) {
 		// Base queue
-		await this.channel?.assertQueue(queue, {
-			durable: true,
-			autoDelete: false,
-			exclusive: false
-		});
+		await this.channel?.assertQueue(queue, QUEUE_BASE_OPTIONS);
 		await Promise.all([
 			...bindings.map(binding => this.channel?.bindQueue(queue, exchangeName, binding)),
 			this.channel?.bindQueue(queue, exchangeName, queue)
@@ -107,14 +91,10 @@ export class AmqpWrapper {
 
 	private async setupRetryQueue(exchangeName: string, queue: string, bindings: string[]) {
 		// Retry queue
-		await this.channel?.assertQueue(`${queue}.${this.retrySuffix}`, {
-			durable: true,
-			autoDelete: false,
-			exclusive: false,
-			messageTtl: 5000,
-			deadLetterExchange: exchangeName,
-			deadLetterRoutingKey: queue
-		});
+		await this.channel?.assertQueue(
+			`${queue}.${this.retrySuffix}`,
+			QUEUE_RETRY_OPTIONS(exchangeName, queue)
+		);
 		await Promise.all([
 			...bindings.map(binding =>
 				this.channel?.bindQueue(
@@ -128,11 +108,7 @@ export class AmqpWrapper {
 
 	private async setupDeadLetterQueue(exchangeName: string, queue: string, bindings: string[]) {
 		// DL queue
-		await this.channel?.assertQueue(`${queue}.${this.deadLetterSuffix}`, {
-			durable: true,
-			autoDelete: false,
-			exclusive: false
-		});
+		await this.channel?.assertQueue(`${queue}.${this.deadLetterSuffix}`, QUEUE_BASE_OPTIONS);
 		await Promise.all([
 			...bindings.map(binding =>
 				this.channel?.bindQueue(
@@ -145,41 +121,7 @@ export class AmqpWrapper {
 	}
 
 	private async declareExchange(exchange: string): Promise<void> {
-		await this.channel?.assertExchange(exchange, 'topic', {
-			durable: true,
-			autoDelete: false
-		});
-	}
-
-	private ensureChannelAvailable(): void {
-		if (!this.channel) {
-			throw new Error(
-				'El canal no está disponible. Asegúrate de llamar a connect() antes de publicar.'
-			);
-		}
-	}
-
-	private async publishMessage(
-		exchange: string,
-		routingKey: string,
-		messageId: string,
-		data: string
-	): Promise<void> {
-		return new Promise((resolve, reject) => {
-			this.channel?.publish(
-				exchange,
-				routingKey,
-				Buffer.from(data),
-				{ ...this.amqpChannelPublishOptions, messageId },
-				err => {
-					if (err) {
-						reject(err);
-					} else {
-						resolve();
-					}
-				}
-			);
-		});
+		await this.channel?.assertExchange(exchange, 'topic', EXCHANGE_BASE_OPTIONS);
 	}
 
 	private async createConnection(): Promise<amqplib.Connection> {

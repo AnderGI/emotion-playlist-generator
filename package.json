@@ -12,6 +12,7 @@
   },
   "scripts": {
     "rabbitmq:configure" :"npx ts-node ./src/scripts/configure-rabbitmq/configure-rabbitmq.ts",
+    "rabbitmq:consume" :"npx ts-node ./src/scripts/configure-rabbitmq/consume-rabbitmq.ts",
     "dev:backoffice:backend": "cross-env NODE_ENV=dev ts-node-dev --ignore-watch node_modules  ./src/apps/backoffice/backend/start.ts",
     "lint": "eslint --ignore-path .gitignore .",
     "lint:fix": "npm run lint -- --fix",

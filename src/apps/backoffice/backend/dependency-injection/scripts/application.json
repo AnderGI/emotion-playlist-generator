@@ -3,6 +3,14 @@
     "scripts.RabbitMqSetupConfigurator": {
       "class": "../../../../../scripts/configure-rabbitmq/RabbitMqSetupConfigurator",
       "arguments": ["@backoffice.shared.AmqpConnectionSettingsFactory"]
+    },
+    "scripts.RabbitMqSetupConfigurer":{
+      "class": "../../../../../scripts/configure-rabbitmq/RabbitMqSetupConfigurer",
+      "arguments": ["@backoffice.shared.AmqpConnectionSettingsFactory"]
+    },
+    "scripts.RabbitMqConsumeConfigurer":{
+      "class": "../../../../../scripts/configure-rabbitmq/RabbitMqConsumeConfigurer",
+      "arguments": ["@backoffice.shared.AmqpConnectionSettingsFactory", "@backoffice.shared.DomainEventJsonDeserializer"]
     }
   }
 }

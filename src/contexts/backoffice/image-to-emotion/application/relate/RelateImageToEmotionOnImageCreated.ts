@@ -1,12 +1,12 @@
-import { DomainEventClassName } from '../../../../shared/domain/event/DomainEvent';
+import { DomainEventClass } from '../../../../shared/domain/event/DomainEvent';
 import { DomainEventSubscriber } from '../../../../shared/domain/event/DomainEventSubscriber';
 import { ImageCreatedDomainEvent } from '../../../image/application/save/ImageCreatedDomainEvent';
 
 export class RelateImageToEmotionOnImageCreated
 	implements DomainEventSubscriber<ImageCreatedDomainEvent>
 {
-	subscribedTo(): Array<DomainEventClassName> {
-		return [{ name: ImageCreatedDomainEvent.EVENT_NAME }];
+	subscribedTo(): DomainEventClass[] {
+		return [ImageCreatedDomainEvent];
 	}
 
 	async on(domainEvent: ImageCreatedDomainEvent): Promise<void> {
