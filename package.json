@@ -11,8 +11,8 @@
     "npm": ">=10.0.0"
   },
   "scripts": {
-    "rabbitmq:configure" :"npx ts-node ./src/scripts/configure-rabbitmq/configure-rabbitmq.ts",
-    "rabbitmq:consume" :"npx ts-node ./src/scripts/configure-rabbitmq/consume-rabbitmq.ts",
+    "rabbitmq:configure": "npx ts-node ./src/scripts/configure-rabbitmq/configure-rabbitmq.ts",
+    "rabbitmq:consume": "npx ts-node ./src/scripts/configure-rabbitmq/consume-rabbitmq.ts",
     "dev:backoffice:backend": "cross-env NODE_ENV=dev ts-node-dev --ignore-watch node_modules  ./src/apps/backoffice/backend/start.ts",
     "lint": "eslint --ignore-path .gitignore .",
     "lint:fix": "npm run lint -- --fix",
@@ -21,7 +21,7 @@
     "test:integration": "cross-env NODE_ENV=test jest --passWithNoTests --testPathPattern './tests/contexts/.*/infrastructure/.*/.*\\.test\\.ts'",
     "start:backoffice:backend": "cross-env NODE_ENV=production node dist/src/apps/backoffice/backend/start",
     "test:features": "npm run test:backoffice:backend:features",
-    "test:backoffice:backend:features": "cross-env NODE_ENV=test cucumber-js -p backoffice_backend",
+    "test:backoffice:backend:features": "cross-env NODE_ENV=test cucumber-js --force-exit -p backoffice_backend",
     "build": "npm run build:clean && npm run build:tsc && npm run build:di",
     "build:tsc": "tsc -p tsconfig.prod.json",
     "build:di": "copy 'src/**/*.{json,yaml,html,png}' dist/src",
