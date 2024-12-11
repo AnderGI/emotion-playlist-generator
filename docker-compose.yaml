@@ -31,3 +31,9 @@ services:
       - '5672:5672'
       - '15672:15672'
     restart: always
+  ollama:
+    image: ollama/ollama:0.5.1
+    container_name: ollama-inferer
+    ports:
+      - '11434:11434'
+    restart: always
