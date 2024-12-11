@@ -3,7 +3,6 @@ import { DomainEvent } from '../../contexts/shared/domain/event/DomainEvent';
 import { DomainEventSubscriber } from '../../contexts/shared/domain/event/DomainEventSubscriber';
 import RabbitMqConnection from '../../contexts/shared/infrastructure/event/RabbitMqConnection';
 
-const EXCHANGE_NAME = 'domain_events';
 const setupConfigurer: RabbitMqConnection = container.get('backoffice.shared.RabbitMqConnection');
 
 const subscribers = container.findTaggedServiceIds('subscriber');
@@ -19,12 +18,9 @@ const queuesToBindings = ids.map(id => {
 
 async function main() {
 	await setupConfigurer.connect();
-	await setupConfigurer.declareExchanges(EXCHANGE_NAME);
-	// Create all queues
+	await setupConfigurer.declareExchanges();
 	await Promise.all(
-		queuesToBindings.map(queueToBindings =>
-			setupConfigurer.createQueues(EXCHANGE_NAME, queueToBindings)
-		)
+		queuesToBindings.map(queueToBindings => setupConfigurer.createQueues(queueToBindings))
 	);
 	await setupConfigurer.close();
 }

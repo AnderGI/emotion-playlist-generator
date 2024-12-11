@@ -15,6 +15,7 @@ export default class RabbitMqConnection {
 		exclusive: false
 	};
 
+	private static readonly EXCHANGE_NAME = `andergi.domain_events`;
 	private static readonly RETRY_SUFFIX = `retry`;
 	private static readonly DEAD_LETTER_SUFFIX = 'dead_letter';
 	private static readonly TIME_FOR_MESSAGE_TO_LEAVE_QUEUE_MS = 5000;
@@ -61,40 +62,36 @@ export default class RabbitMqConnection {
 		);
 	}
 
-	async publish(params: {
-		exchange: string;
-		routingKey: string;
-		messageId: string;
-		data: string;
-	}): Promise<void> {
+	async publish(params: { routingKey: string; messageId: string; data: string }): Promise<void> {
 		await this.connect();
 
-		const { exchange, routingKey, messageId, data } = params;
+		const { routingKey, messageId, data } = params;
 		try {
-			await this.publishMessage(exchange, routingKey, messageId, data);
+			await this.publishMessage(RabbitMqConnection.EXCHANGE_NAME, routingKey, messageId, data);
 		} catch (err) {
 			console.error('Error al publicar el mensaje:', err);
 			throw err;
 		}
 	}
 
-	async declareExchanges(exchange: string): Promise<void> {
+	async declareExchanges(): Promise<void> {
 		await Promise.all([
-			this.declareExchange(exchange),
-			this.declareExchange(`${exchange}.${RabbitMqConnection.RETRY_SUFFIX}`),
-			this.declareExchange(`${exchange}.${RabbitMqConnection.DEAD_LETTER_SUFFIX}`)
+			this.declareExchange(RabbitMqConnection.EXCHANGE_NAME),
+			this.declareExchange(
+				`${RabbitMqConnection.EXCHANGE_NAME}.${RabbitMqConnection.RETRY_SUFFIX}`
+			),
+			this.declareExchange(
+				`${RabbitMqConnection.EXCHANGE_NAME}.${RabbitMqConnection.DEAD_LETTER_SUFFIX}`
+			)
 		]);
 	}
 
-	async createQueues(
-		exchangeName: string,
-		queueToBindings: { queue: string; bindings: string[] }
-	): Promise<void> {
+	async createQueues(queueToBindings: { queue: string; bindings: string[] }): Promise<void> {
 		const { queue, bindings } = queueToBindings;
 		await Promise.all([
-			this.setupBaseQueue(exchangeName, queue, bindings),
-			this.setupRetryQueue(exchangeName, queue, bindings),
-			this.setupDeadLetterQueue(exchangeName, queue, bindings)
+			this.setupBaseQueue(RabbitMqConnection.EXCHANGE_NAME, queue, bindings),
+			this.setupRetryQueue(RabbitMqConnection.EXCHANGE_NAME, queue, bindings),
+			this.setupDeadLetterQueue(RabbitMqConnection.EXCHANGE_NAME, queue, bindings)
 		]);
 	}
 
@@ -131,7 +128,7 @@ export default class RabbitMqConnection {
 	private async publishToRetry(message: amqplib.ConsumeMessage, queueName: string): Promise<void> {
 		return new Promise((resolve, reject) => {
 			this.channel.publish(
-				`domain_events.${RabbitMqConnection.RETRY_SUFFIX}`,
+				`${RabbitMqConnection.EXCHANGE_NAME}.${RabbitMqConnection.RETRY_SUFFIX}`,
 				queueName,
 				Buffer.from(message.content.toString()),
 				{
@@ -159,7 +156,7 @@ export default class RabbitMqConnection {
 	): Promise<void> {
 		return new Promise((resolve, reject) => {
 			this.channel.publish(
-				`domain_events.${RabbitMqConnection.DEAD_LETTER_SUFFIX}`,
+				`${RabbitMqConnection.EXCHANGE_NAME}.${RabbitMqConnection.DEAD_LETTER_SUFFIX}`,
 				queueName,
 				Buffer.from(message.content.toString()),
 				{

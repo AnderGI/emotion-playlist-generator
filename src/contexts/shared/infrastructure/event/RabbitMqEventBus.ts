@@ -6,20 +6,15 @@ import { DomainEventSubscribers } from './DomainEventSubscribers';
 import RabbitMqConnection from './RabbitMqConnection';
 
 export class RabbitMqEventBus implements EventBus {
-	private readonly exchange: string;
-
 	constructor(
 		private readonly rabbitmqConnection: RabbitMqConnection,
 		private readonly domainEventsFallback: DomainEventsFallback,
 		private readonly domainEventJsonSerializer: DomainEventJsonSerializer
-	) {
-		this.exchange = 'domain_events';
-	}
+	) {}
 
 	async publish(event: DomainEvent): Promise<void> {
 		try {
 			await this.rabbitmqConnection.publish({
-				exchange: this.exchange,
 				routingKey: event.eventName,
 				messageId: event.eventId,
 				data: this.serialize(event)
