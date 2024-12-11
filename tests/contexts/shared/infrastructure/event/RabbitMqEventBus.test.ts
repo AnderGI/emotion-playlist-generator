@@ -1,7 +1,7 @@
 import container from '../../../../../src/apps/backoffice/backend/dependency-injection';
 import { RabbitMqEventBus } from '../../../../../src/contexts/shared/infrastructure/event/RabbitMqEventBus';
-import { ImageCreatedDomainEventMother } from '../../../images/domain/ImageCreatedDomainEventMother';
-import { ImageMother } from '../../../images/domain/ImageMother';
+import { ImageCreatedDomainEventMother } from '../../../image/domain/ImageCreatedDomainEventMother';
+import { ImageMother } from '../../../image/domain/ImageMother';
 
 describe('RabbitMQEventBus', () => {
 	describe('#publish', () => {
