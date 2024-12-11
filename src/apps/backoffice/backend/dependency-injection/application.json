@@ -4,8 +4,6 @@
     { "resource": "./apps/application.json" },
     { "resource": "./contexts/backoffice/shared/application.json" },    
     { "resource": "./contexts/backoffice/image/application.json" },
-    { "resource": "./contexts/backoffice/image-to-emotion/application.json" },
-    { "resource": "./scripts/application.json" }
-
+    { "resource": "./contexts/backoffice/image-to-emotion/application.json" }
   ]
 }

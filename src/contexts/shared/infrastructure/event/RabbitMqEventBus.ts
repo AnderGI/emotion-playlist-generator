@@ -1,15 +1,15 @@
 import { DomainEvent } from '../../domain/event/DomainEvent';
 import { EventBus } from '../../domain/event/EventBus';
-import { AmqpWrapper } from './AmqpWrapper';
 import DomainEventJsonSerializer from './DomainEventJsonSerializer';
 import { DomainEventsFallback } from './DomainEventsFallback';
 import { DomainEventSubscribers } from './DomainEventSubscribers';
+import RabbitMqConnection from './RabbitMqConnection';
 
 export class RabbitMqEventBus implements EventBus {
 	private readonly exchange: string;
 
 	constructor(
-		private readonly amqpWrapper: AmqpWrapper,
+		private readonly rabbitmqConnection: RabbitMqConnection,
 		private readonly domainEventsFallback: DomainEventsFallback,
 		private readonly domainEventJsonSerializer: DomainEventJsonSerializer
 	) {
@@ -18,7 +18,7 @@ export class RabbitMqEventBus implements EventBus {
 
 	async publish(event: DomainEvent): Promise<void> {
 		try {
-			await this.amqpWrapper.publish({
+			await this.rabbitmqConnection.publish({
 				exchange: this.exchange,
 				routingKey: event.eventName,
 				messageId: event.eventId,

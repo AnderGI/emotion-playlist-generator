@@ -25,9 +25,9 @@
         "method": "createConnection"
       }
     },
-    "backoffice.shared.AmqpWrapper": {
-      "class": "../../../../../../../contexts/shared/infrastructure/event/AmqpWrapper",
-      "arguments": ["@backoffice.shared.AmqpConnectionSettingsFactory", "@backoffice.shared.AmqpChannelPublishOptionsFactory"]
+    "backoffice.shared.RabbitMqConnection": {
+      "class": "../../../../../../../contexts/shared/infrastructure/event/RabbitMqConnection",
+      "arguments": ["@backoffice.shared.AmqpConnectionSettingsFactory", "@backoffice.shared.AmqpChannelPublishOptionsFactory", "@backoffice.shared.DomainEventJsonDeserializer"]
     },
     "backoffice.shared.DomainEventsFallback": {
       "class": "../../../../../../../contexts/shared/infrastructure/event/DomainEventsFallback",
@@ -46,7 +46,7 @@
     },
     "backoffice.shared.EventBus": {
       "class": "../../../../../../../contexts/shared/infrastructure/event/RabbitMqEventBus",
-      "arguments": ["@backoffice.shared.AmqpWrapper","@backoffice.shared.DomainEventsFallback", "@backoffice.shared.DomainEventJsonSerializer"]
+      "arguments": ["@backoffice.shared.RabbitMqConnection","@backoffice.shared.DomainEventsFallback", "@backoffice.shared.DomainEventJsonSerializer"]
     }
   }
 }

@@ -115,12 +115,13 @@ export class AmqpWrapper {
 			deadLetterExchange: exchangeName,
 			deadLetterRoutingKey: queue
 		});
+		console.log(queue);
 		await Promise.all([
-			...bindings.map(binding =>
+			...bindings.map(() =>
 				this.channel?.bindQueue(
 					`${queue}.${this.retrySuffix}`,
 					`${exchangeName}.${this.retrySuffix}`,
-					binding
+					queue
 				)
 			)
 		]);
@@ -134,11 +135,11 @@ export class AmqpWrapper {
 			exclusive: false
 		});
 		await Promise.all([
-			...bindings.map(binding =>
+			...bindings.map(() =>
 				this.channel?.bindQueue(
 					`${queue}.${this.deadLetterSuffix}`,
 					`${exchangeName}.${this.deadLetterSuffix}`,
-					binding
+					queue
 				)
 			)
 		]);

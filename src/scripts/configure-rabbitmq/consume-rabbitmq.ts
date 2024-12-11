@@ -1,11 +1,9 @@
 import container from '../../apps/backoffice/backend/dependency-injection';
 import { DomainEvent } from '../../contexts/shared/domain/event/DomainEvent';
 import { DomainEventSubscriber } from '../../contexts/shared/domain/event/DomainEventSubscriber';
-import RabbitMqConsumeConfigurer from './RabbitMqConsumeConfigurer';
+import RabbitMqConnection from '../../contexts/shared/infrastructure/event/RabbitMqConnection';
 
-const consumeConfigurer: RabbitMqConsumeConfigurer = container.get(
-	'scripts.RabbitMqConsumeConfigurer'
-);
+const consumeConfigurer: RabbitMqConnection = container.get('backoffice.shared.RabbitMqConnection');
 
 const subscribersIds = [...container.findTaggedServiceIds('subscriber').keys()];
 

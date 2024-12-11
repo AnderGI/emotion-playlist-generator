@@ -9,10 +9,10 @@ export class RelateImageToEmotionOnImageCreated
 		return [ImageCreatedDomainEvent];
 	}
 
+	// eslint-disable-next-line @typescript-eslint/require-await
 	async on(domainEvent: ImageCreatedDomainEvent): Promise<void> {
-		console.log(`${domainEvent.eventName} ha llegado`);
-
-		return Promise.resolve();
+		throw new Error(`Se ha dado un error a la hora de consumir el evento ${domainEvent.eventName}`);
+		//console.log(`${domainEvent.eventName} ha llegado`);
 	}
 
 	queueName(): string {
