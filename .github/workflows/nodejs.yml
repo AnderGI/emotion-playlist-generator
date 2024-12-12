@@ -21,12 +21,8 @@ jobs:
         run: ls -la
       - name: Start docker
         run: docker compose up -d
-      - name: Enter ollama-inferer docker container
-        run: docker exec -it ollama-inferer ./bin/./bin/bash
-      - name: Pull LLaVA:7b model
-        run: ollama pull llavA:7b
-      - name: Exit ollama-inferer container
-        run: exit 
+      - name: Pull LLaVA:7b model into ollama-inferer docker container
+        run: docker exec -it ollama-inferer ./bin/./bin/bash -c "ollama pull llavA:7b"
       - name: Install dependencies
         run: npm install
       - name: Run linter
