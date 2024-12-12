@@ -1,27 +1,26 @@
 import { ImagePath } from '../../../../../src/contexts/backoffice/image/domain/ImagePath';
-import ImageToEmotionRelator from '../../../../../src/contexts/backoffice/image-to-emotion/application/relate/ImageToEmotionRelator';
+import ImageToEmotionGenerator from '../../../../../src/contexts/backoffice/image-to-emotion/application/relate/ImageToEmotionRelator';
 import { RelateImageToEmotionOnImageCreated } from '../../../../../src/contexts/backoffice/image-to-emotion/application/relate/RelateImageToEmotionOnImageCreated';
 import { ImageCreatedDomainEventMother } from '../../../image/domain/ImageCreatedDomainEventMother';
 import { ImageMother } from '../../../image/domain/ImageMother';
-import MockImageToEmotionGenerator from '../../__mocks__/MockImageToEmotionGenerator';
+import MockImageToEmotionRelator from '../../__mocks__/MockImageToEmotionRelator';
 
 describe('ImageToEmotionRelator', () => {
-	describe('#generate', () => {
+	describe('#relate', () => {
 		it('should search for valid emotions from image', async () => {
-			const imageToEmotionGenerator: MockImageToEmotionGenerator =
-				new MockImageToEmotionGenerator();
-			const imageToEmotionRelator: ImageToEmotionRelator = new ImageToEmotionRelator(
-				imageToEmotionGenerator
+			const imageToEmotionRelator: MockImageToEmotionRelator = new MockImageToEmotionRelator();
+			const imageToEmotionGenerator: ImageToEmotionGenerator = new ImageToEmotionGenerator(
+				imageToEmotionRelator
 			);
 			const image = ImageMother.random();
 			const imageCreatedDomainEvent = ImageCreatedDomainEventMother.create(image);
 			const consumer: RelateImageToEmotionOnImageCreated = new RelateImageToEmotionOnImageCreated(
-				imageToEmotionRelator
+				imageToEmotionGenerator
 			);
 
 			await consumer.on(imageCreatedDomainEvent);
 
-			imageToEmotionGenerator.assertGenerateHasBeenCalledWith(ImagePath.create(image.getPath()));
+			imageToEmotionRelator.assertRelateHasBeenCalledWith(ImagePath.create(image.getPath()));
 		});
 	});
 });
