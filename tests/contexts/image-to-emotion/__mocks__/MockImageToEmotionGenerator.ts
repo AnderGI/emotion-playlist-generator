@@ -7,10 +7,8 @@ export default class MockImageToEmotionGenerator implements ImageToEmotionGenera
 		this.generateMock = jest.fn();
 	}
 
-	async generate(path: ImagePath): Promise<void> {
-		this.generateMock(path);
-
-		return Promise.resolve();
+	async generate(path: ImagePath): Promise<string> {
+		return this.generateMock(path) as Promise<string>;
 	}
 
 	public assertGenerateHasBeenCalledWith(path: ImagePath): void {

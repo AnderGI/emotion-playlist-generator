@@ -1,5 +1,5 @@
 import { ImagePath } from '../../image/domain/ImagePath';
 
 export interface ImageToEmotionGenerator {
-	generate(path: ImagePath): Promise<void>;
+	generate(path: ImagePath): Promise<string>;
 }
