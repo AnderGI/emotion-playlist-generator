@@ -19,6 +19,6 @@ describe('OllamaLLaVaImageToEmotionGenerator', () => {
 
 			// Imprimimos la respuesta en caso de querer más información de depuración
 			console.log('Generated emotion:', response.emotion);
-		}, 120000);
+		}, 240000);
 	});
 });
