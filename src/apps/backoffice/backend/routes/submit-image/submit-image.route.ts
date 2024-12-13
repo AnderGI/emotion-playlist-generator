@@ -4,7 +4,7 @@ import { body } from 'express-validator';
 import CreateImageReq from '../../controllers/submit-image/CreateImageReq';
 import ImagePutController from '../../controllers/submit-image/ImagePutController';
 import container from '../../dependency-injection';
-import validateContentType from './middlewares/content-type-validator.middleware';
+import validateContentType from './middlewares/ContentTypeValidator.middleware';
 import { MulterSubmitImageUploader } from './middlewares/MulterSubmitImageUploader';
 import SubmitImageExpressRequestSchemaValidator from './middlewares/SubmitImageExpressRequestSchemaValidator';
 

@@ -1,5 +1,5 @@
 import OllamaLLaVaImageToEmotionGenerator from '../../../../../src/contexts/backoffice/image-to-emotion/infrastructure/OllamaLLaVaImageToEmotionGenerator';
-import { ImagePathMother } from '../../../image/domain/ImagePathMother';
+import { ImageFilenameMother } from '../../../image/domain/ImageFilenameMother';
 
 describe('OllamaLLaVaImageToEmotionGenerator', () => {
 	describe('#relate', () => {
@@ -7,7 +7,7 @@ describe('OllamaLLaVaImageToEmotionGenerator', () => {
 			const ollamaLLaVaImageToEmotionGenerator = new OllamaLLaVaImageToEmotionGenerator();
 
 			const response = await ollamaLLaVaImageToEmotionGenerator.relate(
-				ImagePathMother.create('./demo-smily.png')
+				ImageFilenameMother.create('artist-white.png')
 			);
 
 			// Validamos que el objeto tenga la propiedad 'emotion'

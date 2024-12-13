@@ -1,15 +1,15 @@
 import { AggregateRoot } from '../../../shared/domain/AggregateRoot';
 import { ImageId } from './ImageId';
-import { ImagePath } from './ImagePath';
+import { ImageFilename } from './ImageFilename';
 
 export class Image implements AggregateRoot {
-	constructor(readonly id: ImageId, readonly path: ImagePath) {
+	constructor(readonly id: ImageId, readonly filename: ImageFilename) {
 		this.id;
-		this.path;
+		this.filename;
 	}
 
-	public static create({ id, path }: { id: string; path: string }): Image {
-		const image: Image = new Image(ImageId.create(id), ImagePath.create(path));
+	public static create({ id, filename }: { id: string; filename: string }): Image {
+		const image: Image = new Image(ImageId.create(id), ImageFilename.create(filename));
 
 		return image;
 	}
@@ -17,7 +17,7 @@ export class Image implements AggregateRoot {
 	toPrimitives(): { id: string; path: string } {
 		return {
 			id: this.getId(),
-			path: this.getPath()
+			path: this.getFilename()
 		};
 	}
 
@@ -29,7 +29,7 @@ export class Image implements AggregateRoot {
 		return this.id.getId();
 	}
 
-	public getPath(): string {
-		return this.path.getPath();
+	public getFilename(): string {
+		return this.filename.getFilename();
 	}
 }

@@ -3,14 +3,17 @@ import { PromptTemplate } from '@langchain/core/prompts';
 import { RunnableSequence } from '@langchain/core/runnables';
 import { Ollama } from '@langchain/ollama';
 import * as fs from 'node:fs';
+import path from 'node:path';
 import { z } from 'zod';
 
-import { ImagePath } from '../../image/domain/ImagePath';
+import { ImageFilename } from '../../image/domain/ImageFilename';
 import ImageToEmotionRelator, { GeneratorResult } from '../domain/ImageToEmotionRelator';
 
 export default class OllamaLLaVaImageToEmotionGenerator implements ImageToEmotionRelator {
-	async relate(path: ImagePath): Promise<GeneratorResult> {
-		const imageData = await this.readFileAsBase64(path.getPath());
+	async relate(filename: ImageFilename): Promise<GeneratorResult> {
+		const imageData = await this.readFileAsBase64(
+			path.resolve('image-uploads', filename.getFilename())
+		);
 		const fromZodParser = StructuredOutputParser.fromZodSchema(
 			z.object({
 				emotion: z.string().describe('Emotion name')

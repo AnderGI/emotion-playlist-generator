@@ -1,4 +1,4 @@
-import { ImagePath } from '../../image/domain/ImagePath';
+import { ImagePath } from '../../image/domain/ImageFilename';
 
 export type GeneratorResult = {
 	emotion: string;

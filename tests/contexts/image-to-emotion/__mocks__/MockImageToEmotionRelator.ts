@@ -1,4 +1,4 @@
-import { ImagePath } from '../../../../src/contexts/backoffice/image/domain/ImagePath';
+import { ImageFilename } from '../../../../src/contexts/backoffice/image/domain/ImageFilename';
 import ImageToEmotionRelator, {
 	GeneratorResult
 } from '../../../../src/contexts/backoffice/image-to-emotion/domain/ImageToEmotionRelator';
@@ -9,11 +9,11 @@ export default class MockImageToEmotionRelator implements ImageToEmotionRelator 
 		this.relateMock = jest.fn();
 	}
 
-	async relate(path: ImagePath): Promise<GeneratorResult> {
+	async relate(path: ImageFilename): Promise<GeneratorResult> {
 		return this.relateMock(path) as Promise<GeneratorResult>;
 	}
 
-	public assertRelateHasBeenCalledWith(path: ImagePath): void {
+	public assertRelateHasBeenCalledWith(path: ImageFilename): void {
 		expect(this.relateMock).toHaveBeenCalledWith(path);
 	}
 }

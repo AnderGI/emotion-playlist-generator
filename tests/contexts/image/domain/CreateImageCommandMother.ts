@@ -6,7 +6,7 @@ export class CreateImageCommandMother {
 	static random(): CreateImageCommand {
 		return {
 			id: datatype.uuid(),
-			path: system.filePath()
+			filename: system.fileName()
 		};
 	}
 }

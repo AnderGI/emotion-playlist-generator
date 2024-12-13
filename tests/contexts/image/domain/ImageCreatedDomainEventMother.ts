@@ -6,7 +6,7 @@ export class ImageCreatedDomainEventMother {
 		return ImageCreatedDomainEvent.fromPrimitives({
 			aggregateId: image.getId(),
 			attributes: {
-				path: image.getPath()
+				filename: image.getFilename()
 			}
 		});
 	}

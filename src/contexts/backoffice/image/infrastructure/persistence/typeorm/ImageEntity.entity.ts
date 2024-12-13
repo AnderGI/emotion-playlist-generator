@@ -2,8 +2,8 @@ import { EntitySchema } from 'typeorm';
 
 import { ValueObjectTransformer } from '../../../../../shared/infrastructure/persistence/typeorm/ValueObjectTransformer';
 import { Image } from '../../../domain/Image';
+import { ImageFilename } from '../../../domain/ImageFilename';
 import { ImageId } from '../../../domain/ImageId';
-import { ImagePath } from '../../../domain/ImagePath';
 
 export const ImageEntity = new EntitySchema<Image>({
 	name: 'Image',
@@ -15,9 +15,9 @@ export const ImageEntity = new EntitySchema<Image>({
 			primary: true,
 			transformer: ValueObjectTransformer(ImageId)
 		},
-		path: {
+		filename: {
 			type: String,
-			transformer: ValueObjectTransformer(ImagePath)
+			transformer: ValueObjectTransformer(ImageFilename)
 		}
 	}
 });

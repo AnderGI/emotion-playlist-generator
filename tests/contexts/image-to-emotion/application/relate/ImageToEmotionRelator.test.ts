@@ -1,4 +1,4 @@
-import { ImagePath } from '../../../../../src/contexts/backoffice/image/domain/ImagePath';
+import { ImageFilename } from '../../../../../src/contexts/backoffice/image/domain/ImageFilename';
 import ImageToEmotionGenerator from '../../../../../src/contexts/backoffice/image-to-emotion/application/relate/ImageToEmotionRelator';
 import { RelateImageToEmotionOnImageCreated } from '../../../../../src/contexts/backoffice/image-to-emotion/application/relate/RelateImageToEmotionOnImageCreated';
 import { ImageCreatedDomainEventMother } from '../../../image/domain/ImageCreatedDomainEventMother';
@@ -20,7 +20,7 @@ describe('ImageToEmotionRelator', () => {
 
 			await consumer.on(imageCreatedDomainEvent);
 
-			imageToEmotionRelator.assertRelateHasBeenCalledWith(ImagePath.create(image.getPath()));
+			imageToEmotionRelator.assertRelateHasBeenCalledWith(ImageFilename.create(image.getFilename()));
 		});
 	});
 });
