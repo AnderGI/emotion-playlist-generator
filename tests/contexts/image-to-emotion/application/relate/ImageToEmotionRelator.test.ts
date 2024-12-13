@@ -20,7 +20,9 @@ describe('ImageToEmotionRelator', () => {
 
 			await consumer.on(imageCreatedDomainEvent);
 
-			imageToEmotionRelator.assertRelateHasBeenCalledWith(ImageFilename.create(image.getFilename()));
+			imageToEmotionRelator.assertRelateHasBeenCalledWith(
+				ImageFilename.create(image.getFilename())
+			);
 		});
 	});
 });
