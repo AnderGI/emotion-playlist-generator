@@ -1,6 +1,6 @@
 import { AggregateRoot } from '../../../shared/domain/AggregateRoot';
-import { ImageId } from './ImageId';
 import { ImageFilename } from './ImageFilename';
+import { ImageId } from './ImageId';
 
 export class Image implements AggregateRoot {
 	constructor(readonly id: ImageId, readonly filename: ImageFilename) {
