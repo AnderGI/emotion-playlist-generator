@@ -14,8 +14,6 @@ export default class MockImageToEmotionEventBus implements EventBus {
 		return Promise.resolve();
 	}
 
-	
-
 	assertPublishHasBeenCalled(): void {
 		const publishMockCalls = this.mockPublish.mock.calls;
 

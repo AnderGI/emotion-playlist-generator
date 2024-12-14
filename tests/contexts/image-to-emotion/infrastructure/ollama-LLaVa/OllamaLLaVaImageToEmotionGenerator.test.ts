@@ -1,15 +1,20 @@
+import ImageToEmotion from '../../../../../src/contexts/backoffice/image-to-emotion/domain/ImageToEmotion';
+import { GeneratorResult } from '../../../../../src/contexts/backoffice/image-to-emotion/domain/ImageToEmotionRelator';
 import OllamaLLaVaImageToEmotionGenerator from '../../../../../src/contexts/backoffice/image-to-emotion/infrastructure/OllamaLLaVaImageToEmotionGenerator';
 import { ImageFilenameMother } from '../../../image/domain/ImageFilenameMother';
 
 describe('OllamaLLaVaImageToEmotionGenerator', () => {
 	describe('#relate', () => {
-		it('should generate only one emotion per image', async () => {
-			const ollamaLLaVaImageToEmotionGenerator = new OllamaLLaVaImageToEmotionGenerator();
+		const ollamaLLaVaImageToEmotionGenerator = new OllamaLLaVaImageToEmotionGenerator();
+		let response: GeneratorResult;
 
-			const response = await ollamaLLaVaImageToEmotionGenerator.relate(
-				ImageFilenameMother.create('artist-white.png')
+		beforeAll(async () => {
+			response = await ollamaLLaVaImageToEmotionGenerator.relate(
+				new ImageToEmotion(ImageFilenameMother.create('artist-white.png'))
 			);
+		}, 240000);
 
+		it('should generate only one emotion per image', () => {
 			// Validamos que el objeto tenga la propiedad 'emotion'
 			expect(response).toHaveProperty('emotion');
 
@@ -19,6 +24,6 @@ describe('OllamaLLaVaImageToEmotionGenerator', () => {
 
 			// Imprimimos la respuesta en caso de querer más información de depuración
 			console.log('Generated emotion:', response.emotion);
-		}, 240000);
+		});
 	});
 });
