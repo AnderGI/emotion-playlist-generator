@@ -1,7 +1,6 @@
 import { ImageCreatedDomainEvent } from '../../../../src/contexts/backoffice/image/application/save/ImageCreatedDomainEvent';
 import { DomainEvent } from '../../../../src/contexts/shared/domain/event/DomainEvent';
 import { EventBus } from '../../../../src/contexts/shared/domain/event/EventBus';
-import { DomainEventSubscribers } from '../../../../src/contexts/shared/infrastructure/event/DomainEventSubscribers';
 
 export class MockEventBus implements EventBus {
 	private readonly publishMock: jest.Mock;
@@ -24,10 +23,5 @@ export class MockEventBus implements EventBus {
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
 		const lastPublishedEvent = publishMockCalls[0][0] as unknown as ImageCreatedDomainEvent;
 		expect(event.toPrimitives()).toMatchObject(lastPublishedEvent.toPrimitives());
-	}
-
-	// eslint-disable-next-line unused-imports/no-unused-vars
-	addSubscribers(subscribers: DomainEventSubscribers): void {
-		throw new Error('addSubscribers Method not implemented.');
 	}
 }

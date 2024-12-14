@@ -6,13 +6,13 @@ import * as fs from 'node:fs';
 import path from 'node:path';
 import { z } from 'zod';
 
-import { ImageFilename } from '../../image/domain/ImageFilename';
+import ImageToEmotion from '../domain/ImageToEmotion';
 import ImageToEmotionRelator, { GeneratorResult } from '../domain/ImageToEmotionRelator';
 
 export default class OllamaLLaVaImageToEmotionGenerator implements ImageToEmotionRelator {
-	async relate(filename: ImageFilename): Promise<GeneratorResult> {
+	async relate(imageToEmotion: ImageToEmotion): Promise<GeneratorResult> {
 		const imageData = await this.readFileAsBase64(
-			path.resolve('image-uploads', filename.getFilename())
+			path.resolve('image-uploads', imageToEmotion.getFilename())
 		);
 		const fromZodParser = StructuredOutputParser.fromZodSchema(
 			z.object({

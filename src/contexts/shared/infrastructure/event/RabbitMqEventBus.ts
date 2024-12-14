@@ -2,7 +2,6 @@ import { DomainEvent } from '../../domain/event/DomainEvent';
 import { EventBus } from '../../domain/event/EventBus';
 import DomainEventJsonSerializer from './DomainEventJsonSerializer';
 import { DomainEventsFallback } from './DomainEventsFallback';
-import { DomainEventSubscribers } from './DomainEventSubscribers';
 import RabbitMqConnection from './RabbitMqConnection';
 
 export class RabbitMqEventBus implements EventBus {
@@ -23,10 +22,6 @@ export class RabbitMqEventBus implements EventBus {
 			console.log(err);
 			await this.domainEventsFallback.fallback(event);
 		}
-	}
-
-	addSubscribers(subscribers: DomainEventSubscribers): void {
-		throw new Error('Method not implemented.');
 	}
 
 	private serialize(event: DomainEvent): string {

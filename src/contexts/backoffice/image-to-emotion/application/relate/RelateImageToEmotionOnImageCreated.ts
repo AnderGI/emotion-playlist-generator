@@ -2,6 +2,7 @@ import { DomainEventClass } from '../../../../shared/domain/event/DomainEvent';
 import { DomainEventSubscriber } from '../../../../shared/domain/event/DomainEventSubscriber';
 import { ImageCreatedDomainEvent } from '../../../image/application/save/ImageCreatedDomainEvent';
 import ImageToEmotionRelator from './ImageToEmotionRelator';
+import RelateImageToEmotionCommand from './RelateImageToEmotionCommand';
 
 export class RelateImageToEmotionOnImageCreated
 	implements DomainEventSubscriber<ImageCreatedDomainEvent>
@@ -14,7 +15,8 @@ export class RelateImageToEmotionOnImageCreated
 
 	// eslint-disable-next-line @typescript-eslint/require-await
 	async on(domainEvent: ImageCreatedDomainEvent): Promise<void> {
-		await this.imageToEmotionRelator.run(domainEvent);
+		const { filename } = domainEvent;
+		await this.imageToEmotionRelator.run(new RelateImageToEmotionCommand(filename));
 	}
 
 	queueName(): string {

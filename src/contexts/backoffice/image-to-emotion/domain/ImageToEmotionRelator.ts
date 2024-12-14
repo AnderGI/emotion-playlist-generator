@@ -1,8 +1,8 @@
-import { ImageFilename } from '../../image/domain/ImageFilename';
+import ImageToEmotion from './ImageToEmotion';
 
 export type GeneratorResult = {
 	emotion: string;
 };
 export default interface ImageToEmotionRelator {
-	relate(path: ImageFilename): Promise<GeneratorResult>;
+	relate(imageToEmotion: ImageToEmotion): Promise<GeneratorResult>;
 }

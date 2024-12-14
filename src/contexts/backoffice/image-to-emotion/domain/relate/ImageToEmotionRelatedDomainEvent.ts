@@ -1,23 +1,22 @@
 import { DomainEvent } from '../../../../shared/domain/event/DomainEvent';
 
 type ImageToEmotionRelatedDomainEventAttributes = {
-	emotion: string;
+	filename: string;
 };
 
 export default class ImageToEmotionRelatedDomainEvent extends DomainEvent {
 	static readonly EVENT_NAME: string =
 		'andergi.backoffice.image-to-emotion.event.image_related_to_emotion.1';
 
-	readonly emotion: string;
-
+	readonly filename: string;
 	constructor({
 		aggregateId,
-		emotion,
+		filename,
 		eventId,
 		occurredOn
 	}: {
 		aggregateId: string;
-		emotion: string;
+		filename: string;
 		eventId?: string;
 		occurredOn?: Date;
 	}) {
@@ -27,7 +26,7 @@ export default class ImageToEmotionRelatedDomainEvent extends DomainEvent {
 			eventId,
 			occurredOn
 		});
-		this.emotion = emotion;
+		this.filename = filename;
 	}
 
 	static fromPrimitives(params: {
@@ -40,17 +39,17 @@ export default class ImageToEmotionRelatedDomainEvent extends DomainEvent {
 
 		return new ImageToEmotionRelatedDomainEvent({
 			aggregateId,
-			emotion: attributes.emotion,
+			filename: attributes.filename,
 			eventId,
 			occurredOn
 		});
 	}
 
 	toPrimitives(): ImageToEmotionRelatedDomainEventAttributes {
-		const { emotion } = this;
+		const { filename } = this;
 
 		return {
-			emotion
+			filename
 		};
 	}
 }
