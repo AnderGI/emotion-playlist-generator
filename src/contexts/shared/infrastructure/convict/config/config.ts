@@ -91,6 +91,14 @@ const config = convict({
 				default: 'utf-8'
 			}
 		}
+	},
+	spotify: {
+		clientId: '787dd00a52634cc3afeb85ed7b6cf221',
+		clientSecret: '87ad55ce02ef4606b8d0d7a1a7129beb',
+		redirectUri: 'http://localhost:3000',
+		scope: 'user-read-private user-read-email',
+		responseType: 'code',
+		grantType: 'authorization_code'
 	}
 });
 

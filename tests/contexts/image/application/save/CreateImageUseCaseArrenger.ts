@@ -3,7 +3,7 @@ import CreateImageCommandHandler from '../../../../../src/contexts/backoffice/im
 import { ImageCreatedDomainEvent } from '../../../../../src/contexts/backoffice/image/application/save/ImageCreatedDomainEvent';
 import { ImageSaver } from '../../../../../src/contexts/backoffice/image/application/save/ImageSaver';
 import { Image } from '../../../../../src/contexts/backoffice/image/domain/Image';
-import { MockEventBus } from '../../__mocks__/MockEventBus';
+import { ImageMockEventBus } from '../../__mocks__/ImageMockEventBus';
 import { MockImageRepository } from '../../__mocks__/MockImageRepository';
 import { CreateImageCommandMother } from '../../domain/CreateImageCommandMother';
 import { ImageCreatedDomainEventMother } from '../../domain/ImageCreatedDomainEventMother';
@@ -11,13 +11,13 @@ import { ImageMother } from '../../domain/ImageMother';
 
 export default class CreateImageUseCaseArrenger {
 	private readonly imageRepository: MockImageRepository;
-	private readonly eventBus: MockEventBus;
+	private readonly eventBus: ImageMockEventBus;
 	private readonly imageSaver: ImageSaver;
 	private readonly handler: CreateImageCommandHandler;
 
 	private constructor() {
 		this.imageRepository = new MockImageRepository();
-		this.eventBus = new MockEventBus();
+		this.eventBus = new ImageMockEventBus();
 		this.imageSaver = new ImageSaver(this.imageRepository, this.eventBus);
 		this.handler = new CreateImageCommandHandler(this.imageSaver);
 	}

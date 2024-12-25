@@ -5,14 +5,15 @@ import ImageToEmotionRelator, {
 
 export default class MockImageToEmotionRelator implements ImageToEmotionRelator {
 	private readonly relateMock: jest.Mock;
-	constructor() {
+
+	constructor(private readonly mockEmotion: string) {
 		this.relateMock = jest.fn();
 	}
 
 	async relate(imageToEmotion: ImageToEmotion): Promise<GeneratorResult> {
 		this.relateMock(imageToEmotion);
 
-		return Promise.resolve({ emotion: 'happines' });
+		return Promise.resolve({ emotion: this.mockEmotion });
 	}
 
 	public assertRelateHasBeenCalledWith(imageToEmotion: ImageToEmotion): void {

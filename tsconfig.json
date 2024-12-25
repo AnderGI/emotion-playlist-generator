@@ -16,6 +16,6 @@
   "include": [
     "src/**/**.ts",
     "tests/**/**.ts"
-  ],
+, "spoti.ts"  ],
   "exclude": ["node_modules"]
 }
