@@ -1,4 +1,6 @@
-export default class RegisterSpotifyUserCommand {
+import Command from '../../../../../shared/domain/command/Command';
+
+export default class RegisterSpotifyUserCommand implements Command {
 	constructor(
 		readonly id: string,
 		readonly country: string,
