@@ -98,7 +98,13 @@ const config = convict({
 		redirectUri: 'http://localhost:3000',
 		scope: 'user-read-private user-read-email',
 		responseType: 'code',
-		grantType: 'authorization_code'
+		grantType: 'authorization_code',
+		userAuthorizationUri: 'https://accounts.spotify.com/authorize',
+		stateFile: 'top-secret.txt'
+	},
+	system: {
+		privateKey: 'config/jwt/private.pem',
+		publicKey: 'config/jwt/public.pem'
 	}
 });
 

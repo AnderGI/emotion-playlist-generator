@@ -13,7 +13,7 @@ export default class SpotifyUserRegistar {
 	public async registar(command: RegistarSpotifyUserCommand): Promise<void> {
 		const { id, country, displayName, email } = command;
 		const spotifyUser = SpotifyUser.fromPrimitives({ id, country, displayName, email });
-		await this.spotifyUserRepository.register(spotifyUser);
+		await this.spotifyUserRepository.save(spotifyUser);
 		await this.eventBus.publish(
 			SpotifyUserRegisteredDomainEvent.fromPrimitives({
 				aggregateId: id,

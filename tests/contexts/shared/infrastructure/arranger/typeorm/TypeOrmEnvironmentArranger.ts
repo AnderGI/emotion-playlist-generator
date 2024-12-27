@@ -13,9 +13,9 @@ export class TypeOrmEnvironmentArranger implements EnvironmentArranger {
 		await this.cleanDatabase();
 	}
 
-	public async arrange(): Promise<void> {
-		await this.cleanDatabase();
-	}
+	// public async arrange(): Promise<void> {
+	// 	await this.cleanDatabase();
+	// }
 
 	private async cleanDatabase(): Promise<void> {
 		const entities = await this.entities();

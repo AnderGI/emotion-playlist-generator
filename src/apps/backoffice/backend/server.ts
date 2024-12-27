@@ -1,5 +1,6 @@
 import { json, urlencoded } from 'body-parser';
 import compress from 'compression';
+import cookieParser from 'cookie-parser';
 import errorHandler from 'errorhandler';
 import express, { Request, Response } from 'express';
 import Router from 'express-promise-router';
@@ -21,6 +22,7 @@ export class Server {
 		this.express.use(urlencoded({ extended: true }));
 		this.express.use(helmet.xssFilter());
 		this.express.use(helmet.noSniff());
+		this.express.use(cookieParser());
 		this.express.use(helmet.hidePoweredBy());
 		this.express.use(helmet.frameguard({ action: 'deny' }));
 		this.express.use(compress());

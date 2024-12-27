@@ -1,9 +1,10 @@
 import { Request, Response, Router } from 'express';
-import * as fs from 'fs/promises';
+import * as fs from 'fs';
 import httpStatus from 'http-status';
+import * as jwt from 'jsonwebtoken';
 import querystring from 'querystring';
 
-import config from '../../../../contexts/shared/infrastructure/convict/config/config';
+import config from '../../../../../contexts/shared/infrastructure/convict/config/config';
 
 type SpotiFySuccesAuthResponse = {
 	access_token: string;
@@ -45,30 +46,34 @@ type SpotifyCurrentUserData = {
 export const register = (router: Router): void => {
 	// const controller = container.get<StatusGetController>('apps.backoffice.StatusGetController');
 	// eslint-disable-next-line @typescript-eslint/no-misused-promises
-	router.get('/', async (req: Request, res: Response) => {
+	router.get('/spotifycb', async (req: Request, res: Response) => {
 		const code = req.query.code as string;
 		const receivedState = req.query.state as string;
 
 		if (!code || !receivedState) {
-			res.status(httpStatus.FOUND).redirect('/auth');
+			res.status(httpStatus.BAD_REQUEST).json({ error: 'missing code or state' });
 
 			return;
 		}
 
-		const stateData = await fs.readFile('top-secret.txt', 'utf-8');
-		await fs.rm('top-secret.txt');
-		if (stateData !== receivedState) {
+		const generatedStatus = fs.readFileSync(
+			config.get('spotify.stateFile') as unknown as string,
+			'utf-8'
+		);
+
+		if (generatedStatus !== receivedState) {
 			res.status(httpStatus.FORBIDDEN).json({ error: 'state mismatch error' });
 
 			return;
 		}
 
+		// Request an access token
 		const authOptions = {
 			grant_type: config.get('spotify.grantType') as unknown as string,
 			code,
 			redirect_uri: config.get('spotify.redirectUri') as unknown as string
 		};
-		// get token
+
 		const data = await fetch('https://accounts.spotify.com/api/token', {
 			method: 'POST',
 			headers: {
@@ -83,9 +88,8 @@ export const register = (router: Router): void => {
 		});
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 		const json: SpotiFySuccesAuthResponse = await data.json();
-
-		// get user information
-
+		// eslint-disable-next-line camelcase
+		const { access_token } = json;
 		const userData = await fetch('https://api.spotify.com/v1/me', {
 			method: 'GET',
 			headers: {
@@ -94,6 +98,28 @@ export const register = (router: Router): void => {
 		});
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 		const user: SpotifyCurrentUserData = await userData.json();
-		res.json(user);
+		// eslint-disable-next-line camelcase
+		const { email, display_name } = user;
+		// Carga las claves
+		const privateKey = fs.readFileSync(
+			config.get('system.privateKey') as unknown as string,
+			'utf8'
+		);
+		const token = jwt.sign(
+			// eslint-disable-next-line camelcase
+			{ email, display_name, access_token },
+			privateKey,
+			{
+				algorithm: 'RS256',
+				expiresIn: '15 minutes'
+			}
+		);
+		res
+			.cookie('access_token', token, {
+				sameSite: 'strict',
+				httpOnly: true,
+				maxAge: 15 * 1000 // 15 min * 1000 ms
+			})
+			.redirect('/app');
 	});
 };

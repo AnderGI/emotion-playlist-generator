@@ -6,10 +6,10 @@ type SpotifyUserPrimitives = {
 };
 export default class SpotifyUser {
 	constructor(
-		private readonly id: string,
-		private readonly country: string,
-		private readonly displayName: string,
-		private readonly email: string
+		readonly id: string,
+		readonly country: string,
+		readonly displayName: string,
+		readonly email: string
 	) {}
 
 	public static fromPrimitives({

@@ -1,0 +1,8 @@
+{
+  "services": {
+    "backoffice.spotify-user.SpotifyUserRepository": {
+      "class": "../../../../../../../contexts/backoffice/spotify-user/infrastructure/persistence/typeorm/TypeOrmSpotifyUserRepository",
+      "arguments": ["@backoffice.shared.TypeOrmClientFactory"]
+    }
+  }
+}

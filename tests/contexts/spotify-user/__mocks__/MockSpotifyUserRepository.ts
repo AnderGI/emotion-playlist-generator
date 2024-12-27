@@ -7,7 +7,7 @@ export default class MockSpotifyUserRepository implements SpotifyUserRepository 
 		this.mockRegister = jest.fn();
 	}
 
-	async register(spotifyUser: SpotifyUser): Promise<void> {
+	async save(spotifyUser: SpotifyUser): Promise<void> {
 		await this.mockRegister(spotifyUser);
 	}
 

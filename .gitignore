@@ -4,3 +4,4 @@ dist/
 logs/
 data
 test-results.xml
+config/jwt/*.jwt
