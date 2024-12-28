@@ -1,8 +1,7 @@
 import { EventBus } from '../../../../shared/domain/event/EventBus';
-import SpotifyUser from '../../domain/SpotifyUser';
+import DomainSpotifyUserRegistar from '../../domain/registar/DomainSpotifyUserRegistar';
 import { SpotifyUserRepository } from '../../domain/SpotifyUserRepository';
 import RegistarSpotifyUserCommand from './RegisterSpotifyUserCommand';
-import SpotifyUserRegisteredDomainEvent from './SpotifyUserRegisteredDomainEvent';
 
 export default class SpotifyUserRegistar {
 	constructor(
@@ -11,19 +10,6 @@ export default class SpotifyUserRegistar {
 	) {}
 
 	public async registar(command: RegistarSpotifyUserCommand): Promise<void> {
-		const { id, country, displayName, email, spotifyUserAccessToken } = command;
-		const spotifyUser = SpotifyUser.fromPrimitives({ id, country, displayName, email });
-		await this.spotifyUserRepository.save(spotifyUser);
-		await this.eventBus.publish(
-			SpotifyUserRegisteredDomainEvent.fromPrimitives({
-				aggregateId: id,
-				attributes: {
-					spotifyUserCountry: country,
-					spotifyUserDisplayName: displayName,
-					spotifyUserEmail: email,
-					spotifyUserAccessToken
-				}
-			})
-		);
+		await DomainSpotifyUserRegistar.registar(this.spotifyUserRepository, this.eventBus)(command);
 	}
 }

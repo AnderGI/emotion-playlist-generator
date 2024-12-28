@@ -6,6 +6,8 @@ export default class RegisterSpotifyUserCommand implements Command {
 		readonly country: string,
 		readonly displayName: string,
 		readonly email: string,
-		readonly spotifyUserAccessToken: string
+		readonly ipAddress: string,
+		readonly accessToken: string,
+		readonly refreshToken: string
 	) {}
 }

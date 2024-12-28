@@ -2,11 +2,9 @@ import SpotifyUserRegisteredDomainEvent from '../../../../../src/contexts/backof
 import SpotifyUser from '../../../../../src/contexts/backoffice/spotify-user/domain/SpotifyUser';
 
 export class SpotifyUserRegisteredDomainEventMother {
-	static fromSpotifyUser(
-		spotifyUser: SpotifyUser,
-		accesToken: string
-	): SpotifyUserRegisteredDomainEvent {
-		const { id, email, country, displayName } = spotifyUser.toPrimitives();
+	static fromSpotifyUser(spotifyUser: SpotifyUser): SpotifyUserRegisteredDomainEvent {
+		const { id, email, country, displayName, ipAddress, accessToken, refreshToken } =
+			spotifyUser.toPrimitives();
 
 		return SpotifyUserRegisteredDomainEvent.fromPrimitives({
 			aggregateId: id,
@@ -14,7 +12,9 @@ export class SpotifyUserRegisteredDomainEventMother {
 				spotifyUserCountry: country,
 				spotifyUserDisplayName: displayName,
 				spotifyUserEmail: email,
-				spotifyUserAccessToken: accesToken
+				spotifyUserIpAddress: ipAddress,
+				spotifyUserAccessToken: accessToken,
+				spotifyUserRefreshToken: refreshToken
 			}
 		});
 	}

@@ -1,5 +1,3 @@
-import { randomBytes } from 'crypto';
-
 import RegisterSpotifyUserCommandHandler from '../../../../../src/contexts/backoffice/spotify-user/application/registar/RegisterSpotifyUserCommandHandler';
 import SpotifyUserRegistar from '../../../../../src/contexts/backoffice/spotify-user/application/registar/SpotifyUserRegistar';
 import MockSpotifyUserRepository from '../../__mocks__/MockSpotifyUserRepository';
@@ -18,13 +16,9 @@ describe('SpotifyUserRegistar', () => {
 				spotifyUserRepository,
 				spotifyUserEventBus
 			);
-			const accessToken = randomBytes(32).toString('hex');
-			const registerSpotifyUserCommand = RegisterSpotifyUserCommandMother.fromUser(
-				spotifyUser,
-				accessToken
-			);
+			const registerSpotifyUserCommand = RegisterSpotifyUserCommandMother.fromUser(spotifyUser);
 			const spotifyUserRegisteredDomainEvent =
-				SpotifyUserRegisteredDomainEventMother.fromSpotifyUser(spotifyUser, accessToken);
+				SpotifyUserRegisteredDomainEventMother.fromSpotifyUser(spotifyUser);
 			const registerSpotifyUserCommandHandler = new RegisterSpotifyUserCommandHandler(
 				spotifyUserRegister
 			);
