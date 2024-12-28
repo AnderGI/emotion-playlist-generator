@@ -7,12 +7,14 @@ type SpotifyUserRegisteredDomainEventConstructorPrimitives = {
 	spotifyUserCountry: string;
 	spotifyUserDisplayName: string;
 	spotifyUserEmail: string;
+	spotifyUserAccessToken: string;
 };
 
 type SpotifyUserRegisteredDomainEventAttributes = {
 	spotifyUserCountry: string;
 	spotifyUserDisplayName: string;
 	spotifyUserEmail: string;
+	spotifyUserAccessToken: string;
 };
 
 export default class SpotifyUserRegisteredDomainEvent extends DomainEvent {
@@ -20,13 +22,15 @@ export default class SpotifyUserRegisteredDomainEvent extends DomainEvent {
 	private readonly spotifyUserCountry: string;
 	private readonly spotifyUserDisplayName: string;
 	private readonly spotifyUserEmail: string;
+	private readonly spotifyUserAccessToken: string;
 	constructor({
 		aggregateId,
 		occurredOn,
 		eventId,
 		spotifyUserCountry,
 		spotifyUserDisplayName,
-		spotifyUserEmail
+		spotifyUserEmail,
+		spotifyUserAccessToken
 	}: SpotifyUserRegisteredDomainEventConstructorPrimitives) {
 		super({
 			eventName: SpotifyUserRegisteredDomainEvent.EVENT_NAME,
@@ -37,6 +41,7 @@ export default class SpotifyUserRegisteredDomainEvent extends DomainEvent {
 		this.spotifyUserCountry = spotifyUserCountry;
 		this.spotifyUserDisplayName = spotifyUserDisplayName;
 		this.spotifyUserEmail = spotifyUserEmail;
+		this.spotifyUserAccessToken = spotifyUserAccessToken;
 	}
 
 	static fromPrimitives(params: {
@@ -45,7 +50,8 @@ export default class SpotifyUserRegisteredDomainEvent extends DomainEvent {
 		occurredOn?: Date;
 		attributes: SpotifyUserRegisteredDomainEventAttributes;
 	}): SpotifyUserRegisteredDomainEvent {
-		const { spotifyUserCountry, spotifyUserDisplayName, spotifyUserEmail } = params.attributes;
+		const { spotifyUserCountry, spotifyUserDisplayName, spotifyUserEmail, spotifyUserAccessToken } =
+			params.attributes;
 
 		return new SpotifyUserRegisteredDomainEvent({
 			aggregateId: params.aggregateId,
@@ -53,13 +59,15 @@ export default class SpotifyUserRegisteredDomainEvent extends DomainEvent {
 			occurredOn: params.occurredOn,
 			spotifyUserCountry,
 			spotifyUserDisplayName,
-			spotifyUserEmail
+			spotifyUserEmail,
+			spotifyUserAccessToken
 		});
 	}
 
 	toPrimitives(): SpotifyUserRegisteredDomainEventAttributes {
-		const { spotifyUserCountry, spotifyUserDisplayName, spotifyUserEmail } = this;
+		const { spotifyUserCountry, spotifyUserDisplayName, spotifyUserEmail, spotifyUserAccessToken } =
+			this;
 
-		return { spotifyUserCountry, spotifyUserDisplayName, spotifyUserEmail };
+		return { spotifyUserCountry, spotifyUserDisplayName, spotifyUserEmail, spotifyUserAccessToken };
 	}
 }

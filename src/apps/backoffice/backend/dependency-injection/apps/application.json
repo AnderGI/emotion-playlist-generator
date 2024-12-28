@@ -7,6 +7,10 @@
     "apps.backoffice.ImagePutController": {
       "class": "../../controllers/submit-image/ImagePutController",
       "arguments": ["@shared.CommandBus"]     
+    },
+    "apps.backoffice.SpotifyUserPutController": {
+      "class": "../../controllers/register-user/SpotifyUserPutController",
+      "arguments": ["@shared.CommandBus"]     
     }
   }
 }

@@ -7,7 +7,6 @@ import config from '../../../../../contexts/shared/infrastructure/convict/config
 
 // request user authorization
 export const register = (router: Router): void => {
-	// const controller = container.get<StatusGetController>('apps.backoffice.StatusGetController');
 	router.get('/auth', (req: Request, res: Response) => {
 		const state = crypto.randomBytes(16).toString('hex');
 		const query = querystring.stringify({

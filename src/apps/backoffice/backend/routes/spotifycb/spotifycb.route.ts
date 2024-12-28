@@ -74,6 +74,7 @@ export const register = (router: Router): void => {
 			redirect_uri: config.get('spotify.redirectUri') as unknown as string
 		};
 
+		// request access token
 		const data = await fetch('https://accounts.spotify.com/api/token', {
 			method: 'POST',
 			headers: {
