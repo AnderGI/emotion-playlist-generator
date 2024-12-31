@@ -22,7 +22,6 @@
     "test:integration": "cross-env NODE_ENV=test NODE_OPTIONS=\"--experimental-vm-modules\" jest --passWithNoTests --testPathPattern './tests/contexts/.*/infrastructure/.*/.*\\.test\\.ts'",
     "start:backoffice:backend": "cross-env NODE_ENV=production node dist/src/apps/backoffice/backend/start",
     "test:features": "npm run test:backoffice:backend:features",
-    "test:supertest": "cross-env NODE_ENV=test jest --passWithNoTests --testPathPattern './tests/apps/.*\\.supertest.test\\.ts' --detectOpenHandles",
     "test:backoffice:backend:features": "cross-env NODE_ENV=test cucumber-js --force-exit -p backoffice_backend",
     "build": "npm run build:clean && npm run build:tsc && npm run build:di",
     "build:tsc": "tsc -p tsconfig.prod.json",

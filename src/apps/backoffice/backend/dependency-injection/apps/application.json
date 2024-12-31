@@ -9,7 +9,7 @@
       "arguments": ["@shared.CommandBus"]     
     },
     "apps.backoffice.SpotifyUserPutController": {
-      "class": "../../controllers/register-user/SpotifyUserPutController",
+      "class": "../../controllers/login-spotify-user/SpotifyUserPutController",
       "arguments": ["@shared.CommandBus"]     
     }
   }

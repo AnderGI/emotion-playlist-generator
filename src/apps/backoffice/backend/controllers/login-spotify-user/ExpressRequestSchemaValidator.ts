@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import { ValidationChain, ValidationError, validationResult } from 'express-validator';
 import httpStatus from 'http-status';
 
-export default class SubmitImageExpressRequestSchemaValidator {
+export default class ExpressRequestSchemaValidator {
 	constructor(private readonly validationChain: ValidationChain[]) {}
 
 	public getValidationChain(): ValidationChain[] {

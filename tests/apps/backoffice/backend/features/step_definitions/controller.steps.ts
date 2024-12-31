@@ -4,27 +4,34 @@ import request from 'supertest';
 
 import BackofficeBackendApp from '../../../../../../src/apps/backoffice/backend/BackofficeBackendApp';
 
-let _request: request.Test;
+// let _request: request.Test;
 let application: BackofficeBackendApp;
 let _response: request.Response;
 
 BeforeAll(async () => {
 	application = new BackofficeBackendApp();
 	await application.start();
+	console.log('iniciado');
 });
 
 AfterAll(async () => {
 	await application.stop();
 });
 
-Given('I send a GET request to {string}', async (route: string) => {
-	_request = request(application.httpServer).get(route);
-	_response = await _request;
+Given(
+	'I send a PUT request to {string} with JSON request body:',
+	async (route: string, body: string) => {
+		_response = await request(application.httpServer)
+			.put(route)
+			.send(JSON.parse(body) as object);
+	}
+);
+
+Then('the response status code should be {int}', (status: number) => {
+	// _response = await _request.expect(status);
+	assert.deepEqual(_response.status, status);
 });
 
-Then('the response status should be {int}', async (status: number) => {
-	_response = await _request.expect(status);
-});
-Then('the response headers location should include {string}', (location: string) => {
-	assert.ok(_response.headers['location'].includes(location));
+Then('the response body should be empty', () => {
+	assert.deepEqual(_response.body, {});
 });

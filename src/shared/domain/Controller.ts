@@ -1,7 +1,5 @@
-import { Response } from 'express';
+import { Request, Response } from 'express';
 
-import { ControllerRequest } from './ControllerRequest';
-
-export interface Controller {
-	run(req: ControllerRequest, res: Response): Promise<void> | void;
+export interface Controller<R extends Request> {
+	run(req: R, res: Response): Promise<void> | void;
 }

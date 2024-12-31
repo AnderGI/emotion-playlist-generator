@@ -4,8 +4,8 @@ import * as jwt from 'jsonwebtoken';
 import { v4 } from 'uuid';
 
 import config from '../../../../../contexts/shared/infrastructure/convict/config/config';
-import CreateSpotifyUserReq from '../../controllers/register-user/CreateSpotifyUserReq';
-import SpotifyUserPutController from '../../controllers/register-user/SpotifyUserPutController';
+import CreateSpotifyUserReq from '../../controllers/login-spotify-user/LogInSpotifyUserReq';
+import SpotifyUserPutController from '../../controllers/login-spotify-user/SpotifyUserPutController';
 import container from '../../dependency-injection';
 
 type DECODEDJWT = {

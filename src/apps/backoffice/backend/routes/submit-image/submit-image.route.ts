@@ -1,12 +1,12 @@
 import { NextFunction, Request, Response, Router } from 'express';
 import { body } from 'express-validator';
 
+import SubmitImageExpressRequestSchemaValidator from '../../controllers/login-spotify-user/ExpressRequestSchemaValidator';
 import CreateImageReq from '../../controllers/submit-image/CreateImageReq';
 import ImagePutController from '../../controllers/submit-image/ImagePutController';
 import container from '../../dependency-injection';
 import validateContentType from './middlewares/ContentTypeValidator.middleware';
 import { MulterSubmitImageUploader } from './middlewares/MulterSubmitImageUploader';
-import SubmitImageExpressRequestSchemaValidator from './middlewares/SubmitImageExpressRequestSchemaValidator';
 
 const expressRequestSchemaValidator = new SubmitImageExpressRequestSchemaValidator([
 	body('fieldname').exists().isString(), // 'image',

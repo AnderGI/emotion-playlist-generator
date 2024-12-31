@@ -5,7 +5,7 @@ import { Controller } from '../../../../../shared/domain/Controller';
 import CreateImageCommand from './CreateImageCommand';
 import CreateImageReq from './CreateImageReq';
 
-export default class ImagePutController implements Controller {
+export default class ImagePutController implements Controller<CreateImageReq> {
 	constructor(private readonly commandBus: CommandBus) {}
 	async run(req: CreateImageReq, res: Response): Promise<void> {
 		const { id, filename } = req;
