@@ -2,7 +2,7 @@ Feature: Register User
   Register users into our system
   Generate Spotify User Projection data
 
-  Scenario: Send Put Request To Backoffice api
+  Scenario: User LogIn. Happy Path.
     Given I send a PUT request to "/spotifyUsers/065f2655-aef3-4b1b-94cb-fddb18f84e7e" with JSON request body:
     """
     {
@@ -18,3 +18,4 @@ Feature: Register User
     """
     Then the response status code should be 201
     Then the response body should be empty
+  

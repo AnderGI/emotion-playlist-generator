@@ -1,5 +1,5 @@
-import RegisterSpotifyUserCommandHandler from '../../../../../src/contexts/backoffice/spotify-user/application/registar/RegisterSpotifyUserCommandHandler';
-import SpotifyUserRegistar from '../../../../../src/contexts/backoffice/spotify-user/application/registar/SpotifyUserRegistar';
+import RegisterSpotifyUserCommandHandler from '../../../../../src/contexts/backoffice/spotify-user/application/log-in/LogInSpotifyUserCommandHandler';
+import SpotifyUserRegistar from '../../../../../src/contexts/backoffice/spotify-user/application/log-in/SpotifyUserRegistar';
 import MockSpotifyUserRepository from '../../__mocks__/MockSpotifyUserRepository';
 import SpotifyUserMockEventBus from '../../__mocks__/SpotifyUserMockEventBus';
 import { SpotifyUserMother } from '../../domain/SpotifyUserMother';
@@ -7,9 +7,9 @@ import { RegisterSpotifyUserCommandMother } from './RegisterSpotifyUserCommandMo
 import { SpotifyUserRegisteredDomainEventMother } from './SpotifyUserRegisteredDomainEventMother';
 
 describe('SpotifyUserRegistar', () => {
-	describe('#register', () => {
-		it('should register a user', async () => {
-			const spotifyUser = SpotifyUserMother.random();
+	describe('#logIn', () => {
+		it('should register a non existing user', async () => {
+			const spotifyUser = SpotifyUserMother.create();
 			const spotifyUserRepository = new MockSpotifyUserRepository();
 			const spotifyUserEventBus = new SpotifyUserMockEventBus();
 			const spotifyUserRegister = new SpotifyUserRegistar(

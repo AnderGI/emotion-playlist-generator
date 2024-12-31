@@ -1,20 +1,31 @@
-import SpotifyUserRegisteredDomainEvent from '../../../../../src/contexts/backoffice/spotify-user/application/registar/SpotifyUserRegisteredDomainEvent';
+import SpotifyUserRegisteredDomainEvent from '../../../../../src/contexts/backoffice/spotify-user/application/log-in/SpotifyUserRegisteredDomainEvent';
 import SpotifyUser from '../../../../../src/contexts/backoffice/spotify-user/domain/SpotifyUser';
 
 export class SpotifyUserRegisteredDomainEventMother {
 	static fromSpotifyUser(spotifyUser: SpotifyUser): SpotifyUserRegisteredDomainEvent {
-		const { id, email, country, displayName, ipAddress, accessToken, refreshToken } =
-			spotifyUser.toPrimitives();
+		const {
+			id,
+			spotifyDisplayName,
+			spotifyUri,
+			spotifyMail,
+			accessToken,
+			refreshToken,
+			productType,
+			countryCode,
+			ipAddress
+		} = spotifyUser.toPrimitives();
 
 		return SpotifyUserRegisteredDomainEvent.fromPrimitives({
 			aggregateId: id,
 			attributes: {
-				spotifyUserCountry: country,
-				spotifyUserDisplayName: displayName,
-				spotifyUserEmail: email,
-				spotifyUserIpAddress: ipAddress,
-				spotifyUserAccessToken: accessToken,
-				spotifyUserRefreshToken: refreshToken
+				spotifyDisplayName,
+				spotifyUri,
+				spotifyMail,
+				accessToken,
+				refreshToken,
+				productType,
+				countryCode,
+				ipAddress
 			}
 		});
 	}

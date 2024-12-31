@@ -1,18 +1,26 @@
 import { randomBytes } from 'crypto';
-import * as faker from 'faker';
+import fakerStatic from 'faker';
 
-import SpotifyUser from '../../../../src/contexts/backoffice/spotify-user/domain/SpotifyUser';
+import SpotifyUser, {
+	SpotifyUserPrimitives
+} from '../../../../src/contexts/backoffice/spotify-user/domain/SpotifyUser';
 
 export class SpotifyUserMother {
-	static random(): SpotifyUser {
-		return SpotifyUser.fromPrimitives({
-			id: faker.internet.userName(),
-			country: faker.address.countryCode('ISO 3166-1 alpha-2'),
-			displayName: faker.internet.userName(),
-			email: faker.internet.email(),
-			ipAddress: faker.internet.ip(),
-			accessToken: randomBytes(32).toString('hex'),
-			refreshToken: randomBytes(32).toString('hex')
-		});
+	static create(value?: SpotifyUserPrimitives): SpotifyUser {
+		const name = fakerStatic.name.firstName();
+
+		return SpotifyUser.fromPrimitives(
+			Object.assign({}, value, {
+				id: fakerStatic.datatype.uuid(),
+				spotifyDisplayName: name,
+				spotifyUri: `spotify:user:${name}`,
+				spotifyMail: fakerStatic.internet.email(),
+				accessToken: randomBytes(32).toString('hex'),
+				refreshToken: randomBytes(64).toString('hex'),
+				productType: fakerStatic.random.arrayElement(['premium', 'free']),
+				countryCode: fakerStatic.address.countryCode('ISO 3166-1 alpha-2'),
+				ipAddress: fakerStatic.internet.ip()
+			})
+		);
 	}
 }

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { NextFunction, Request, Response, Router } from 'express';
 import { body, param } from 'express-validator';
 
@@ -6,10 +7,8 @@ import SpotifyUserPutController from '../../controllers/login-spotify-user/Spoti
 import container from '../../dependency-injection';
 
 const requestSchemaValidator = new ExpressRequestSchemaValidator([
-	// Validar el parámetro de la ruta "id"
 	param('id').isUUID(4).withMessage('The ID must be a valid UUID (v4).'),
 
-	// Validar el cuerpo de la solicitud
 	body('spotifyDisplayName')
 		.isString()
 		.withMessage('spotifyDisplayName must be a string.')
@@ -57,7 +56,31 @@ export const register = (router: Router): void => {
 		(req: Request, res: Response, next: NextFunction) =>
 			requestSchemaValidator.validateRequestSchema(req, res, next),
 		(req: Request, res: Response) => {
-			controller.run(req, res);
+			const { id } = req.params;
+			const {
+				spotifyDisplayName,
+				spotifyUri,
+				spotifyMail,
+				accessToken,
+				refreshToken,
+				productType,
+				countryCode,
+				ipAddress
+			} = req.body;
+			controller.run(
+				{
+					id,
+					spotifyDisplayName,
+					spotifyUri,
+					spotifyMail,
+					accessToken,
+					refreshToken,
+					productType,
+					countryCode,
+					ipAddress
+				},
+				res
+			);
 		}
 	);
 };

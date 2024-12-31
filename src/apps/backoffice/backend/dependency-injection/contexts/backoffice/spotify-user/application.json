@@ -3,6 +3,15 @@
     "backoffice.spotify-user.SpotifyUserRepository": {
       "class": "../../../../../../../contexts/backoffice/spotify-user/infrastructure/persistence/typeorm/TypeOrmSpotifyUserRepository",
       "arguments": ["@backoffice.shared.TypeOrmClientFactory"]
+    },
+    "backoffice.spotify-user.SpotifyUserRegistar": {
+      "class": "../../../../../../../contexts/backoffice/spotify-user/application/log-in/SpotifyUserRegistar",
+      "arguments": ["@backoffice.image.ImageRepository", "@backoffice.shared.EventBus"]
+    },
+    "backoffice.spotify-user.LogInSpotifyUserCommandHandler": {
+      "class": "../../../../../../../contexts/backoffice/spotify-user/application/log-in/LogInSpotifyUserCommandHandler",
+      "arguments": ["@backoffice.spotify-user.SpotifyUserRegistar"],
+      "tags": [{"name":"commandHandler"}]
     }
   }
 }

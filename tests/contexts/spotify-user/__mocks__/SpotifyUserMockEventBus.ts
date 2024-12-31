@@ -1,4 +1,4 @@
-import SpotifyUserRegisteredDomainEvent from '../../../../src/contexts/backoffice/spotify-user/application/registar/SpotifyUserRegisteredDomainEvent';
+import SpotifyUserRegisteredDomainEvent from '../../../../src/contexts/backoffice/spotify-user/application/log-in/SpotifyUserRegisteredDomainEvent';
 import MockEventBus from '../../shared/__mocks__/MockEventBus';
 
 export default class SpotifyUserMockEventBus extends MockEventBus<SpotifyUserRegisteredDomainEvent> {

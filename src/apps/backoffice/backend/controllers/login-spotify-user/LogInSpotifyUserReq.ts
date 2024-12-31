@@ -1,6 +1,5 @@
-import { Request } from 'express';
-
-export default interface LogInSpotifyUserReq extends Request {
+export default interface LogInSpotifyUserReq {
+	id: string;
 	spotifyDisplayName: string;
 	spotifyUri: string;
 	spotifyMail: string;
