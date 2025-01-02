@@ -9,6 +9,13 @@ const backoffice_backend = [
 	'--require tests/apps/backoffice/backend/features/step_definitions/*.steps.ts'
 ].join(' ');
 
+const backoffice_frontend = [
+	...common,
+	'tests/apps/backoffice/frontend/features/**/*.feature',
+	'--require tests/apps/backoffice/frontend/features/step_definitions/*.steps.ts'
+].join(' ');
+
 module.exports = {
-	backoffice_backend
+	backoffice_backend,
+	backoffice_frontend
 };

@@ -1,0 +1,8 @@
+{
+  "services": {
+    "apps.backoffice.frontend.StatusGetController":{
+      "class": "../../controllers/status-health-check/StatusGetController",
+      "arguments": [""]
+    }
+  }
+}

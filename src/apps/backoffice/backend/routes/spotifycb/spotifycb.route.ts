@@ -100,7 +100,7 @@ export const register = (router: Router): void => {
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 		const user: SpotifyCurrentUserData = await userData.json();
 		// eslint-disable-next-line camelcase
-		const { email, display_name } = user;
+		const { email, display_name, id } = user;
 		// Carga las claves
 		const privateKey = fs.readFileSync(
 			config.get('system.privateKey') as unknown as string,
@@ -108,7 +108,7 @@ export const register = (router: Router): void => {
 		);
 		const token = jwt.sign(
 			// eslint-disable-next-line camelcase
-			{ email, display_name, access_token },
+			{ email, display_name, access_token, id },
 			privateKey,
 			{
 				algorithm: 'RS256',
@@ -121,6 +121,6 @@ export const register = (router: Router): void => {
 				httpOnly: true,
 				maxAge: 15 * 1000 // 15 min * 1000 ms
 			})
-			.redirect('/app');
+			.redirect('http://localhost:3001/dashboard');
 	});
 };

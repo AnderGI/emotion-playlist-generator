@@ -1,0 +1,2 @@
+import { DomainEvent } from './DomainEvent';
+

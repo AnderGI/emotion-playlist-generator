@@ -95,7 +95,7 @@ const config = convict({
 	spotify: {
 		clientId: '787dd00a52634cc3afeb85ed7b6cf221',
 		clientSecret: '87ad55ce02ef4606b8d0d7a1a7129beb',
-		redirectUri: 'http://localhost:3000',
+		redirectUri: 'http://localhost:3000/spotifycb',
 		scope: 'user-read-private user-read-email',
 		responseType: 'code',
 		grantType: 'authorization_code',

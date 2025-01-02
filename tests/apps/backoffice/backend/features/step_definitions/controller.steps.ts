@@ -18,6 +18,10 @@ AfterAll(async () => {
 	await application.stop();
 });
 
+Given('I send a GET request to {string}', async (route: string) => {
+	_response = await request(application.httpServer).get(route);
+});
+
 Given(
 	'I send a PUT request to {string} with JSON request body:',
 	async (route: string, body: string) => {
