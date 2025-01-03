@@ -15,7 +15,6 @@ export default class RabbitMqPublishingErrorHandler {
 
 	async handleRetry(message: amqplib.ConsumeMessage, queueName: string): Promise<void> {
 		try {
-
 			const redeliveryCount = this.getRedeliveryCount(message);
 			if (redeliveryCount < 3) {
 				// Incrementa el redelivery_count y republica en la cola de reintentos
