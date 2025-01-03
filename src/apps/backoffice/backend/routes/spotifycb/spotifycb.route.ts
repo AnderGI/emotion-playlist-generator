@@ -44,7 +44,6 @@ type SpotifyCurrentUserData = {
 };
 
 export const register = (router: Router): void => {
-	// const controller = container.get<StatusGetController>('apps.backoffice.StatusGetController');
 	// eslint-disable-next-line @typescript-eslint/no-misused-promises
 	router.get('/spotifycb', async (req: Request, res: Response) => {
 		const code = req.query.code as string;

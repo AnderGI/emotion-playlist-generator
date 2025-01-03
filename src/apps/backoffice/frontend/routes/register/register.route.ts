@@ -2,12 +2,7 @@ import { Request, Response, Router } from 'express';
 import httpStatus from 'http-status';
 
 export const register = (router: Router): void => {
-	// const controller = container.get<StatusGetController>(
-	// 	'apps.backoffice.frontend.StatusGetController'
-	// );
 	router.get('/register', (req: Request, res: Response) => {
-		console.log('----- /register cookies');
-		console.log(req.cookies);
 		res.status(httpStatus.OK).send(`
     <!DOCTYPE html>
     <html lang="en">

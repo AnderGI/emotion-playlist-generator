@@ -11,7 +11,6 @@ let _response: request.Response;
 BeforeAll(async () => {
 	application = new BackofficeFrontendApp();
 	await application.start();
-	console.log('iniciado');
 });
 
 AfterAll(async () => {

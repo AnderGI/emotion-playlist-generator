@@ -10,7 +10,7 @@ export default class SpotifyUserRepositoryArrenger {
 
 	public async saveSpotifyUser(): Promise<void> {
 		await this.cleanFirst();
-		const spotifyUser = SpotifyUserMother.random();
+		const spotifyUser = SpotifyUserMother.create();
 		await this.repository.save(spotifyUser);
 		await this.cleanEnd();
 	}
