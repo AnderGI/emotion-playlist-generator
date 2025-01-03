@@ -19,6 +19,12 @@ jobs:
         run: ls -la
       - name: Start docker
         run: docker compose up -d
+      - name: Wait for containers to be ready
+        run: sleep 10
+      - name: Check running containers
+        run: docker ps
+      - name: Check ollama logs
+        run: docker logs ollama-inferer
       - name: Pull LLaVA:7b model into ollama-inferer docker container
         run: docker exec ollama-inferer ./bin/bash -c "ollama pull llava:7b"
       - name: Install dependencies
