@@ -3,4 +3,5 @@ node_modules/
 logs/
 data
 test-results.xml
-config/jwt/*.jwt
+config/jwt/*.pem
+src/contexts/shared/infrastructure/convict/config/*
