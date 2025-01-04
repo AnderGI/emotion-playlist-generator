@@ -9,6 +9,6 @@ export const register = (router: Router): void => {
 
 			return;
 		}
-		res.status(httpStatus.OK).redirect('/dashboard');
+		res.status(httpStatus.SEE_OTHER).redirect('/dashboard');
 	});
 };

@@ -3,6 +3,7 @@ import httpStatus from 'http-status';
 
 export const register = (router: Router): void => {
 	router.get('/register', (req: Request, res: Response) => {
+		res.setHeader('Content-Type', 'text/html; charset=utf-8');
 		res.status(httpStatus.OK).send(`
     <!DOCTYPE html>
     <html lang="en">
