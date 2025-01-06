@@ -20,7 +20,7 @@ jobs:
         run: echo "${{ secrets.ENV_FILE_CONTENT }}" > .env
       - name: Read the env from an external script
         run: |
-          chmod +x .github/scripts/custom.sh
+          chmod +x custom.sh
           .github/scripts/custom.sh
         shell: bash
 
