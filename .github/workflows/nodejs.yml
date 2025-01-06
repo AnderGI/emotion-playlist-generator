@@ -21,7 +21,7 @@ jobs:
       - name: Read the env from an external script
         run: |
           chmod +x custom.sh
-          .github/scripts/custom.sh
+          custom.sh
         shell: bash
 
       - name: List files in the current directory
