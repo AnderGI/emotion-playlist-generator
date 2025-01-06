@@ -17,8 +17,8 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Create .env file
         run: echo "${{ secrets.ENV_FILE_CONTENT }}" > .env
-        env: 
-          ENV_FILE_CONTENT: ${{ secrets.ENV_FILE_CONTENT }}
+      - name: Validate .env file
+        run: cat .env
       - name: List files in the current directory
         run: ls -la
       - name: Start docker
