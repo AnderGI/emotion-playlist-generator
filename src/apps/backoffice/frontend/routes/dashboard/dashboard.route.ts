@@ -1,8 +1,10 @@
 import { Request, Response, Router } from 'express';
 import httpStatus from 'http-status';
 
+import { authJwt } from '../../middlewares/auth-jwt/auth-jwt.middleware';
+
 export const register = (router: Router): void => {
-	router.get('/dashboard', (req: Request, res: Response) => {
+	router.get('/dashboard', authJwt, (req: Request, res: Response) => {
 		res.setHeader('Content-Type', 'text/html; charset=utf-8');
 		res.status(httpStatus.OK).send(`
 		<!DOCTYPE html>

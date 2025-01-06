@@ -8,8 +8,8 @@ export type AmqpChannelPublishOptions = {
 export class AmqpChannelPublishOptionsFactory {
 	static createOptions(): AmqpChannelPublishOptions {
 		return {
-			contentType: config.get('rabbitmq.publishOptions.contentType'),
-			contentEncoding: config.get('rabbitmq.publishOptions.contentEncoding')
+			contentType: config.get('rabbitmq.publishOptions.contentType') as string,
+			contentEncoding: config.get('rabbitmq.publishOptions.contentEncoding') as string
 		};
 	}
 }

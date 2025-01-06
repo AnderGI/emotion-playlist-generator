@@ -4,4 +4,4 @@ logs/
 data
 test-results.xml
 config/jwt/*.pem
-src/contexts/shared/infrastructure/convict/config/*
+.env

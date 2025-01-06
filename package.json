@@ -49,6 +49,7 @@
     "cookie-session": "^1.4.0",
     "copy": "^0.3.2",
     "cross-env": "^7.0.3",
+    "dotenv": "^16.4.7",
     "errorhandler": "^1.5.1",
     "express": "^4.17.1",
     "express-promise-router": "^4.1.0",

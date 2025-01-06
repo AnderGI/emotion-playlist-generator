@@ -1,14 +1,10 @@
 import { Request, Response, Router } from 'express';
 import httpStatus from 'http-status';
 
-export const register = (router: Router): void => {
-	router.get('/', (req: Request, res: Response) => {
-		const token = req.cookies.access_token as unknown as string;
-		if (!token) {
-			res.status(httpStatus.SEE_OTHER).redirect('/register');
+import { authJwt } from '../../middlewares/auth-jwt/auth-jwt.middleware';
 
-			return;
-		}
+export const register = (router: Router): void => {
+	router.get('/', authJwt, (req: Request, res: Response) => {
 		res.status(httpStatus.SEE_OTHER).redirect('/dashboard');
 	});
 };

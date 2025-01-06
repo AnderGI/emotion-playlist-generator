@@ -15,6 +15,10 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+      - name: Create .env file
+        run: echo "${{ secrets.ENV_FILE_CONTENT }}" > .env
+        env: 
+          ENV_FILE_CONTENT: ${{ secrets.ENV_FILE_CONTENT }}
       - name: List files in the current directory
         run: ls -la
       - name: Start docker
