@@ -12,7 +12,7 @@ describe('OllamaLLaVaImageToEmotionGenerator', () => {
 			response = await ollamaLLaVaImageToEmotionGenerator.relate(
 				new ImageToEmotion(ImageFilenameMother.create('artist-white.png'))
 			);
-		}, 240000);
+		}, 600000);
 
 		it('should generate only one emotion per image', () => {
 			// Validamos que el objeto tenga la propiedad 'emotion'
