@@ -5,7 +5,8 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    env: 
+      MY_ENV: ${{ secrets.ENV_FILE_CONTENT }} 
     strategy:
       matrix:
         node-version: [20.x]
@@ -17,8 +18,12 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Create .env file
         run: echo "${{ secrets.ENV_FILE_CONTENT }}" > .env
-      - name: Validate .env file
-        run: cat .env
+      - name: Read the env from an external script
+        run: |
+          chmod +x .github/scripts/custom.sh
+          .github/scripts/custom.sh
+        shell: bash
+
       - name: List files in the current directory
         run: ls -la
       - name: Start docker
