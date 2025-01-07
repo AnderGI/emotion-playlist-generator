@@ -4,6 +4,6 @@ import ImageSize from '../../../../src/contexts/backoffice/image/domain/ImageSiz
 
 export class ImageSizeMother {
 	static create(value?: number): ImageSize {
-		return new ImageSize(value ?? datatype.number({ min: 0, precision: 0 }));
+		return new ImageSize(value ?? datatype.number());
 	}
 }

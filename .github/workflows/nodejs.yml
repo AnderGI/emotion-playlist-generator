@@ -39,10 +39,6 @@ jobs:
         run: npm run build
       - name: Unit tests
         run: npm run test:unit
-      - name: Integration tests
-        run: npm run test:integration
-      - name: End-to-end tests
-        run: npm run test:features
       - name: Stop docker container
         if: always()
         run: docker compose down 

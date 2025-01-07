@@ -11,6 +11,7 @@ export class ImageRepositoryArrenger {
 	public async saveImage(): Promise<void> {
 		await this.cleanFirst();
 		const image = ImageMother.random();
+		console.log(image);
 		await this.repository.save(image);
 		await this.cleanEnd();
 	}
