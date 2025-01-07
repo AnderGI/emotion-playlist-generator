@@ -2,14 +2,13 @@ import { Response } from 'express';
 
 import CommandBus from '../../../../../shared/domain/command/CommandBus';
 import { Controller } from '../../../../../shared/domain/Controller';
-import CreateImageCommand from './CreateImageCommand';
-import CreateImageReq from './CreateImageReq';
+import SubmitImageCommand from './CreateImageCommand';
+import SubmitImageReq from './CreateImageReq';
 
-export default class ImagePutController implements Controller<CreateImageReq> {
+export default class ImagePutController implements Controller<SubmitImageReq> {
 	constructor(private readonly commandBus: CommandBus) {}
-	async run(req: CreateImageReq, res: Response): Promise<void> {
-		const { id, filename } = req;
-		await this.commandBus.dispatch(new CreateImageCommand(id, filename));
+	async run(req: SubmitImageReq, res: Response): Promise<void> {
+		await this.commandBus.dispatch(SubmitImageCommand.create(req));
 		res.status(201).send();
 	}
 }

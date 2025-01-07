@@ -1,6 +1,8 @@
 import { Request, Response, Router } from 'express';
 import httpStatus from 'http-status';
 
+import SubmitImageReq from '../../controllers/submit-image/CreateImageReq';
+
 // const expressRequestSchemaValidator = new SubmitImageExpressRequestSchemaValidator([
 // 	body('fieldname').exists().isString(), // 'image',
 // 	body('originalname').exists().isString(), // name.ext
@@ -15,21 +17,29 @@ import httpStatus from 'http-status';
 
 // const multerSubmitImageUploader = new MulterSubmitImageUploader();
 
+type UploadedFile = {
+	fieldname: string;
+	originalname: string;
+	encoding: string;
+	mimetype: string;
+	destination: string;
+	filename: string;
+	path: string;
+	size: string;
+};
+
 export const register = (router: Router): void => {
-	//	const controller = container.get<ImagePutController>('apps.backoffice.ImagePutController');
-	router.put(
-		'/images/:id',
-		// validateContentType,
-		// multerSubmitImageUploader.handleSingleImageUpload(),
-		// (req: Request, res: Response, next: NextFunction) =>
-		// 	multerSubmitImageUploader.mutateRequestBody(req, res, next),
-		// expressRequestSchemaValidator.getValidationChain(),
-		// (req: Request, res: Response, next: NextFunction) =>
-		// 	expressRequestSchemaValidator.validateRequestSchema(req, res, next),
-		(req: Request, res: Response) => {
-			console.log('llega');
-			res.status(httpStatus.OK).send();
-			//controller.run(req.body as CreateImageReq, res);
-		}
-	);
+	//const controller = container.get<ImagePutController>('apps.backoffice.ImagePutController');
+	router.put('/images/:id', (req: Request, res: Response) => {
+		const data = req.body as UploadedFile;
+		const { id } = req.params;
+		const submitImageRequest = Object.assign(
+			data,
+			{ id },
+			Number(data.size)
+		) as unknown as SubmitImageReq;
+		console.log(submitImageRequest);
+		//controller.run(submitImageRequest, res);
+		res.status(httpStatus.OK).send();
+	});
 };

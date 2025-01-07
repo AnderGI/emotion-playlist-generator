@@ -1,1 +1,0 @@
-echo "my envs are $MY_ENV"

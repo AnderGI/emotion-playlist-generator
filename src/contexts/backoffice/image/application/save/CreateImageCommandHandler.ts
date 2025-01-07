@@ -1,15 +1,15 @@
-import CreateImageCommand from '../../../../../apps/backoffice/backend/controllers/submit-image/CreateImageCommand';
+import SubmitImageCommand from '../../../../../apps/backoffice/backend/controllers/submit-image/CreateImageCommand';
 import Command from '../../../../../shared/domain/command/Command';
 import CommandHandler from '../../../../../shared/domain/command/CommandHandler';
 import { ImageSaver } from './ImageSaver';
 
-export default class CreateImageCommandHandler implements CommandHandler<CreateImageCommand> {
+export default class SubmitImageCommandHandler implements CommandHandler<SubmitImageCommand> {
 	constructor(private readonly imageSaver: ImageSaver) {}
 	subscribedTo(): Command {
-		return CreateImageCommand;
+		return SubmitImageCommand;
 	}
 
-	async handle(command: CreateImageCommand): Promise<void> {
+	async handle(command: SubmitImageCommand): Promise<void> {
 		await this.imageSaver.run(command);
 	}
 }

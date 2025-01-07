@@ -1,5 +1,10 @@
 import Command from '../../../../../shared/domain/command/Command';
+import SubmitImageReq from './CreateImageReq';
 
-export default class CreateImageCommand implements Command {
-	constructor(readonly id: string, readonly filename: string) {}
+export default class SubmitImageCommand implements Command {
+	private constructor(readonly params: SubmitImageReq) {}
+
+	public static create(req: SubmitImageReq): SubmitImageCommand {
+		return new SubmitImageCommand(req);
+	}
 }

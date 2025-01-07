@@ -1,5 +1,5 @@
-import CreateImageCommand from '../../../../../src/apps/backoffice/backend/controllers/submit-image/CreateImageCommand';
-import CreateImageCommandHandler from '../../../../../src/contexts/backoffice/image/application/save/CreateImageCommandHandler';
+import SubmitImageCommand from '../../../../../src/apps/backoffice/backend/controllers/submit-image/CreateImageCommand';
+import SubmitImageCommandHandler from '../../../../../src/contexts/backoffice/image/application/save/CreateImageCommandHandler';
 import { ImageCreatedDomainEvent } from '../../../../../src/contexts/backoffice/image/application/save/ImageCreatedDomainEvent';
 import { ImageSaver } from '../../../../../src/contexts/backoffice/image/application/save/ImageSaver';
 import { Image } from '../../../../../src/contexts/backoffice/image/domain/Image';
@@ -13,13 +13,13 @@ export default class CreateImageUseCaseArrenger {
 	private readonly imageRepository: MockImageRepository;
 	private readonly eventBus: ImageMockEventBus;
 	private readonly imageSaver: ImageSaver;
-	private readonly handler: CreateImageCommandHandler;
+	private readonly handler: SubmitImageCommandHandler;
 
 	private constructor() {
 		this.imageRepository = new MockImageRepository();
 		this.eventBus = new ImageMockEventBus();
 		this.imageSaver = new ImageSaver(this.imageRepository, this.eventBus);
-		this.handler = new CreateImageCommandHandler(this.imageSaver);
+		this.handler = new SubmitImageCommandHandler(this.imageSaver);
 	}
 
 	public static create(): CreateImageUseCaseArrenger {
@@ -37,11 +37,11 @@ export default class CreateImageUseCaseArrenger {
 		this.eventBus.assertBusHasBeenCalledWith(event);
 	}
 
-	private createCommand(): CreateImageCommand {
+	private createCommand(): SubmitImageCommand {
 		return CreateImageCommandMother.random();
 	}
 
-	private createImageFromCommand(command: CreateImageCommand): Image {
+	private createImageFromCommand(command: SubmitImageCommand): Image {
 		return ImageMother.fromCommand(command);
 	}
 
