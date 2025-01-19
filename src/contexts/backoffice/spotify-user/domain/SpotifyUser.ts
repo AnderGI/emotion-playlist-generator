@@ -22,17 +22,6 @@ export type SpotifyUserPrimitives = {
 	refresh_token: string;
 };
 
-// type SpotifyUserParams = {
-// 	id: UuidValueObject;
-// 	spotifyDisplayName: SpotifyUserDisplayName;
-// 	spotifyUri: SpotifyUserUri;
-// 	spotifyMail: SpotifyUserEmail;
-// 	accessToken: SpotifyUserAccessToken;
-// 	refreshToken: SpotifyUserRefreshToken;
-// 	productType: SpotifyUserProductType;
-// 	countryCode: SpotifyUserCountryCode;
-// 	ipAddress: SpotifyUserIpAddress;
-// };
 export default class SpotifyUser {
 	constructor(
 		readonly id: UuidValueObject,
@@ -58,7 +47,6 @@ export default class SpotifyUser {
 			country,
 			refresh_token
 		} = command.params;
-		console.log('--- uuid', uuid);
 
 		return new SpotifyUser(
 			new UuidValueObject(uuid),
