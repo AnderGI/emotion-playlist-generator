@@ -10,6 +10,8 @@ export class ImageSaver {
 	) {}
 
 	public async run(command: SubmitImageCommand): Promise<void> {
+		console.log('imagesaver');
+
 		return DomainImageSaver.save(this.imageRepository, this.eventBus)(command);
 	}
 }

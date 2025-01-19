@@ -6,7 +6,7 @@
     },
     "backoffice.spotify-user.SpotifyUserRegistar": {
       "class": "../../../../../../../contexts/backoffice/spotify-user/application/log-in/SpotifyUserRegistar",
-      "arguments": ["@backoffice.image.ImageRepository", "@backoffice.shared.EventBus"]
+      "arguments": ["@backoffice.spotify-user.SpotifyUserRepository", "@backoffice.shared.EventBus"]
     },
     "backoffice.spotify-user.LogInSpotifyUserCommandHandler": {
       "class": "../../../../../../../contexts/backoffice/spotify-user/application/log-in/LogInSpotifyUserCommandHandler",

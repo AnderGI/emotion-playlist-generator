@@ -10,6 +10,7 @@ const subscribersIds = [...container.findTaggedServiceIds('subscriber').keys()];
 const queuesToSubscriber = subscribersIds.map(id => {
 	const subscriber = container.get<DomainEventSubscriber<DomainEvent>>(id as string);
 	const queue = subscriber.queueName();
+	console.log({ queue, subscriber });
 
 	return { queue, subscriber };
 });

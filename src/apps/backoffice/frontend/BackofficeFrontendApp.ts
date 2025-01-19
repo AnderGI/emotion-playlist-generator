@@ -6,7 +6,7 @@ export default class BackofficeFrontendApp {
 	async start(): Promise<void> {
 		const port = process.env.PORT ?? '3001';
 		this.server = new Server(port);
-
+		
 		return this.server.listen();
 	}
 

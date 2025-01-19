@@ -1,7 +1,7 @@
 import SubmitImageCommand from '../../../../../src/apps/backoffice/backend/controllers/submit-image/CreateImageCommand';
-import SubmitImageCommandHandler from '../../../../../src/contexts/backoffice/image/application/save/CreateImageCommandHandler';
-import { ImageCreatedDomainEvent } from '../../../../../src/contexts/backoffice/image/application/save/ImageCreatedDomainEvent';
-import { ImageSaver } from '../../../../../src/contexts/backoffice/image/application/save/ImageSaver';
+import { ImageSaver } from '../../../../../src/contexts/backoffice/image/application/submit/ImageSaver';
+import { ImageSubmitedDomainEvent } from '../../../../../src/contexts/backoffice/image/application/submit/ImageSubmitedDomainEvent';
+import SubmitImageCommandHandler from '../../../../../src/contexts/backoffice/image/application/submit/SubmitImageCommandHandler';
 import { Image } from '../../../../../src/contexts/backoffice/image/domain/Image';
 import { ImageMockEventBus } from '../../__mocks__/ImageMockEventBus';
 import { MockImageRepository } from '../../__mocks__/MockImageRepository';
@@ -45,7 +45,7 @@ export default class CreateImageUseCaseArrenger {
 		return ImageMother.fromCommand(command);
 	}
 
-	private createImageCreatedEvent(image: Image): ImageCreatedDomainEvent {
+	private createImageCreatedEvent(image: Image): ImageSubmitedDomainEvent {
 		return ImageCreatedDomainEventMother.create(image);
 	}
 }

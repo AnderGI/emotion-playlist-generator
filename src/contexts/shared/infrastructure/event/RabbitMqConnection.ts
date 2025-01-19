@@ -51,6 +51,7 @@ export default class RabbitMqConnection {
 	}
 
 	async consume(queuesToSubscribers: QueueToSubscriber[]): Promise<void> {
+		console.log(queuesToSubscribers);
 		await Promise.all(
 			queuesToSubscribers.map(queueToSusbcriber =>
 				this.channel.consume(
@@ -100,6 +101,8 @@ export default class RabbitMqConnection {
 		channel: amqplib.ConfirmChannel
 	) {
 		return (msg: amqplib.ConsumeMessage | null) => {
+			console.log('evejbjbhbhjvhjvghv');
+			console.log(msg);
 			if (msg !== null) {
 				subscriber
 					.on(this.domainEventJsonDeserializer.deserialize(msg.content.toString()))

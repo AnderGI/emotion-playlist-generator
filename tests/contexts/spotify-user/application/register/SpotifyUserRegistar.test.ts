@@ -1,10 +1,10 @@
-import RegisterSpotifyUserCommandHandler from '../../../../../src/contexts/backoffice/spotify-user/application/log-in/LogInSpotifyUserCommandHandler';
+import LogInSpotifyUserCommandHandler from '../../../../../src/contexts/backoffice/spotify-user/application/log-in/LogInSpotifyUserCommandHandler';
 import SpotifyUserRegistar from '../../../../../src/contexts/backoffice/spotify-user/application/log-in/SpotifyUserRegistar';
 import MockSpotifyUserRepository from '../../__mocks__/MockSpotifyUserRepository';
 import SpotifyUserMockEventBus from '../../__mocks__/SpotifyUserMockEventBus';
 import { SpotifyUserMother } from '../../domain/SpotifyUserMother';
-import { RegisterSpotifyUserCommandMother } from './RegisterSpotifyUserCommandMother';
-import { SpotifyUserRegisteredDomainEventMother } from './SpotifyUserRegisteredDomainEventMother';
+import { LogInSpotifyUserCommandMother } from './LogInSpotifyUserCommandMother';
+import { SpotifyUserLoggedInDomainEventMother } from './SpotifyUserLoggedInDomainEventMother';
 
 describe('SpotifyUserRegistar', () => {
 	describe('#logIn', () => {
@@ -16,16 +16,16 @@ describe('SpotifyUserRegistar', () => {
 				spotifyUserRepository,
 				spotifyUserEventBus
 			);
-			const registerSpotifyUserCommand = RegisterSpotifyUserCommandMother.fromUser(spotifyUser);
-			const spotifyUserRegisteredDomainEvent =
-				SpotifyUserRegisteredDomainEventMother.fromSpotifyUser(spotifyUser);
-			const registerSpotifyUserCommandHandler = new RegisterSpotifyUserCommandHandler(
+			const registerSpotifyUserCommand = LogInSpotifyUserCommandMother.fromUser(spotifyUser);
+			const spotifyUserLoggedInDomainEvent =
+				SpotifyUserLoggedInDomainEventMother.fromSpotifyUser(spotifyUser);
+			const registerSpotifyUserCommandHandler = new LogInSpotifyUserCommandHandler(
 				spotifyUserRegister
 			);
 
 			await registerSpotifyUserCommandHandler.handle(registerSpotifyUserCommand);
 			spotifyUserRepository.ensureRegisterHasBeenCalledWith(spotifyUser);
-			spotifyUserEventBus.assertBusHasBeenCalledWith(spotifyUserRegisteredDomainEvent);
+			spotifyUserEventBus.assertBusHasBeenCalledWith(spotifyUserLoggedInDomainEvent);
 		});
 	});
 });

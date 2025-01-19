@@ -1,10 +1,8 @@
 import { Request, Response, Router } from 'express';
-import httpStatus from 'http-status';
-
-import { authJwt } from '../../middlewares/auth-jwt/auth-jwt.middleware';
+import path from 'node:path';
 
 export const register = (router: Router): void => {
-	router.get('/', authJwt, (req: Request, res: Response) => {
-		res.status(httpStatus.SEE_OTHER).redirect('/dashboard');
+	router.get('/', (req: Request, res: Response) => {
+		res.sendFile(path.join(__dirname, '..', '..', '/public/login.html'));
 	});
 };

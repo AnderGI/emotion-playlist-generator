@@ -7,6 +7,7 @@ import Router from 'express-promise-router';
 import helmet from 'helmet';
 import * as http from 'http';
 import httpStatus from 'http-status';
+import path from 'path';
 
 import { registerRoutes } from './routes';
 
@@ -26,6 +27,8 @@ export class Server {
 		this.express.use(helmet.hidePoweredBy());
 		this.express.use(helmet.frameguard({ action: 'deny' }));
 		this.express.use(compress());
+		// Servir archivos estáticos desde la carpeta "public"
+		this.express.use(express.static(path.join(__dirname, 'public')));
 		const router = Router();
 		router.use(errorHandler());
 		this.express.use(router);

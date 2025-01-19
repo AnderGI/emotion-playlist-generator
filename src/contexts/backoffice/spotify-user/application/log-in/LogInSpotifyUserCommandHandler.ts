@@ -6,12 +6,12 @@ import SpotifyUserRegistar from './SpotifyUserRegistar';
 export default class LogInSpotifyUserCommandHandler
 	implements CommandHandler<LogInSpotifyUserCommand>
 {
-	constructor(private readonly spotifyUserRegistar: SpotifyUserRegistar) {}
+	constructor(readonly spotifyUserRegistar: SpotifyUserRegistar) {}
 	subscribedTo(): Command {
 		return LogInSpotifyUserCommand;
 	}
 
 	async handle(command: LogInSpotifyUserCommand): Promise<void> {
-		await this.spotifyUserRegistar.registar(command);
+		await this.spotifyUserRegistar.run(command);
 	}
 }

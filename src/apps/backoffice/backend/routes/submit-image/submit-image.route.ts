@@ -2,6 +2,8 @@ import { Request, Response, Router } from 'express';
 import httpStatus from 'http-status';
 
 import SubmitImageReq from '../../controllers/submit-image/CreateImageReq';
+import ImagePutController from '../../controllers/submit-image/ImagePutController';
+import container from '../../dependency-injection';
 
 // const expressRequestSchemaValidator = new SubmitImageExpressRequestSchemaValidator([
 // 	body('fieldname').exists().isString(), // 'image',
@@ -29,8 +31,9 @@ type UploadedFile = {
 };
 
 export const register = (router: Router): void => {
-	//const controller = container.get<ImagePutController>('apps.backoffice.ImagePutController');
+	const controller = container.get<ImagePutController>('apps.backoffice.ImagePutController');
 	router.put('/images/:id', (req: Request, res: Response) => {
+		console.log('backend submit route');
 		const data = req.body as UploadedFile;
 		const { id } = req.params;
 		const submitImageRequest = Object.assign(
@@ -38,8 +41,7 @@ export const register = (router: Router): void => {
 			{ id },
 			Number(data.size)
 		) as unknown as SubmitImageReq;
-		console.log(submitImageRequest);
-		//controller.run(submitImageRequest, res);
+		controller.run(submitImageRequest, res);
 		res.status(httpStatus.OK).send();
 	});
 };

@@ -8,6 +8,7 @@ import SubmitImageReq from './CreateImageReq';
 export default class ImagePutController implements Controller<SubmitImageReq> {
 	constructor(private readonly commandBus: CommandBus) {}
 	async run(req: SubmitImageReq, res: Response): Promise<void> {
+		console.log('ImagePutController');
 		await this.commandBus.dispatch(SubmitImageCommand.create(req));
 		res.status(201).send();
 	}

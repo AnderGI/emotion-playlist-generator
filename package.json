@@ -32,7 +32,8 @@
     "lint": "eslint --ignore-path .gitignore .",
     "start:backoffice:backend": "cross-env NODE_ENV=production node dist/src/apps/backoffice/backend/start",
     "rabbitmq:configure": "npx ts-node ./src/scripts/configure-rabbitmq/configure-rabbitmq.ts",
-    "rabbitmq:consume": "npx ts-node ./src/scripts/configure-rabbitmq/consume-rabbitmq.ts"
+    "rabbitmq:consume": "npx ts-node ./src/scripts/configure-rabbitmq/consume-rabbitmq.ts",
+    "script:remove-uploads": "npx ts-node ./src/scripts/clean-uploads/clean-uploads.ts"
   },
   "dependencies": {
     "@langchain/core": "^0.3.23",

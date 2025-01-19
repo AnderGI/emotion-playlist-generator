@@ -3,17 +3,17 @@ Feature: Register User
   Generate Spotify User Projection data
 
   Scenario: User LogIn. Happy Path.
-    Given I send a PUT request to "/spotifyUsers/065f2655-aef3-4b1b-94cb-fddb18f84e7e" with JSON request body:
+    Given I send a PUT request to "/spotify-users/9ed3e1f7-36b6-4546-94f7-3d354e4ad8fb" with JSON request body:
     """
     {
-      "spotifyDisplayName": "blablabla",
-      "spotifyUri": "spotify:user:blablabla",
-      "spotifyMail":  "blablabla@gmail.com",
-      "accessToken" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvbiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.4Tw5AYa9_1QD7EEHh4ZQdqk2jF9P7z4E9VXVoK2MA1o",
-      "refreshToken": "dGhpcyBpcyBhIHNhbXBsZSBwcm9kdWNlZCBieSBhIGh1bWFuIG9yIHN5c3RlbSBnZW5lcmF0ZWQgdG9rZW4uIHRoZXJlIGlzIG5vIGFjdHVhbCBzdHJ1Y3R1cmUgaGVyZQ==",
-      "productType": "premium",
-      "countryCode": "ES",
-      "ipAddress": "178.161.152.62" 
+      "spotify_id": "1234567890",
+      "spotify_email": "randomuser@example.com",
+      "spotify_display_name": "RandomUser123",
+      "spotify_product": "premium",
+      "spotify_uri": "spotify:user:1234567890",
+      "spotify_type": "user",
+      "country": "US",
+      "refresh_token": "dGhpcyBpcyBhIHNhbXBsZSBwcm9kdWNlZCBieSBhIHJlc2ZyZXNoIHRva2VuLg=="
     }
     """
     Then the response status code should be 201

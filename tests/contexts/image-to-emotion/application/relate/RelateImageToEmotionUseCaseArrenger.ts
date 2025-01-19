@@ -1,6 +1,6 @@
 import { ImageFilename } from '../../../../../src/contexts/backoffice/image/domain/ImageFilename';
-import ImageToEmotionGenerator from '../../../../../src/contexts/backoffice/image-to-emotion/application/relate/ImageToEmotionRelator';
-import { RelateImageToEmotionOnImageCreated } from '../../../../../src/contexts/backoffice/image-to-emotion/application/relate/RelateImageToEmotionOnImageCreated';
+import ImageToEmotionGenerator from '../../../../../src/contexts/backoffice/image-to-emotion/application/relate/ImageToEmotionGenerator';
+import { RelateImageToEmotionOnImageSubmited } from '../../../../../src/contexts/backoffice/image-to-emotion/application/relate/RelateImageToEmotionOnImageSubmited';
 import ImageToEmotion from '../../../../../src/contexts/backoffice/image-to-emotion/domain/ImageToEmotion';
 import { ImageCreatedDomainEventMother } from '../../../image/domain/ImageCreatedDomainEventMother';
 import ImageToEmotionMockEventBus from '../../__mocks__/ImageToEmotionMockEventBus';
@@ -13,7 +13,7 @@ export default class RelateImageToEmotionUseCaseArrenger {
 	private readonly eventBus: ImageToEmotionMockEventBus;
 	private readonly EMOTION: string;
 	private readonly imageToEmotionGenerator: ImageToEmotionGenerator;
-	private readonly relateImageToEmotionOnImageCreated: RelateImageToEmotionOnImageCreated;
+	private readonly relateImageToEmotionOnImageCreated: RelateImageToEmotionOnImageSubmited;
 
 	private constructor() {
 		this.EMOTION = EmotioNameMother.random();
@@ -23,7 +23,7 @@ export default class RelateImageToEmotionUseCaseArrenger {
 			this.imageToEmotionRelator,
 			this.eventBus
 		);
-		this.relateImageToEmotionOnImageCreated = new RelateImageToEmotionOnImageCreated(
+		this.relateImageToEmotionOnImageCreated = new RelateImageToEmotionOnImageSubmited(
 			this.imageToEmotionGenerator
 		);
 	}

@@ -4,6 +4,7 @@ import httpStatus from 'http-status';
 import * as jwt from 'jsonwebtoken';
 import querystring from 'querystring';
 
+import { UuidValueObject } from '../../../../../contexts/shared/domain/value-object/UuidValueObject';
 import config from '../../../../../contexts/shared/infrastructure/convict/config/config';
 
 type SpotiFySuccesAuthResponse = {
@@ -46,6 +47,7 @@ type SpotifyCurrentUserData = {
 export const register = (router: Router): void => {
 	// eslint-disable-next-line @typescript-eslint/no-misused-promises
 	router.get('/spotifycb', async (req: Request, res: Response) => {
+		res.header('Access-Control-Allow-Origin', 'http://localhost:3001');
 		const code = req.query.code as string;
 		const receivedState = req.query.state as string;
 
@@ -89,7 +91,7 @@ export const register = (router: Router): void => {
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 		const json: SpotiFySuccesAuthResponse = await data.json();
 		// eslint-disable-next-line camelcase
-		const { access_token } = json;
+		const { access_token, refresh_token } = json;
 		const userData = await fetch('https://api.spotify.com/v1/me', {
 			method: 'GET',
 			headers: {
@@ -114,12 +116,34 @@ export const register = (router: Router): void => {
 				expiresIn: '15 minutes'
 			}
 		);
+
+		// call spotifyuserput route
+
+		const uuid = UuidValueObject.random();
+		const dataForPut = {
+			spotify_id: user.id,
+			spotify_email: user.email,
+			spotify_display_name: user.display_name,
+			spotify_product: user.product,
+			spotify_uri: user.uri,
+			spotify_type: user.type,
+			country: user.country,
+			// eslint-disable-next-line camelcase
+			refresh_token
+		};
+		console.log(dataForPut);
+		// backend
+		fetch(`http://localhost:3000/spotify-users/${uuid}`, {
+			method: 'PUT',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify(dataForPut)
+		});
+
 		res
 			.cookie('access_token', token, {
-				sameSite: 'strict',
 				httpOnly: true,
-				maxAge: 15 * 1000 // 15 min * 1000 ms
+				maxAge: 5 * 60 * 1 * 1000 // 15 min * 1000 ms
 			})
-			.redirect('http://localhost:3001/dashboard');
+			.redirect('http://localhost:3001/upload');
 	});
 };

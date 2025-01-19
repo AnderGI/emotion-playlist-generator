@@ -11,6 +11,7 @@ import ImageToEmotionRelator, { GeneratorResult } from '../domain/ImageToEmotion
 
 export default class OllamaLLaVaImageToEmotionGenerator implements ImageToEmotionRelator {
 	async relate(imageToEmotion: ImageToEmotion): Promise<GeneratorResult> {
+		console.log('ollama relator');
 		const imageData = await this.readFileAsBase64(
 			path.resolve('image-uploads', imageToEmotion.getFilename())
 		);

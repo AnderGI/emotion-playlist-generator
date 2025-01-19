@@ -28,6 +28,7 @@ export default class DomainEventJsonDeserializer {
 	}
 
 	deserialize(content: string): DomainEvent {
+		console.log(content);
 		const jsonStringDomainEvent = JSON.parse(content) as JsonStringDomainEvent;
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 		const { aggregateId, eventId, occurredOn, attributes, eventName } = jsonStringDomainEvent;

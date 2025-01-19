@@ -5,11 +5,11 @@ import { SpotifyUserRepository } from '../../domain/SpotifyUserRepository';
 
 export default class SpotifyUserRegistar {
 	constructor(
-		private readonly spotifyUserRepository: SpotifyUserRepository,
+		private readonly userRepository: SpotifyUserRepository,
 		private readonly eventBus: EventBus
 	) {}
 
-	public async registar(command: LogInSpotifyUserCommand): Promise<void> {
-		await DomainSpotifyUserRegistar.registar(this.spotifyUserRepository, this.eventBus)(command);
+	public async run(command: LogInSpotifyUserCommand): Promise<void> {
+		return DomainSpotifyUserRegistar.registar(this.userRepository, this.eventBus)(command);
 	}
 }

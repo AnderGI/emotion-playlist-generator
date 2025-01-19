@@ -1,6 +1,8 @@
+/* eslint-disable camelcase */
+/* eslint-disable unused-imports/no-unused-vars */
 import LogInSpotifyUserCommand from '../../../../../apps/backoffice/backend/controllers/login-spotify-user/LogInSpotifyUserCommand';
 import { EventBus } from '../../../../shared/domain/event/EventBus';
-import SpotifyUserRegisteredDomainEvent from '../../application/log-in/SpotifyUserRegisteredDomainEvent';
+import { SpotifyUserLoggedInDomainEvent } from '../../application/log-in/SpotifyUserLoggedInDomainEvent';
 import SpotifyUser from '../SpotifyUser';
 import { SpotifyUserRepository } from '../SpotifyUserRepository';
 
@@ -10,28 +12,28 @@ export default class DomainSpotifyUserRegistar {
 			const spotifyUser = SpotifyUser.create(command);
 			await spotifyUserRepository.save(spotifyUser);
 			const {
-				id,
-				spotifyDisplayName,
-				spotifyUri,
-				spotifyMail,
-				accessToken,
-				refreshToken,
-				productType,
-				countryCode,
-				ipAddress
+				uuid,
+				spotify_id,
+				spotify_email,
+				spotify_display_name,
+				spotify_product,
+				spotify_uri,
+				spotify_type,
+				country,
+				refresh_token
 			} = spotifyUser.toPrimitives();
 			await eventBus.publish(
-				SpotifyUserRegisteredDomainEvent.fromPrimitives({
-					aggregateId: id,
+				SpotifyUserLoggedInDomainEvent.fromPrimitives({
+					aggregateId: uuid,
 					attributes: {
-						spotifyDisplayName,
-						spotifyUri,
-						spotifyMail,
-						accessToken,
-						refreshToken,
-						productType,
-						countryCode,
-						ipAddress
+						spotify_id,
+						spotify_email,
+						spotify_display_name,
+						spotify_product,
+						spotify_uri,
+						spotify_type,
+						country,
+						refresh_token
 					}
 				})
 			);

@@ -5,11 +5,11 @@
       "arguments": ["@backoffice.shared.TypeOrmClientFactory"]
     },
     "backoffice.image.ImageSaver": {
-      "class": "../../../../../../../contexts/backoffice/image/application/save/ImageSaver",
+      "class": "../../../../../../../contexts/backoffice/image/application/submit/ImageSaver",
       "arguments": ["@backoffice.image.ImageRepository", "@backoffice.shared.EventBus"]
     },
-    "backoffice.image.CreateImageCommandHandler": {
-      "class": "../../../../../../../contexts/backoffice/image/application/save/CreateImageCommandHandler",
+    "backoffice.image.SubmitImageCommandHandler": {
+      "class": "../../../../../../../contexts/backoffice/image/application/submit/SubmitImageCommandHandler",
       "arguments": ["@backoffice.image.ImageSaver"],
       "tags": [{"name":"commandHandler"}]
     }
