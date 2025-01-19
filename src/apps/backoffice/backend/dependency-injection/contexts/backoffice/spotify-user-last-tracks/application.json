@@ -1,0 +1,13 @@
+{
+  "services": {
+    "backoffice.spotify-user-last-tracks.GetSpotifyUserLastTracksOnSepotifyUserLoggedIn": {
+      "class": "../../../../../../../contexts/backoffice/spotify-user-last-tracks/application/get-spotify-user-last-tracks/GetSpotifyUserLastTracksOnSepotifyUserLoggedIn",
+      "arguments": [""],
+      "tags": [{"name":"subscriber"}]
+    }
+  }
+}
+
+
+
+

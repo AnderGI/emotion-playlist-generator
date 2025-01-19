@@ -37,6 +37,7 @@ export default class DomainSpotifyUserRegistar {
 					}
 				})
 			);
+			console.log('---- event published');
 		};
 	}
 }
