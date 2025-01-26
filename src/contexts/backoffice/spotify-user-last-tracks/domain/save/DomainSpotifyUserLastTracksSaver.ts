@@ -7,6 +7,7 @@ export default class DomainSpotifyUserLastTracksSaver {
 		spotifyUserPrimitives: SpotifyUserLastTracksPrimitives
 	): Promise<void> {
 		const userLastTracks = SpotifyUserLastTracks.fromPrimitives(spotifyUserPrimitives);
+		console.log(userLastTracks);
 		await repository.save(userLastTracks);
 	}
 }

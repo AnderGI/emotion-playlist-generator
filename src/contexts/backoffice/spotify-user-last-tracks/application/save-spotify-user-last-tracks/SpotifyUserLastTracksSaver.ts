@@ -1,5 +1,6 @@
 import logger from '../../../../../shared/infrastructure/winston/config';
 import SpotifyUserLastTracksGetter from '../../domain/get-spotify-user-last-tracks/SpotifyUserLastTracksGetter';
+import DomainSpotifyUserLastTracksSearcher from '../../domain/search/DomainSpotifyUserLastTracksSearcher';
 import SpotifyUserLastTracks from '../../domain/SpotifyUserLastTracks';
 import SpotifyUserLastTracksRepository from '../../domain/SpotifyUserLastTracksRepository';
 import SpotifyUserLastTracksRetriever from '../../domain/SpotifyUserLastTracksRetriever';
@@ -15,6 +16,24 @@ export default class SpotifyUserLastTracksSaver {
 		logger.info('--- SpotifyUserLastTracksSaver#run');
 		logger.info('--- command');
 		logger.info(JSON.stringify(command, null, 2));
+		logger.info('--- Before searching in ddbb');
+
+		// Get Spotify User Last Tracks
+		const exitingUser = await DomainSpotifyUserLastTracksSearcher.search(
+			this.spotifyUserLastTracksRepository,
+			command.data.spotify_id
+		);
+		logger.info('--- existing user');
+		logger.info(exitingUser);
+
+		if (!exitingUser?.tracksShouldBeUpdatedAfterThreeWeeks()) {
+			logger.info('no necessary update');
+
+			return Promise.resolve();
+		}
+		// See if update is necessary
+
+		// If it is do de update
 		logger.info('--- Before retrieving spotify users last tracks');
 		const data = await SpotifyUserLastTracksGetter.getSpotifyUserLastTracks(
 			this.spotifyUserLastTracksRetriever
@@ -40,7 +59,7 @@ export default class SpotifyUserLastTracksSaver {
 		// save DOMAIN
 		logger.info('--- Before calling SpotifyUserLastTracks');
 		await SpotifyUserLastTracks.save(this.spotifyUserLastTracksRepository)({
-			userId: command.data.aggregateId,
+			userId: command.data.spotify_id,
 			topTracks: tracks,
 			updatedAt: new Date().getTime()
 		});

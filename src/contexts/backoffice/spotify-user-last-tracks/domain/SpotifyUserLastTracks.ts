@@ -1,5 +1,6 @@
 import { AggregateRoot } from '../../../shared/domain/AggregateRoot';
 import DomainSpotifyUserLastTracksSaver from './save/DomainSpotifyUserLastTracksSaver';
+import DomainSpotifyUserLastTracksSearcher from './search/DomainSpotifyUserLastTracksSearcher';
 import SpotifyUserLastTracksRepository from './SpotifyUserLastTracksRepository';
 
 export type SpotifyUserLastTracksPrimitives = {
@@ -23,6 +24,18 @@ export default class SpotifyUserLastTracks implements AggregateRoot {
 		return async (spotifyUserPrimitives: SpotifyUserLastTracksPrimitives): Promise<void> => {
 			await DomainSpotifyUserLastTracksSaver.save(repository, spotifyUserPrimitives);
 		};
+	}
+
+	static search(repository: SpotifyUserLastTracksRepository) {
+		return async (id: string): Promise<void> => {
+			await DomainSpotifyUserLastTracksSearcher.search(repository, id);
+		};
+	}
+
+	tracksShouldBeUpdatedAfterThreeWeeks(): boolean {
+		const threeWeekInMs = 3 * 7 * 24 * 60 * 60 * 1000;
+
+		return Date.now() - this.updatedAt >= threeWeekInMs;
 	}
 
 	toPrimitives(): SpotifyUserLastTracksPrimitives {
