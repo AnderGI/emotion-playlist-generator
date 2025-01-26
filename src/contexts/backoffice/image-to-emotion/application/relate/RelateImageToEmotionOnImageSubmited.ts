@@ -15,8 +15,8 @@ export class RelateImageToEmotionOnImageSubmited
 
 	// eslint-disable-next-line @typescript-eslint/require-await
 	async on(domainEvent: ImageSubmitedDomainEvent): Promise<void> {
-		console.log('RelateImageToEmotionOnImageSubmited');
-		console.log(this.imageToEmotionGenerator);
+		// console.log('RelateImageToEmotionOnImageSubmited');
+		// console.log(this.imageToEmotionGenerator);
 		const { filename } = domainEvent;
 		await this.imageToEmotionGenerator.run(new RelateImageToEmotionCommand(filename));
 	}

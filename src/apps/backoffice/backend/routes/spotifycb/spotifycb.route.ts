@@ -129,7 +129,9 @@ export const register = (router: Router): void => {
 			spotify_type: user.type,
 			country: user.country,
 			// eslint-disable-next-line camelcase
-			refresh_token
+			refresh_token,
+			// eslint-disable-next-line camelcase
+			access_token
 		};
 		console.log(dataForPut);
 		// backend

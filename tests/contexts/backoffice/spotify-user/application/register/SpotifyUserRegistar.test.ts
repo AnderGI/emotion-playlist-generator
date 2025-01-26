@@ -1,5 +1,5 @@
-import LogInSpotifyUserCommandHandler from '../../../../../src/contexts/backoffice/spotify-user/application/log-in/LogInSpotifyUserCommandHandler';
-import SpotifyUserRegistar from '../../../../../src/contexts/backoffice/spotify-user/application/log-in/SpotifyUserRegistar';
+import LogInSpotifyUserCommandHandler from '../../../../../../src/contexts/backoffice/spotify-user/application/log-in/LogInSpotifyUserCommandHandler';
+import SpotifyUserRegistar from '../../../../../../src/contexts/backoffice/spotify-user/application/log-in/SpotifyUserRegistar';
 import MockSpotifyUserRepository from '../../__mocks__/MockSpotifyUserRepository';
 import SpotifyUserMockEventBus from '../../__mocks__/SpotifyUserMockEventBus';
 import { SpotifyUserMother } from '../../domain/SpotifyUserMother';

@@ -10,7 +10,7 @@ export default class ImageToEmotionGenerator {
 	) {}
 
 	public async run(relateImageToEmotionCommand: RelateImageToEmotionCommand): Promise<void> {
-		console.log('ImageToEmotionGenerator');
+		// console.log('ImageToEmotionGenerator');
 		await DomainImageToEmotionRelator.relate(
 			this.imageToEmotionRelator,
 			this.eventBus

@@ -33,7 +33,14 @@
     "start:backoffice:backend": "cross-env NODE_ENV=production node dist/src/apps/backoffice/backend/start",
     "rabbitmq:configure": "npx ts-node ./src/scripts/configure-rabbitmq/configure-rabbitmq.ts",
     "rabbitmq:consume": "npx ts-node ./src/scripts/configure-rabbitmq/consume-rabbitmq.ts",
-    "script:remove-uploads": "npx ts-node ./src/scripts/clean-uploads/clean-uploads.ts"
+    "script:remove-uploads": "npx ts-node ./src/scripts/clean-uploads/clean-uploads.ts",
+    "test:backoffice:backend:contexts":"npm run test:backoffice:backend:spotify-user && npm run test:backoffice:backend:spotify-user-last-tracks",
+    "test:backoffice:backend:spotify-user":"npm run test:backoffice:backend:spotify-user:unit && npm run test:backoffice:backend:spotify-user:integration",
+    "test:backoffice:backend:spotify-user:unit":"cross-env NODE_ENV=test jest --passWithNoTests --testPathPattern './tests/contexts/backoffice/spotify-user/application/.*\\.test\\.ts'",
+    "test:backoffice:backend:spotify-user:integration":"cross-env NODE_ENV=test NODE_OPTIONS=\"--experimental-vm-modules\" jest --passWithNoTests --testPathPattern './tests/contexts/backoffice/spotify-user/infrastructure/.*/.*\\.test\\.ts'",
+    "test:backoffice:backend:spotify-user-last-tracks":"npm run test:backoffice:backend:spotify-user-last-tracks:unit && npm run test:backoffice:backend:spotify-user-last-tracks:integration",
+    "test:backoffice:backend:spotify-user-last-tracks:unit":"cross-env NODE_ENV=test jest --passWithNoTests --testPathPattern './tests/contexts/backoffice/spotify-user-last-tracks/application/.*\\.test\\.ts'",
+    "test:backoffice:backend:spotify-user-last-tracks:integration":"cross-env NODE_ENV=test NODE_OPTIONS=\"--experimental-vm-modules\" jest --passWithNoTests --testPathPattern './tests/contexts/backoffice/spotify-user-last-tracks/infrastructure/.*/.*\\.test\\.ts'"
   },
   "dependencies": {
     "@langchain/core": "^0.3.23",

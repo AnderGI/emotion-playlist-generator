@@ -35,7 +35,8 @@ export const register = (router: Router): void => {
 				.isString()
 				.isLength({ min: 2, max: 2 })
 				.withMessage('country must be a valid 2-letter country code'),
-			body('refresh_token').isString().withMessage('refresh_token must be a string')
+			body('refresh_token').isString().withMessage('refresh_token must be a string'),
+			body('access_token').isString().withMessage('access_token must be a string')
 		],
 		(req: Request, res: Response, next: NextFunction) => {
 			// Verificar si hay errores de validación

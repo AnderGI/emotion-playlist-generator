@@ -7,7 +7,7 @@ import ImageToEmotionRelatedDomainEvent from './ImageToEmotionRelatedDomainEvent
 export default class DomainImageToEmotionRelator {
 	public static relate(imageToEmotionRelator: ImageToEmotionRelator, eventBus: EventBus) {
 		return async (relateImageToEmotionCommand: RelateImageToEmotionCommand): Promise<void> => {
-			console.log('DomainImageToEmotionRelator');
+			// console.log('DomainImageToEmotionRelator');
 			const { filename } = relateImageToEmotionCommand;
 			const imageToEmotion = ImageToEmotion.create({ filename });
 			const result = await imageToEmotionRelator.relate(imageToEmotion);
@@ -16,7 +16,7 @@ export default class DomainImageToEmotionRelator {
 				aggregateId: emotion,
 				attributes: { filename }
 			});
-			console.log('image to emotion related : ', domainEvent);
+			// console.log('image to emotion related : ', domainEvent);
 			await eventBus.publish(domainEvent);
 		};
 	}

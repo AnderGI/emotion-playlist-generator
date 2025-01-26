@@ -1,5 +1,5 @@
-import SpotifyUser from '../../../../src/contexts/backoffice/spotify-user/domain/SpotifyUser';
-import { SpotifyUserRepository } from '../../../../src/contexts/backoffice/spotify-user/domain/SpotifyUserRepository';
+import SpotifyUser from '../../../../../src/contexts/backoffice/spotify-user/domain/SpotifyUser';
+import { SpotifyUserRepository } from '../../../../../src/contexts/backoffice/spotify-user/domain/SpotifyUserRepository';
 
 export default class MockSpotifyUserRepository implements SpotifyUserRepository {
 	private readonly mockRegister: jest.Mock;

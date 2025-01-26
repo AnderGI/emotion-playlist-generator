@@ -37,8 +37,10 @@ jobs:
         run: npm run rabbitmq:consume &
       - name: Build process
         run: npm run build
-      - name: Unit tests
-        run: npm run test:unit
+      - name: Backoffice spotify-user contexts unit tests
+        run: test:backoffice:backend:spotify-user:unit
+      - name: Backoffice spotify-user-last-tracks contexts unit tests
+        run: test:backoffice:backend:spotify-user-last-tracks:unit
       - name: Stop docker container
         if: always()
         run: docker compose down 

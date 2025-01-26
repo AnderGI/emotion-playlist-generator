@@ -20,7 +20,8 @@ export default class DomainSpotifyUserRegistar {
 				spotify_uri,
 				spotify_type,
 				country,
-				refresh_token
+				refresh_token,
+				access_token
 			} = spotifyUser.toPrimitives();
 			await eventBus.publish(
 				SpotifyUserLoggedInDomainEvent.fromPrimitives({
@@ -33,7 +34,8 @@ export default class DomainSpotifyUserRegistar {
 						spotify_uri,
 						spotify_type,
 						country,
-						refresh_token
+						refresh_token,
+						access_token
 					}
 				})
 			);

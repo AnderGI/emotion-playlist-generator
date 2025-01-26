@@ -1,4 +1,4 @@
-import EnvironmentArrengerFactory from '../../../shared/infrastructure/arranger/EnvironmentArrengerFactory';
+import EnvironmentArrengerFactory from '../../../../shared/infrastructure/arranger/EnvironmentArrengerFactory';
 import SpotifyUserRepositoryArrenger from './SpotifyUserRepositoryArrenger';
 import TestSpotifyUserRepositoryFactory from './TestSpotifyUserRepositoryFactory';
 

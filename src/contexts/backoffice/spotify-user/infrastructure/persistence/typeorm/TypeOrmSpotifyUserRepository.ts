@@ -3,7 +3,7 @@ import { DataSource, EntitySchema, Repository } from 'typeorm';
 import { Nullable } from '../../../../../../shared/domain/Nullable';
 import SpotifyUser from '../../../domain/SpotifyUser';
 import { SpotifyUserRepository } from '../../../domain/SpotifyUserRepository';
-import { ImageEntity } from './SpotifyUserEntity.entity';
+import { SpotifyUserEntity } from './SpotifyUserEntity.entity';
 
 export class TypeOrmSpotifyUserRepository implements SpotifyUserRepository {
 	constructor(private readonly _client: Promise<DataSource>) {}
@@ -15,17 +15,17 @@ export class TypeOrmSpotifyUserRepository implements SpotifyUserRepository {
 	public async search(user: SpotifyUser): Promise<Nullable<SpotifyUser>> {
 		const repository = await this.repository();
 
-		const image = await repository.findOne({
+		const retrievedUser = await repository.findOne({
 			where: {
 				id: user.id
 			}
 		});
 
-		return image;
+		return retrievedUser;
 	}
 
 	public entitySchema(): EntitySchema<SpotifyUser> {
-		return ImageEntity;
+		return SpotifyUserEntity;
 	}
 
 	private async client(): Promise<DataSource> {

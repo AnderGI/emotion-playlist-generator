@@ -12,7 +12,7 @@ import SpotifyUserProductType from '../../../domain/SpotifyUserProductType';
 import SpotifyUserRefreshToken from '../../../domain/SpotifyUserRefreshToken';
 import SpotifyUserUri from '../../../domain/SpotifyUserUri';
 
-export const ImageEntity = new EntitySchema<SpotifyUser>({
+export const SpotifyUserEntity = new EntitySchema<SpotifyUser>({
 	name: 'SpotifyUser',
 	tableName: 'spotify_users',
 	target: SpotifyUser,

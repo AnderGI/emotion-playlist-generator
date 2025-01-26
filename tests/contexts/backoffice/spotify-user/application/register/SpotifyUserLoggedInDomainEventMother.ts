@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
-import { SpotifyUserLoggedInDomainEvent } from '../../../../../src/contexts/backoffice/spotify-user/application/log-in/SpotifyUserLoggedInDomainEvent';
-import SpotifyUser from '../../../../../src/contexts/backoffice/spotify-user/domain/SpotifyUser';
+
+import { SpotifyUserLoggedInDomainEvent } from '../../../../../../src/contexts/backoffice/spotify-user/application/log-in/SpotifyUserLoggedInDomainEvent';
+import SpotifyUser from '../../../../../../src/contexts/backoffice/spotify-user/domain/SpotifyUser';
 
 export class SpotifyUserLoggedInDomainEventMother {
 	static fromSpotifyUser(spotifyUser: SpotifyUser): SpotifyUserLoggedInDomainEvent {
@@ -13,7 +14,8 @@ export class SpotifyUserLoggedInDomainEventMother {
 			spotify_uri,
 			spotify_type,
 			country,
-			refresh_token
+			refresh_token,
+			access_token
 		} = spotifyUser.toPrimitives();
 
 		return SpotifyUserLoggedInDomainEvent.fromPrimitives({
@@ -26,7 +28,8 @@ export class SpotifyUserLoggedInDomainEventMother {
 				spotify_uri,
 				spotify_type,
 				country,
-				refresh_token
+				refresh_token,
+				access_token
 			}
 		});
 	}

@@ -1,5 +1,5 @@
-import { SpotifyUserLoggedInDomainEvent } from '../../../../src/contexts/backoffice/spotify-user/application/log-in/SpotifyUserLoggedInDomainEvent';
-import MockEventBus from '../../shared/__mocks__/MockEventBus';
+import { SpotifyUserLoggedInDomainEvent } from '../../../../../src/contexts/backoffice/spotify-user/application/log-in/SpotifyUserLoggedInDomainEvent';
+import MockEventBus from '../../../shared/__mocks__/MockEventBus';
 
 export default class SpotifyUserMockEventBus extends MockEventBus<SpotifyUserLoggedInDomainEvent> {
 	assertBusHasBeenCalledWith(event: SpotifyUserLoggedInDomainEvent): void {

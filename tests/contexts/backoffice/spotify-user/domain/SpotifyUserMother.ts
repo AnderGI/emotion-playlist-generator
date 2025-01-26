@@ -3,7 +3,7 @@ import fakerStatic from 'faker';
 
 import SpotifyUser, {
 	SpotifyUserPrimitives
-} from '../../../../src/contexts/backoffice/spotify-user/domain/SpotifyUser';
+} from '../../../../../src/contexts/backoffice/spotify-user/domain/SpotifyUser';
 
 export class SpotifyUserMother {
 	static create(value?: SpotifyUserPrimitives): SpotifyUser {
@@ -19,7 +19,8 @@ export class SpotifyUserMother {
 				spotify_uri: `spotify:user:${name}`,
 				spotify_type: fakerStatic.random.arrayElement(['user']),
 				country: fakerStatic.address.countryCode('ISO 3166-1 alpha-2'),
-				refresh_token: randomBytes(64).toString('hex')
+				refresh_token: randomBytes(64).toString('hex'),
+				access_token: randomBytes(64).toString('hex')
 			})
 		);
 	}

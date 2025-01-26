@@ -1,5 +1,5 @@
-import { SpotifyUserRepository } from '../../../../../src/contexts/backoffice/spotify-user/domain/SpotifyUserRepository';
-import { EnvironmentArranger } from '../../../shared/infrastructure/arranger/EnvironmentArranger';
+import { SpotifyUserRepository } from '../../../../../../src/contexts/backoffice/spotify-user/domain/SpotifyUserRepository';
+import { EnvironmentArranger } from '../../../../shared/infrastructure/arranger/EnvironmentArranger';
 import { SpotifyUserMother } from '../../domain/SpotifyUserMother';
 
 export default class SpotifyUserRepositoryArrenger {

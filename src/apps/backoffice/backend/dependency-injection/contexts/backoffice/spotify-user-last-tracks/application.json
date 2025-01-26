@@ -1,8 +1,20 @@
 {
   "services": {
+    "backoffice.spotify-user-last-tracks.SpotifyUserLastTracksRepository": {
+      "class": "../../../../../../../contexts/backoffice/spotify-user-last-tracks/infrastructure/persistence/typeorm/TypeOrmSpotifyUserLastTracksRepository",
+      "arguments": ["@backoffice.shared.TypeOrmClientFactory"]
+    },
+    "backoffice.spotify-user-last-tracks.SpotifyUserLastTracksRetriever": {
+      "class": "../../../../../../../contexts/backoffice/spotify-user-last-tracks/infrastructure/retriever/HttpSpotifyUserLastTracksRetriever",
+      "arguments": [""]
+    },
+    "backoffice.spotify-user-last-tracks.SpotifyUserLastTracksSaver": {
+      "class": "../../../../../../../contexts/backoffice/spotify-user-last-tracks/application/save-spotify-user-last-tracks/SpotifyUserLastTracksSaver",
+      "arguments": ["@backoffice.spotify-user-last-tracks.SpotifyUserLastTracksRetriever"]
+    },
     "backoffice.spotify-user-last-tracks.GetSpotifyUserLastTracksOnSepotifyUserLoggedIn": {
-      "class": "../../../../../../../contexts/backoffice/spotify-user-last-tracks/application/get-spotify-user-last-tracks/GetSpotifyUserLastTracksOnSepotifyUserLoggedIn",
-      "arguments": [""],
+      "class": "../../../../../../../contexts/backoffice/spotify-user-last-tracks/application/save-spotify-user-last-tracks/GetSpotifyUserLastTracksOnSepotifyUserLoggedIn",
+      "arguments": ["@backoffice.spotify-user-last-tracks.SpotifyUserLastTracksSaver"],
       "tags": [{"name":"subscriber"}]
     }
   }

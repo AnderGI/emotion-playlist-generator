@@ -1,5 +1,5 @@
-export default interface SpotifyUserData {
-	uuid: string;
+export default interface SpotifyUserLoggedInDomainEventReq {
+	aggregateId: string;
 	spotify_id: string;
 	spotify_email: string;
 	spotify_display_name: string;
@@ -7,6 +7,5 @@ export default interface SpotifyUserData {
 	spotify_uri: string;
 	spotify_type: string;
 	country: string;
-	refresh_token: string;
-	access_token: string;
+	acces_token: string;
 }
