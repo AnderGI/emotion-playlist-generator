@@ -1,3 +1,4 @@
+import logger from '../../../../../shared/infrastructure/winston/config';
 import SpotifyUserLastTracksGetter from '../../domain/get-spotify-user-last-tracks/SpotifyUserLastTracksGetter';
 import SpotifyUserLastTracks from '../../domain/SpotifyUserLastTracks';
 import SpotifyUserLastTracksRepository from '../../domain/SpotifyUserLastTracksRepository';
@@ -10,13 +11,15 @@ export default class SpotifyUserLastTracksSaver {
 		private readonly spotifyUserLastTracksRepository: SpotifyUserLastTracksRepository
 	) {}
 
-	// change return type
 	public async run(command: GetSpotifyUserLastTracksOnSepotifyUserLoggedInCommand): Promise<void> {
-		// get last tracks DOMAIN
+		logger.info('--- SpotifyUserLastTracksSaver#run');
+		logger.info('--- command');
+		logger.info(JSON.stringify(command, null, 2));
+		logger.info('--- Before retrieving spotify users last tracks');
 		const data = await SpotifyUserLastTracksGetter.getSpotifyUserLastTracks(
 			this.spotifyUserLastTracksRetriever
 		)(command);
-
+		logger.info('--- AAfter retrieving spotify user last tracks');
 		// Deserialize
 		const tracks = data.items.map(item => {
 			return JSON.stringify({
@@ -31,11 +34,16 @@ export default class SpotifyUserLastTracksSaver {
 			});
 		});
 
+		logger.info('--- SPotifyUserLastTracks top tracks');
+		logger.info(JSON.stringify(tracks, null, 2));
+
 		// save DOMAIN
+		logger.info('--- Before calling SpotifyUserLastTracks');
 		await SpotifyUserLastTracks.save(this.spotifyUserLastTracksRepository)({
 			userId: command.data.aggregateId,
 			topTracks: tracks,
 			updatedAt: new Date().getTime()
 		});
+		logger.info('--- After calling SpotifyUserLastTracks');
 	}
 }

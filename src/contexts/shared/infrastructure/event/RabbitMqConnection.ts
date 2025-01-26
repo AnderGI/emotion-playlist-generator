@@ -1,5 +1,6 @@
 import * as amqplib from 'amqplib';
 
+import logger from '../../../../shared/infrastructure/winston/config';
 import { DomainEvent } from '../../domain/event/DomainEvent';
 import { DomainEventSubscriber } from '../../domain/event/DomainEventSubscriber';
 import { AmqpChannelPublishOptions } from './AmqpChannelPublishOptionsFactory';
@@ -99,16 +100,27 @@ export default class RabbitMqConnection {
 		subscriber: DomainEventSubscriber<DomainEvent>,
 		channel: amqplib.ConfirmChannel
 	) {
-		return (msg: amqplib.ConsumeMessage | null) => {
-			if (msg !== null) {
-				subscriber
-					.on(this.domainEventJsonDeserializer.deserialize(msg.content.toString()))
-					.catch(() => {
-						this.handleRetry(msg, subscriber.queueName());
-					})
-					.finally(() => {
-						channel.ack(msg);
-					});
+		return async (msg: amqplib.ConsumeMessage | null) => {
+			if (msg === null) {
+				return;
+			}
+
+			try {
+				// Procesar el mensaje
+				await subscriber.on(this.domainEventJsonDeserializer.deserialize(msg.content.toString()));
+				// Confirmar el mensaje como procesado
+				channel.ack(msg);
+			} catch (error) {
+				// Manejar el error y determinar si debe reintentarse o moverse a Dead Letter
+				logger.error(`Error procesando mensaje: ${msg.content.toString()}. Error:`, error);
+				try {
+					await this.handleRetry(msg, subscriber.queueName());
+				} catch (retryError) {
+					logger.error(`Error manejando reintento o Dead Letter:`, retryError);
+				} finally {
+					// No hacer ack. Indicar a RabbitMQ que no se procesó correctamente
+					channel.nack(msg, false, false); // No requeue: false, no múltiple: false
+				}
 			}
 		};
 	}

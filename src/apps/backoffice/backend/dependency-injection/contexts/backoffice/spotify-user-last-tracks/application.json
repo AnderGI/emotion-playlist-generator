@@ -10,7 +10,7 @@
     },
     "backoffice.spotify-user-last-tracks.SpotifyUserLastTracksSaver": {
       "class": "../../../../../../../contexts/backoffice/spotify-user-last-tracks/application/save-spotify-user-last-tracks/SpotifyUserLastTracksSaver",
-      "arguments": ["@backoffice.spotify-user-last-tracks.SpotifyUserLastTracksRetriever"]
+      "arguments": ["@backoffice.spotify-user-last-tracks.SpotifyUserLastTracksRetriever", "@backoffice.spotify-user-last-tracks.SpotifyUserLastTracksRepository"]
     },
     "backoffice.spotify-user-last-tracks.GetSpotifyUserLastTracksOnSepotifyUserLoggedIn": {
       "class": "../../../../../../../contexts/backoffice/spotify-user-last-tracks/application/save-spotify-user-last-tracks/GetSpotifyUserLastTracksOnSepotifyUserLoggedIn",

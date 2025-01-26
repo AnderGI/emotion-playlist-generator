@@ -1,3 +1,4 @@
+import logger from '../../../../../shared/infrastructure/winston/config';
 import { DomainEventClass } from '../../../../shared/domain/event/DomainEvent';
 import { DomainEventSubscriber } from '../../../../shared/domain/event/DomainEventSubscriber';
 import { SpotifyUserLoggedInDomainEvent } from '../../../spotify-user/application/log-in/SpotifyUserLoggedInDomainEvent';
@@ -16,8 +17,9 @@ export default class GetSpotifyUserLastTracksOnSepotifyUserLoggedIn
 	}
 
 	async on(domainEvent: SpotifyUserLoggedInDomainEvent): Promise<void> {
-		console.log('----- GetSpotifyUserLastTracksOnSepotifyUserLoggedIn');
-		console.log(domainEvent);
+		logger.info('--- GetSpotifyUserLastTracksOnSepotifyUserLoggedIn#on');
+		logger.info('--- Received SpotifyUserLoggedInDomainEvent');
+		logger.info(JSON.stringify(domainEvent.toPrimitives(), null, 2));
 
 		const data: GetSpotifyUserLastTracksOnSepotifyUserLoggedInCommandData = {
 			spotify_id: domainEvent.spotify_id,
@@ -30,6 +32,9 @@ export default class GetSpotifyUserLastTracksOnSepotifyUserLoggedIn
 			access_token: domainEvent.access_token,
 			aggregateId: domainEvent.aggregateId
 		};
+
+		logger.info('--- GetSpotifyUserLastTracksOnSepotifyUserLoggedInCommandData');
+		logger.info(JSON.stringify(data, null, 2));
 
 		await this.spotifyUserLastTracksRetriever.run(
 			new GetSpotifyUserLastTracksOnSepotifyUserLoggedInCommand(data)
