@@ -1,5 +1,5 @@
-import { ImageRepository } from '../../../../../src/contexts/backoffice/image/domain/ImageRepository';
-import { EnvironmentArranger } from '../../../shared/infrastructure/arranger/EnvironmentArranger';
+import { ImageRepository } from '../../../../../../src/contexts/backoffice/image/domain/ImageRepository';
+import { EnvironmentArranger } from '../../../../shared/infrastructure/arranger/EnvironmentArranger';
 import { ImageMother } from '../../domain/ImageMother';
 
 export class ImageRepositoryArrenger {

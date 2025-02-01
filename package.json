@@ -41,7 +41,9 @@
     "test:backoffice:backend:spotify-user-last-tracks":"npm run test:backoffice:backend:spotify-user-last-tracks:unit && npm run test:backoffice:backend:spotify-user-last-tracks:integration",
     "test:backoffice:backend:spotify-user-last-tracks:unit":"cross-env NODE_ENV=test jest --passWithNoTests --testPathPattern './tests/contexts/backoffice/spotify-user-last-tracks/application/.*\\.test\\.ts'",
     "test:backoffice:backend:spotify-user-last-tracks:integration":"cross-env NODE_ENV=test NODE_OPTIONS=\"--experimental-vm-modules\" jest --passWithNoTests --testPathPattern './tests/contexts/backoffice/spotify-user-last-tracks/infrastructure/.*/.*\\.test\\.ts'",
-    "test:backoffice:backend:image:unit": "cross-env NODE_ENV=test jest --passWithNoTests --testPathPattern './tests/contexts/backoffice/image/application/.*\\.test\\.ts'"
+    "test:backoffice:backend:image:unit": "cross-env NODE_ENV=test jest --passWithNoTests --testPathPattern './tests/contexts/backoffice/image/application/.*\\.test\\.ts'",
+    "test:backoffice:backend:image:integration":"cross-env NODE_ENV=test NODE_OPTIONS=\"--experimental-vm-modules\" jest --passWithNoTests --testPathPattern './tests/contexts/backoffice/image/infrastructure/.*/.*\\.test\\.ts'"
+
   },
   "dependencies": {
     "@langchain/core": "^0.3.23",
