@@ -2,31 +2,31 @@ import { DomainEvent } from '../../../../shared/domain/event/DomainEvent';
 
 type ImageSubmitedDomainEventAttributes = {
 	readonly filename: string;
-	readonly destination: string;
+	readonly dirname: string;
 };
 
 export class ImageSubmitedDomainEvent extends DomainEvent {
 	static readonly EVENT_NAME: string = 'andergi.backoffice.image.event.image_submited.1';
 
 	readonly filename: string;
-	readonly destination: string;
+	readonly dirname: string;
 
 	constructor({
 		aggregateId,
 		filename,
-		destination,
+		dirname,
 		eventId,
 		occurredOn
 	}: {
 		aggregateId: string;
 		filename: string;
-		destination: string;
+		dirname: string;
 		eventId?: string;
 		occurredOn?: Date;
 	}) {
 		super({ eventName: ImageSubmitedDomainEvent.EVENT_NAME, aggregateId, eventId, occurredOn });
 		this.filename = filename;
-		this.destination = destination;
+		this.dirname = dirname;
 	}
 
 	static fromPrimitives(params: {
@@ -40,18 +40,18 @@ export class ImageSubmitedDomainEvent extends DomainEvent {
 		return new ImageSubmitedDomainEvent({
 			aggregateId,
 			filename: attributes.filename,
-			destination: attributes.destination,
+			dirname: attributes.dirname,
 			eventId,
 			occurredOn
 		});
 	}
 
 	toPrimitives(): ImageSubmitedDomainEventAttributes {
-		const { filename, destination } = this;
+		const { filename, dirname } = this;
 
 		return {
 			filename,
-			destination
+			dirname
 		};
 	}
 }

@@ -1,15 +1,5 @@
-import { Request } from 'express';
-
-import { ControllerRequest } from '../../../../../shared/domain/ControllerRequest';
-
-export default interface SubmitImageReq extends ControllerRequest, Request {
+export default interface SubmitImageReq {
 	id: string;
-	path: string;
-	fieldname: string;
-	originalname: string;
-	encoding: string;
-	mimetype: string;
-	destination: string;
+	dirname: string;
 	filename: string;
-	size: number;
 }

@@ -1,6 +1,6 @@
 import { system } from 'faker';
 
-import { ImageFilename } from '../../../../src/contexts/backoffice/image/domain/ImageFilename';
+import { ImageFilename } from '../../../../../src/contexts/backoffice/image/domain/ImageFilename';
 
 export class ImageFilenameMother {
 	static random(): ImageFilename {

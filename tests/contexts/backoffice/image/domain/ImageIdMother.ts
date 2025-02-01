@@ -1,6 +1,6 @@
 import { datatype } from 'faker';
 
-import { ImageId } from '../../../../src/contexts/backoffice/image/domain/ImageId';
+import { ImageId } from '../../../../../src/contexts/backoffice/image/domain/ImageId';
 
 export class ImageIdMother {
 	static random(): ImageId {

@@ -1,6 +1,6 @@
-import { ImageSubmitedDomainEvent } from '../../../../src/contexts/backoffice/image/application/submit/ImageSubmitedDomainEvent';
-import { DomainEvent } from '../../../../src/contexts/shared/domain/event/DomainEvent';
-import MockEventBus from '../../shared/__mocks__/MockEventBus';
+import { ImageSubmitedDomainEvent } from '../../../../../src/contexts/backoffice/image/application/submit/ImageSubmitedDomainEvent';
+import { DomainEvent } from '../../../../../src/contexts/shared/domain/event/DomainEvent';
+import MockEventBus from '../../../shared/__mocks__/MockEventBus';
 
 export class ImageMockEventBus extends MockEventBus<ImageSubmitedDomainEvent> {
 	public assertBusHasBeenCalledWith(event: DomainEvent): void {

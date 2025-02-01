@@ -7,14 +7,14 @@ import { ImageRepository } from '../ImageRepository';
 export class DomainImageSaver {
 	static save(imageRepository: ImageRepository, eventBus: EventBus) {
 		return async (command: SubmitImageCommand): Promise<void> => {
-			const { id, filename, mimetype, destination, size } = command.params;
-			const image = Image.create({ id, mimetype, destination, filename, size });
+			const { id, filename, dirname } = command.params;
+			const image = Image.create({ id, filename, dirname });
 			await imageRepository.save(image);
 			const event = ImageSubmitedDomainEvent.fromPrimitives({
 				aggregateId: image.getId(),
 				attributes: {
 					filename: image.getFilename(),
-					destination: image.getDestination()
+					dirname: image.getDirname()
 				}
 			});
 			await eventBus.publish(event);

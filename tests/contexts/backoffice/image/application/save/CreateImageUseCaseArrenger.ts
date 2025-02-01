@@ -1,8 +1,8 @@
-import SubmitImageCommand from '../../../../../src/apps/backoffice/backend/controllers/submit-image/CreateImageCommand';
-import { ImageSaver } from '../../../../../src/contexts/backoffice/image/application/submit/ImageSaver';
-import { ImageSubmitedDomainEvent } from '../../../../../src/contexts/backoffice/image/application/submit/ImageSubmitedDomainEvent';
-import SubmitImageCommandHandler from '../../../../../src/contexts/backoffice/image/application/submit/SubmitImageCommandHandler';
-import { Image } from '../../../../../src/contexts/backoffice/image/domain/Image';
+import SubmitImageCommand from '../../../../../../src/apps/backoffice/backend/controllers/submit-image/CreateImageCommand';
+import { ImageSaver } from '../../../../../../src/contexts/backoffice/image/application/submit/ImageSaver';
+import { ImageSubmitedDomainEvent } from '../../../../../../src/contexts/backoffice/image/application/submit/ImageSubmitedDomainEvent';
+import SubmitImageCommandHandler from '../../../../../../src/contexts/backoffice/image/application/submit/SubmitImageCommandHandler';
+import { Image } from '../../../../../../src/contexts/backoffice/image/domain/Image';
 import { ImageMockEventBus } from '../../__mocks__/ImageMockEventBus';
 import { MockImageRepository } from '../../__mocks__/MockImageRepository';
 import { CreateImageCommandMother } from '../../domain/CreateImageCommandMother';

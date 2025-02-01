@@ -1,5 +1,5 @@
-import { ImageSubmitedDomainEvent } from '../../../../src/contexts/backoffice/image/application/submit/ImageSubmitedDomainEvent';
-import { Image } from '../../../../src/contexts/backoffice/image/domain/Image';
+import { ImageSubmitedDomainEvent } from '../../../../../src/contexts/backoffice/image/application/submit/ImageSubmitedDomainEvent';
+import { Image } from '../../../../../src/contexts/backoffice/image/domain/Image';
 import { ImageMother } from './ImageMother';
 
 export class ImageCreatedDomainEventMother {
@@ -8,7 +8,7 @@ export class ImageCreatedDomainEventMother {
 			aggregateId: image.getId(),
 			attributes: {
 				filename: image.getFilename(),
-				destination: image.getDestination()
+				dirname: image.getDirname()
 			}
 		});
 	}

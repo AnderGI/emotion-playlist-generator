@@ -1,6 +1,6 @@
-import { Image } from '../../../../src/contexts/backoffice/image/domain/Image';
-import { ImageId } from '../../../../src/contexts/backoffice/image/domain/ImageId';
-import { ImageRepository } from '../../../../src/contexts/backoffice/image/domain/ImageRepository';
+import { Image } from '../../../../../src/contexts/backoffice/image/domain/Image';
+import { ImageId } from '../../../../../src/contexts/backoffice/image/domain/ImageId';
+import { ImageRepository } from '../../../../../src/contexts/backoffice/image/domain/ImageRepository';
 import { ImageIdMother } from '../domain/ImageIdMother';
 
 export class MockImageRepository implements ImageRepository {
