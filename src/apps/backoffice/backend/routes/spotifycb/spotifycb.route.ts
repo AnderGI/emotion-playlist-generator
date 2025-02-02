@@ -121,17 +121,14 @@ export const register = (router: Router): void => {
 
 		const uuid = UuidValueObject.random();
 		const dataForPut = {
-			spotify_id: user.id,
-			spotify_email: user.email,
-			spotify_display_name: user.display_name,
-			spotify_product: user.product,
-			spotify_uri: user.uri,
-			spotify_type: user.type,
+			spotifyId: user.id,
+			spotifyEmail: user.email,
+			spotifyDisplayName: user.display_name,
 			country: user.country,
 			// eslint-disable-next-line camelcase
-			refresh_token,
+			refreshToken: refresh_token,
 			// eslint-disable-next-line camelcase
-			access_token
+			accessToken: access_token
 		};
 		console.log(dataForPut);
 		// backend

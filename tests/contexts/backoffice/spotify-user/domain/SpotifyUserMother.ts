@@ -11,16 +11,12 @@ export class SpotifyUserMother {
 
 		return SpotifyUser.fromPrimitives(
 			Object.assign({}, value, {
-				uuid: fakerStatic.datatype.uuid(),
-				spotify_id: name,
-				spotify_email: fakerStatic.internet.email(),
-				spotify_display_name: name,
-				spotify_product: fakerStatic.random.arrayElement(['premium', 'free']),
-				spotify_uri: `spotify:user:${name}`,
-				spotify_type: fakerStatic.random.arrayElement(['user']),
+				spotifyId: name,
+				spotifyEmail: fakerStatic.internet.email(),
+				spotifyDisplayName: name,
 				country: fakerStatic.address.countryCode('ISO 3166-1 alpha-2'),
-				refresh_token: randomBytes(64).toString('hex'),
-				access_token: randomBytes(64).toString('hex')
+				refreshToken: randomBytes(64).toString('hex'),
+				accessToken: randomBytes(64).toString('hex')
 			})
 		);
 	}

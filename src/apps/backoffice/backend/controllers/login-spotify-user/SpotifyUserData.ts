@@ -1,12 +1,8 @@
 export default interface SpotifyUserData {
-	uuid: string;
-	spotify_id: string;
-	spotify_email: string;
-	spotify_display_name: string;
-	spotify_product: string;
-	spotify_uri: string;
-	spotify_type: string;
+	spotifyId: string;
+	spotifyEmail: string;
+	spotifyDisplayName: string;
 	country: string;
-	refresh_token: string;
-	access_token: string;
+	refreshToken: string;
+	accessToken: string;
 }

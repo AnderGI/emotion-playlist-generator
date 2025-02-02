@@ -17,7 +17,7 @@ export class TypeOrmSpotifyUserRepository implements SpotifyUserRepository {
 
 		const retrievedUser = await repository.findOne({
 			where: {
-				id: user.id
+				spotifyId: user.spotifyId.getValue()
 			}
 		});
 

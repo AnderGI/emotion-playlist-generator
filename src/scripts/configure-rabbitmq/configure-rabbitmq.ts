@@ -7,9 +7,10 @@ const setupConfigurer: RabbitMqConnection = container.get('backoffice.shared.Rab
 
 const subscribers = container.findTaggedServiceIds('subscriber');
 const ids = [...subscribers.keys()];
-
+// da error de maximum call stack size
 const queuesToBindings = ids.map(id => {
 	const subscriber = container.get<DomainEventSubscriber<DomainEvent>>(id as string);
+
 	const queue = subscriber.queueName();
 	const bindings = subscriber.subscribedTo().map(event => event.EVENT_NAME);
 

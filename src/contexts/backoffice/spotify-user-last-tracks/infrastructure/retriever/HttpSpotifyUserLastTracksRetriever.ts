@@ -13,7 +13,7 @@ export default class HttpSpotifyUserLastTracksRetriever implements SpotifyUserLa
 		const response = await fetch(url, {
 			method: 'GET',
 			headers: {
-				Authorization: `Bearer ${command.data.access_token}`
+				Authorization: `Bearer ${command.data.accessToken}`
 			}
 		});
 		logger.info('--- After data fetch everything ok');

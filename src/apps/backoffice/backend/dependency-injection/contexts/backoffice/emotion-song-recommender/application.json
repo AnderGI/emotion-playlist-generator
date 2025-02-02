@@ -1,0 +1,21 @@
+{
+  "services": {
+    "backoffice.emotion-song-recommender.EmotionSongRecommenderRepository": {
+      "class": "../../../../../../../contexts/backoffice/emotion-song-recommender/infrastructure/persistence/typeorm/TypeOrmEmotionSongRecommenderRepository",
+      "arguments": ["@backoffice.shared.TypeOrmClientFactory"]
+    },
+    "backoffice.emotion-song-recommender.OnSpotifyUserLoggedInEmotionSongRecommenderUpdater": {
+      "class": "../../../../../../../contexts/backoffice/emotion-song-recommender/application/log-in/OnSpotifyUserLoggedInEmotionSongRecommenderUpdater",
+      "arguments": ["@backoffice.emotion-song-recommender.EmotionSongRecommenderRepository"]
+    },
+    "backoffice.emotion-song-recommender.UpdateEmotionSongRecommenderOnSpotifyUserLoggedIn": {
+      "class": "../../../../../../../contexts/backoffice/emotion-song-recommender/application/log-in/UpdateEmotionSongRecommenderOnSpotifyUserLoggedIn",
+      "arguments": ["@backoffice.emotion-song-recommender.OnSpotifyUserLoggedInEmotionSongRecommenderUpdater"],
+      "tags": [{"name":"subscriber"}]
+    }
+  }
+}
+
+
+
+

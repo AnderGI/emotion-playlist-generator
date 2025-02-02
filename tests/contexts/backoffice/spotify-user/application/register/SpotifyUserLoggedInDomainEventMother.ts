@@ -5,31 +5,17 @@ import SpotifyUser from '../../../../../../src/contexts/backoffice/spotify-user/
 
 export class SpotifyUserLoggedInDomainEventMother {
 	static fromSpotifyUser(spotifyUser: SpotifyUser): SpotifyUserLoggedInDomainEvent {
-		const {
-			uuid,
-			spotify_id,
-			spotify_email,
-			spotify_display_name,
-			spotify_product,
-			spotify_uri,
-			spotify_type,
-			country,
-			refresh_token,
-			access_token
-		} = spotifyUser.toPrimitives();
+		const { spotifyEmail, spotifyDisplayName, country, refreshToken, accessToken } =
+			spotifyUser.toPrimitives();
 
 		return SpotifyUserLoggedInDomainEvent.fromPrimitives({
-			aggregateId: uuid,
+			aggregateId: spotifyUser.spotifyId.getValue(),
 			attributes: {
-				spotify_id,
-				spotify_email,
-				spotify_display_name,
-				spotify_product,
-				spotify_uri,
-				spotify_type,
+				spotifyEmail,
+				spotifyDisplayName,
 				country,
-				refresh_token,
-				access_token
+				refreshToken,
+				accessToken
 			}
 		});
 	}

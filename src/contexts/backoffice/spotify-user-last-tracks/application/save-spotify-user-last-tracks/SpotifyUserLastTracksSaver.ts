@@ -21,7 +21,7 @@ export default class SpotifyUserLastTracksSaver {
 		// Get Spotify User Last Tracks
 		const exitingUser = await DomainSpotifyUserLastTracksSearcher.search(
 			this.spotifyUserLastTracksRepository,
-			command.data.spotify_id
+			command.data.aggregateId
 		);
 		logger.info('--- existing user');
 		logger.info(exitingUser);
@@ -59,7 +59,7 @@ export default class SpotifyUserLastTracksSaver {
 		// save DOMAIN
 		logger.info('--- Before calling SpotifyUserLastTracks');
 		await SpotifyUserLastTracks.save(this.spotifyUserLastTracksRepository)({
-			userId: command.data.spotify_id,
+			userId: command.data.aggregateId,
 			topTracks: tracks,
 			updatedAt: new Date().getTime()
 		});

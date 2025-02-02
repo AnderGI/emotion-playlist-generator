@@ -3,8 +3,8 @@ import { ImageSaver } from '../../../../../../src/contexts/backoffice/image/appl
 import { ImageSubmitedDomainEvent } from '../../../../../../src/contexts/backoffice/image/application/submit/ImageSubmitedDomainEvent';
 import SubmitImageCommandHandler from '../../../../../../src/contexts/backoffice/image/application/submit/SubmitImageCommandHandler';
 import { Image } from '../../../../../../src/contexts/backoffice/image/domain/Image';
-import { ImageMockEventBus } from '../../__mocks__/ImageMockEventBus';
-import { MockImageRepository } from '../../__mocks__/MockImageRepository';
+import { ImageMockEventBus } from '../../__mock__/ImageMockEventBus';
+import { MockImageRepository } from '../../__mock__/MockImageRepository';
 import { CreateImageCommandMother } from '../../domain/CreateImageCommandMother';
 import { ImageCreatedDomainEventMother } from '../../domain/ImageCreatedDomainEventMother';
 import { ImageMother } from '../../domain/ImageMother';

@@ -1,109 +1,70 @@
-/* eslint-disable camelcase */
 import LogInSpotifyUserCommand from '../../../../apps/backoffice/backend/controllers/login-spotify-user/LogInSpotifyUserCommand';
-import { UuidValueObject } from '../../../shared/domain/value-object/UuidValueObject';
 import SpotifyId from './SpotifyId';
-import SpotifyType from './SpotifyType';
 import SpotifyUserAccessToken from './SpotifyUserAccessToken';
 import SpotifyUserCountryCode from './SpotifyUserCountryCode';
 import SpotifyUserDisplayName from './SpotifyUserDisplayName';
 import SpotifyUserEmail from './SpotifyUserEmail';
-import SpotifyUserProductType from './SpotifyUserProductType';
 import SpotifyUserRefreshToken from './SpotifyUserRefreshToken';
-import SpotifyUserUri from './SpotifyUserUri';
 
 export type SpotifyUserPrimitives = {
-	uuid: string;
-	spotify_id: string;
-	spotify_email: string;
-	spotify_display_name: string;
-	spotify_product: string;
-	spotify_uri: string;
-	spotify_type: string;
+	spotifyId: string;
+	spotifyEmail: string;
+	spotifyDisplayName: string;
 	country: string;
-	refresh_token: string;
-	access_token: string;
+	refreshToken: string;
+	accessToken: string;
 };
 
 export default class SpotifyUser {
 	constructor(
-		readonly id: UuidValueObject,
 		readonly spotifyId: SpotifyId,
 		readonly spotifyMail: SpotifyUserEmail,
 		readonly spotifyDisplayName: SpotifyUserDisplayName,
-		readonly productType: SpotifyUserProductType,
-		readonly spotifyUri: SpotifyUserUri,
-		readonly spotifyType: SpotifyType,
 		readonly countryCode: SpotifyUserCountryCode,
 		readonly refreshToken: SpotifyUserRefreshToken,
 		readonly accessToken: SpotifyUserAccessToken
 	) {}
 
 	public static create(command: LogInSpotifyUserCommand): SpotifyUser {
-		const {
-			uuid,
-			spotify_id,
-			spotify_email,
-			spotify_display_name,
-			spotify_product,
-			spotify_uri,
-			spotify_type,
-			country,
-			refresh_token,
-			access_token
-		} = command.params;
+		const { spotifyId, spotifyEmail, spotifyDisplayName, country, refreshToken, accessToken } =
+			command.params;
 
 		return new SpotifyUser(
-			new UuidValueObject(uuid),
-			new SpotifyId(spotify_id),
-			new SpotifyUserEmail(spotify_email),
-			new SpotifyUserDisplayName(spotify_display_name),
-			new SpotifyUserProductType(spotify_product),
-			new SpotifyUserUri(spotify_uri),
-			new SpotifyType(spotify_type),
+			new SpotifyId(spotifyId),
+			new SpotifyUserEmail(spotifyEmail),
+			new SpotifyUserDisplayName(spotifyDisplayName),
 			new SpotifyUserCountryCode(country),
-			new SpotifyUserRefreshToken(refresh_token),
-			new SpotifyUserAccessToken(access_token)
+			new SpotifyUserRefreshToken(refreshToken),
+			new SpotifyUserAccessToken(accessToken)
 		);
 	}
 
 	public static fromPrimitives({
-		uuid,
-		spotify_id,
-		spotify_email,
-		spotify_display_name,
-		spotify_product,
-		spotify_uri,
-		spotify_type,
+		spotifyId,
+		spotifyEmail,
+		spotifyDisplayName,
 		country,
-		refresh_token,
-		access_token
+		refreshToken,
+		accessToken
 	}: SpotifyUserPrimitives): SpotifyUser {
 		return new SpotifyUser(
-			new UuidValueObject(uuid),
-			new SpotifyId(spotify_id),
-			new SpotifyUserEmail(spotify_email),
-			new SpotifyUserDisplayName(spotify_display_name),
-			new SpotifyUserProductType(spotify_product),
-			new SpotifyUserUri(spotify_uri),
-			new SpotifyType(spotify_type),
+			new SpotifyId(spotifyId),
+			new SpotifyUserEmail(spotifyEmail),
+			new SpotifyUserDisplayName(spotifyDisplayName),
 			new SpotifyUserCountryCode(country),
-			new SpotifyUserRefreshToken(refresh_token),
-			new SpotifyUserAccessToken(access_token)
+			new SpotifyUserRefreshToken(refreshToken),
+			new SpotifyUserAccessToken(accessToken)
 		);
 	}
 
 	public toPrimitives(): SpotifyUserPrimitives {
 		return {
-			uuid: this.id.value,
-			spotify_id: this.spotifyId.value,
-			spotify_email: this.spotifyMail.value,
-			spotify_display_name: this.spotifyDisplayName.value,
-			spotify_product: this.productType.value,
-			spotify_uri: this.spotifyUri.value,
-			spotify_type: this.spotifyType.value,
+			spotifyId: this.spotifyId.value,
+			spotifyEmail: this.spotifyMail.value,
+			spotifyDisplayName: this.spotifyDisplayName.value,
 			country: this.countryCode.value,
-			refresh_token: this.refreshToken.value,
-			access_token: this.accessToken.value
+			refreshToken: this.refreshToken.value,
+			accessToken: this.accessToken.value
 		};
 	}
 }

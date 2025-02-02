@@ -19,35 +19,22 @@ export default class DomainSpotifyUserRegistar {
 			logger.info('--- Before calling spotifyUserRepository');
 			await spotifyUserRepository.save(spotifyUser);
 			logger.info('--- After calling spotifyUserRepository');
-			const {
-				uuid,
-				spotify_id,
-				spotify_email,
-				spotify_display_name,
-				spotify_product,
-				spotify_uri,
-				spotify_type,
-				country,
-				refresh_token,
-				access_token
-			} = spotifyUser.toPrimitives();
+			const { spotifyId, spotifyEmail, spotifyDisplayName, country, refreshToken, accessToken } =
+				spotifyUser.toPrimitives();
 			logger.info('--- Before publishing SpotifyUserLoggedInDomainEvent');
-			await eventBus.publish(
-				SpotifyUserLoggedInDomainEvent.fromPrimitives({
-					aggregateId: uuid,
-					attributes: {
-						spotify_id,
-						spotify_email,
-						spotify_display_name,
-						spotify_product,
-						spotify_uri,
-						spotify_type,
-						country,
-						refresh_token,
-						access_token
-					}
-				})
-			);
+			const event = SpotifyUserLoggedInDomainEvent.fromPrimitives({
+				aggregateId: spotifyId,
+				attributes: {
+					spotifyEmail,
+					spotifyDisplayName,
+					country,
+					refreshToken,
+					accessToken
+				}
+			});
+
+			logger.info('Created event', event);
+			await eventBus.publish(event);
 			logger.info('--- After publishing SpotifyUserLoggedInDomainEvent');
 		};
 	}
