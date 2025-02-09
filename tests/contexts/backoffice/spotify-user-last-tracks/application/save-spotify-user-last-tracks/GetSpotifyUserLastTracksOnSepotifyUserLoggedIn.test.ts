@@ -1,6 +1,6 @@
 import { SpotifyUserLoggedInDomainEvent } from '../../../../../../src/contexts/backoffice/spotify-user/application/log-in/SpotifyUserLoggedInDomainEvent';
-import GetSpotifyUserLastTracksOnSepotifyUserLoggedIn from '../../../../../../src/contexts/backoffice/spotify-user-last-tracks/application/save-spotify-user-last-tracks/GetSpotifyUserLastTracksOnSepotifyUserLoggedIn';
-import SpotifyUserLastTracksSaver from '../../../../../../src/contexts/backoffice/spotify-user-last-tracks/application/save-spotify-user-last-tracks/SpotifyUserLastTracksSaver';
+import GetSpotifyUserLastTracksOnSpotifyUserLoggedIn from '../../../../../../src/contexts/backoffice/spotify-user-last-tracks/application/save-spotify-user-last-tracks/GetSpotifyUserLastTracksOnSpotifyUserLoggedIn';
+import SpotifyUserLastTracksUpserter from '../../../../../../src/contexts/backoffice/spotify-user-last-tracks/application/save-spotify-user-last-tracks/SpotifyUserLastTracksUpserter';
 import { SpotifyUserLoggedInDomainEventMother } from '../../../spotify-user/application/register/SpotifyUserLoggedInDomainEventMother';
 import { SpotifyUserMother } from '../../../spotify-user/domain/SpotifyUserMother';
 import MockSpotifyUserLastTracksRepository from '../../__mocks__/MockSpotifyUserLastTracksRepository';
@@ -16,9 +16,9 @@ describe('GetSpotifyUserLastTracksOnSepotifyUserLoggedIn', () => {
 			const command = GetSpotifyUserLastTracksOnSepotifyUserLoggedInCommandMother.fromEvent(event);
 			const mockRetriever = new MockSpotifyUserLastTracksRetriever();
 			const mockRepository = new MockSpotifyUserLastTracksRepository();
-			const spotifyUserLastTracksRetriever: SpotifyUserLastTracksSaver =
-				new SpotifyUserLastTracksSaver(mockRetriever, mockRepository);
-			const subscriber = new GetSpotifyUserLastTracksOnSepotifyUserLoggedIn(
+			const spotifyUserLastTracksRetriever: SpotifyUserLastTracksUpserter =
+				new SpotifyUserLastTracksUpserter(mockRetriever, mockRepository);
+			const subscriber = new GetSpotifyUserLastTracksOnSpotifyUserLoggedIn(
 				spotifyUserLastTracksRetriever
 			);
 

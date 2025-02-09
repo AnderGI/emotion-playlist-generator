@@ -1,6 +1,7 @@
 import { AggregateRoot } from '../../../shared/domain/AggregateRoot';
-import DomainSpotifyUserLastTracksSaver from './save/DomainSpotifyUserLastTracksSaver';
-import DomainSpotifyUserLastTracksSearcher from './search/DomainSpotifyUserLastTracksSearcher';
+import { EventBus } from '../../../shared/domain/event/EventBus';
+import SpotifyUserLastTracksSaver from './save/SpotifyUserLastTracksSaver';
+import SpotifyUserLastTracksSearcher from './search/SpotifyUserLastTracksSearcher';
 import SpotifyUserLastTracksRepository from './SpotifyUserLastTracksRepository';
 
 export type SpotifyUserLastTracksPrimitives = {
@@ -20,15 +21,15 @@ export default class SpotifyUserLastTracks implements AggregateRoot {
 		return new SpotifyUserLastTracks(primitives.userId, primitives.topTracks, primitives.updatedAt);
 	}
 
-	static save(repository: SpotifyUserLastTracksRepository) {
+	static upsert(repository: SpotifyUserLastTracksRepository, bus: EventBus) {
 		return async (spotifyUserPrimitives: SpotifyUserLastTracksPrimitives): Promise<void> => {
-			await DomainSpotifyUserLastTracksSaver.save(repository, spotifyUserPrimitives);
+			await SpotifyUserLastTracksSaver.save(repository, bus)(spotifyUserPrimitives);
 		};
 	}
 
 	static search(repository: SpotifyUserLastTracksRepository) {
 		return async (id: string): Promise<void> => {
-			await DomainSpotifyUserLastTracksSearcher.search(repository, id);
+			await SpotifyUserLastTracksSearcher.search(repository, id);
 		};
 	}
 

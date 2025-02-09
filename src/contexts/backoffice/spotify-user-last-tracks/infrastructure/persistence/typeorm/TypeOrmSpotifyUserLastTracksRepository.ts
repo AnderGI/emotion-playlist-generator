@@ -14,15 +14,11 @@ export class TypeOrmSpotifyUserLastTracksRepository implements SpotifyUserLastTr
 
 	public async search(aggregateId: string): Promise<Nullable<SpotifyUserLastTracks>> {
 		const repository = await this.repository();
-		console.log('spotifyuserlasttracks ', aggregateId);
 		const user = await repository.findOne({
 			where: {
 				userId: aggregateId
 			}
 		});
-
-		// return user;
-		console.log('Retrieved user', user);
 
 		return user;
 	}

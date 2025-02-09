@@ -4,10 +4,8 @@ import { DomainEventSubscriber } from '../../contexts/shared/domain/event/Domain
 import RabbitMqConnection from '../../contexts/shared/infrastructure/event/RabbitMqConnection';
 
 const setupConfigurer: RabbitMqConnection = container.get('backoffice.shared.RabbitMqConnection');
-
 const subscribers = container.findTaggedServiceIds('subscriber');
 const ids = [...subscribers.keys()];
-// da error de maximum call stack size
 const queuesToBindings = ids.map(id => {
 	const subscriber = container.get<DomainEventSubscriber<DomainEvent>>(id as string);
 

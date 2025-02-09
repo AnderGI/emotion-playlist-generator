@@ -5,12 +5,21 @@
       "arguments": ["@backoffice.shared.TypeOrmClientFactory"]
     },
     "backoffice.emotion-song-recommender.OnSpotifyUserLoggedInEmotionSongRecommenderUpdater": {
-      "class": "../../../../../../../contexts/backoffice/emotion-song-recommender/application/log-in/OnSpotifyUserLoggedInEmotionSongRecommenderUpdater",
+      "class": "../../../../../../../contexts/backoffice/emotion-song-recommender/application/update-when-user-logged-in/SpotifyUserLoggedInEmotionSongRecommenderUpdater",
       "arguments": ["@backoffice.emotion-song-recommender.EmotionSongRecommenderRepository"]
     },
     "backoffice.emotion-song-recommender.UpdateEmotionSongRecommenderOnSpotifyUserLoggedIn": {
-      "class": "../../../../../../../contexts/backoffice/emotion-song-recommender/application/log-in/UpdateEmotionSongRecommenderOnSpotifyUserLoggedIn",
+      "class": "../../../../../../../contexts/backoffice/emotion-song-recommender/application/update-when-user-logged-in/UpdateEmotionSongRecommenderOnSpotifyUserLoggedIn",
       "arguments": ["@backoffice.emotion-song-recommender.OnSpotifyUserLoggedInEmotionSongRecommenderUpdater"],
+      "tags": [{"name":"subscriber"}]
+    },
+    "backoffice.emotion-song-recommender.SpotifyUserLastTracksUpdatedEmotionSongRecommenderUpdater": {
+      "class": "../../../../../../../contexts/backoffice/emotion-song-recommender/application/update-spotify-user-last-tracks/SpotifyUserLastTracksUpdatedEmotionSongRecommenderUpdater",
+      "arguments": ["@backoffice.emotion-song-recommender.EmotionSongRecommenderRepository"]
+    },
+    "backoffice.emotion-song-recommender.UpdateEmotionSongRecommenderOnSpotifyUserLastTracksUpdated": {
+      "class": "../../../../../../../contexts/backoffice/emotion-song-recommender/application/update-spotify-user-last-tracks/UpdateEmotionSongRecommenderOnSpotifyUserLastTracksUpdated",
+      "arguments": ["@backoffice.emotion-song-recommender.SpotifyUserLastTracksUpdatedEmotionSongRecommenderUpdater"],
       "tags": [{"name":"subscriber"}]
     }
   }

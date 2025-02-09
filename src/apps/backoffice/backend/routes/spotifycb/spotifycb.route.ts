@@ -4,7 +4,6 @@ import httpStatus from 'http-status';
 import * as jwt from 'jsonwebtoken';
 import querystring from 'querystring';
 
-import { UuidValueObject } from '../../../../../contexts/shared/domain/value-object/UuidValueObject';
 import config from '../../../../../contexts/shared/infrastructure/convict/config/config';
 
 type SpotiFySuccesAuthResponse = {
@@ -119,7 +118,6 @@ export const register = (router: Router): void => {
 
 		// call spotifyuserput route
 
-		const uuid = UuidValueObject.random();
 		const dataForPut = {
 			spotifyId: user.id,
 			spotifyEmail: user.email,
@@ -130,10 +128,9 @@ export const register = (router: Router): void => {
 			// eslint-disable-next-line camelcase
 			accessToken: access_token
 		};
-		console.log(dataForPut);
 		// backend
-		fetch(`http://localhost:3000/spotify-users/${uuid}`, {
-			method: 'PUT',
+		fetch(`http://localhost:3000/spotify-users`, {
+			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify(dataForPut)
 		});

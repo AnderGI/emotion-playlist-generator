@@ -1,6 +1,6 @@
 import Command from '../../../../../shared/domain/command/Command';
-import SpotifyUserData from './SpotifyUserData';
+import SpotifyUserReq from './SpotifyUserReq';
 
 export default class LogInSpotifyUserCommand implements Command {
-	constructor(readonly params: SpotifyUserData) {}
+	constructor(readonly params: SpotifyUserReq) {}
 }

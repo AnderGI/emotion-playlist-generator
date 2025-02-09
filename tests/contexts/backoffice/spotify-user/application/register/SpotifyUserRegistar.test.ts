@@ -1,5 +1,5 @@
 import LogInSpotifyUserCommandHandler from '../../../../../../src/contexts/backoffice/spotify-user/application/log-in/LogInSpotifyUserCommandHandler';
-import SpotifyUserRegistar from '../../../../../../src/contexts/backoffice/spotify-user/application/log-in/SpotifyUserRegistar';
+import SpotifyUserLogIner from '../../../../../../src/contexts/backoffice/spotify-user/application/log-in/SpotifyUserLogIner';
 import MockSpotifyUserRepository from '../../__mocks__/MockSpotifyUserRepository';
 import SpotifyUserMockEventBus from '../../__mocks__/SpotifyUserMockEventBus';
 import { SpotifyUserMother } from '../../domain/SpotifyUserMother';
@@ -12,7 +12,7 @@ describe('SpotifyUserRegistar', () => {
 			const spotifyUser = SpotifyUserMother.create();
 			const spotifyUserRepository = new MockSpotifyUserRepository();
 			const spotifyUserEventBus = new SpotifyUserMockEventBus();
-			const spotifyUserRegister = new SpotifyUserRegistar(
+			const spotifyUserRegister = new SpotifyUserLogIner(
 				spotifyUserRepository,
 				spotifyUserEventBus
 			);

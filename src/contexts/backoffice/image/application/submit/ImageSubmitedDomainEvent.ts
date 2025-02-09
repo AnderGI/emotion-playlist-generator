@@ -54,4 +54,8 @@ export class ImageSubmitedDomainEvent extends DomainEvent {
 			dirname
 		};
 	}
+
+	getEventName(): string {
+		return ImageSubmitedDomainEvent.EVENT_NAME;
+	}
 }

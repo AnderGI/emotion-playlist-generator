@@ -14,6 +14,10 @@ export const EmotionSongRecommenderEntity = new EntitySchema<EmotionSongRecommen
 		spotifyUserMail: {
 			type: String,
 			nullable: true
+		},
+		lastTracks: {
+			type: 'json',
+			nullable: true
 		}
 	}
 });

@@ -2,6 +2,13 @@ import { UuidValueObject } from '../value-object/UuidValueObject';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type DomainEventAttributes = any;
+type FromReceivedData = {
+	eventName: string;
+	aggregateId: string;
+	eventId: string;
+	occurredOn: string;
+	attributes: any;
+};
 
 export abstract class DomainEvent {
 	static EVENT_NAME: string;
@@ -18,6 +25,7 @@ export abstract class DomainEvent {
 		occurredOn?: Date;
 	}) {
 		const { aggregateId, eventName, eventId, occurredOn } = params;
+
 		this.aggregateId = aggregateId;
 		this.eventId = eventId ?? UuidValueObject.random();
 		this.occurredOn = occurredOn ?? new Date();
@@ -25,6 +33,8 @@ export abstract class DomainEvent {
 	}
 
 	abstract toPrimitives(): DomainEventAttributes;
+	abstract fromReceivedData(data: FromReceivedData): DomainEvent;
+	abstract getEventName(): string;
 }
 
 export type DomainEventClass = {

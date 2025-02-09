@@ -23,10 +23,10 @@ Given('I send a GET request to {string}', async (route: string) => {
 });
 
 Given(
-	'I send a PUT request to {string} with JSON request body:',
+	'I send a POST request to {string} with JSON request body:',
 	async (route: string, body: string) => {
 		_response = await request(application.httpServer)
-			.put(route)
+			.post(route)
 			.send(JSON.parse(body) as object);
 	}
 );

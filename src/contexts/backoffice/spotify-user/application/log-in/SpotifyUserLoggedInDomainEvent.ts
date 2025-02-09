@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { DomainEvent } from '../../../../shared/domain/event/DomainEvent';
 
 type SpotifyUserLoggedInDomainEventAttributes = {
@@ -79,5 +80,24 @@ export class SpotifyUserLoggedInDomainEvent extends DomainEvent {
 			refreshToken,
 			accessToken
 		};
+	}
+
+	fromReceivedData(data: {
+		eventName: string;
+		aggregateId: string;
+		eventId: string;
+		occurredOn: string;
+		attributes: any;
+	}): DomainEvent {
+		return SpotifyUserLoggedInDomainEvent.fromPrimitives({
+			aggregateId: data.aggregateId,
+			attributes: data.attributes,
+			eventId: data.eventId,
+			occurredOn: new Date(this.occurredOn)
+		});
+	}
+
+	getEventName(): string {
+		return SpotifyUserLoggedInDomainEvent.EVENT_NAME;
 	}
 }

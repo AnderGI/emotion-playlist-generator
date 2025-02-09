@@ -8,15 +8,13 @@ export class SpotifyUserLoggedInDomainEventMother {
 		const { spotifyEmail, spotifyDisplayName, country, refreshToken, accessToken } =
 			spotifyUser.toPrimitives();
 
-		return SpotifyUserLoggedInDomainEvent.fromPrimitives({
+		return new SpotifyUserLoggedInDomainEvent({
 			aggregateId: spotifyUser.spotifyId.getValue(),
-			attributes: {
-				spotifyEmail,
-				spotifyDisplayName,
-				country,
-				refreshToken,
-				accessToken
-			}
+			spotifyEmail,
+			spotifyDisplayName,
+			country,
+			refreshToken,
+			accessToken
 		});
 	}
 }

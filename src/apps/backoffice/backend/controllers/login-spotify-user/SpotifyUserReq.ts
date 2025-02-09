@@ -1,4 +1,4 @@
-export default interface SpotifyUserData {
+export default interface SpotifyUserReq {
 	spotifyId: string;
 	spotifyEmail: string;
 	spotifyDisplayName: string;

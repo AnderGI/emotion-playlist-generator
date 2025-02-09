@@ -2,13 +2,13 @@ import logger from '../../../../../shared/infrastructure/winston/config';
 import { DomainEventClass } from '../../../../shared/domain/event/DomainEvent';
 import { DomainEventSubscriber } from '../../../../shared/domain/event/DomainEventSubscriber';
 import { SpotifyUserLoggedInDomainEvent } from '../../../spotify-user/application/log-in/SpotifyUserLoggedInDomainEvent';
-import OnSpotifyUserLoggedInEmotionSongRecommenderUpdater from './OnSpotifyUserLoggedInEmotionSongRecommenderUpdater';
+import SpotifyUserLoggedInEmotionSongRecommenderUpdater from './SpotifyUserLoggedInEmotionSongRecommenderUpdater';
 import UpdateEmotionSongRecommenderOnSpotifyUserLoggedInCommand from './UpdateEmotionSongRecommenderOnSpotifyUserLoggedInCommand';
 
 export default class UpdateEmotionSongRecommenderOnSpotifyUserLoggedIn
 	implements DomainEventSubscriber<SpotifyUserLoggedInDomainEvent>
 {
-	constructor(private readonly updater: OnSpotifyUserLoggedInEmotionSongRecommenderUpdater) {}
+	constructor(private readonly updater: SpotifyUserLoggedInEmotionSongRecommenderUpdater) {}
 
 	subscribedTo(): DomainEventClass[] {
 		return [SpotifyUserLoggedInDomainEvent];
@@ -16,13 +16,12 @@ export default class UpdateEmotionSongRecommenderOnSpotifyUserLoggedIn
 
 	async on(domainEvent: SpotifyUserLoggedInDomainEvent): Promise<void> {
 		logger.info('UpdateEmotionSongRecommenderOnSpotifyUserLoggedInDomainEvent#on');
-		logger.info(domainEvent);
-		await this.updater.run(
-			new UpdateEmotionSongRecommenderOnSpotifyUserLoggedInCommand({
-				spotifyUserId: domainEvent.aggregateId,
-				spotifyUserMail: domainEvent.spotifyEmail
-			})
-		);
+		const command = new UpdateEmotionSongRecommenderOnSpotifyUserLoggedInCommand({
+			spotifyUserId: domainEvent.aggregateId,
+			spotifyUserMail: domainEvent.spotifyEmail
+		});
+
+		await this.updater.run(command);
 	}
 
 	queueName(): string {

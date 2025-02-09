@@ -8,13 +8,18 @@
       "class": "../../../../../../../contexts/backoffice/spotify-user-last-tracks/infrastructure/retriever/HttpSpotifyUserLastTracksRetriever",
       "arguments": [""]
     },
-    "backoffice.spotify-user-last-tracks.SpotifyUserLastTracksSaver": {
-      "class": "../../../../../../../contexts/backoffice/spotify-user-last-tracks/application/save-spotify-user-last-tracks/SpotifyUserLastTracksSaver",
-      "arguments": ["@backoffice.spotify-user-last-tracks.SpotifyUserLastTracksRetriever", "@backoffice.spotify-user-last-tracks.SpotifyUserLastTracksRepository"]
+    "backoffice.spotify-user-last-tracks.SpotifyUserLastTracksUpserter": {
+      "class": "../../../../../../../contexts/backoffice/spotify-user-last-tracks/application/save-spotify-user-last-tracks/SpotifyUserLastTracksUpserter",
+      "arguments": ["@backoffice.spotify-user-last-tracks.SpotifyUserLastTracksRetriever", "@backoffice.spotify-user-last-tracks.SpotifyUserLastTracksRepository", "@backoffice.shared.EventBus"]
     },
-    "backoffice.spotify-user-last-tracks.GetSpotifyUserLastTracksOnSepotifyUserLoggedIn": {
-      "class": "../../../../../../../contexts/backoffice/spotify-user-last-tracks/application/save-spotify-user-last-tracks/GetSpotifyUserLastTracksOnSepotifyUserLoggedIn",
-      "arguments": ["@backoffice.spotify-user-last-tracks.SpotifyUserLastTracksSaver"],
+    "andergi.backoffice.spotify-user-last-tracks.event.spotify-user-logged-in.1": {
+      "class": "../../../../../../../contexts/backoffice/spotify-user-last-tracks/application/save-spotify-user-last-tracks/SpotifyUserLastTracksUpdatedDomainEvent",
+      "arguments": [""],
+      "tags": [{"name":"domainEvent"}]
+    },
+    "backoffice.spotify-user-last-tracks.GetSpotifyUserLastTracksOnSpotifyUserLoggedIn": {
+      "class": "../../../../../../../contexts/backoffice/spotify-user-last-tracks/application/save-spotify-user-last-tracks/GetSpotifyUserLastTracksOnSpotifyUserLoggedIn",
+      "arguments": ["@backoffice.spotify-user-last-tracks.SpotifyUserLastTracksUpserter"],
       "tags": [{"name":"subscriber"}]
     }
   }

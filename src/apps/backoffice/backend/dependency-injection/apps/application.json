@@ -8,8 +8,8 @@
       "class": "../../controllers/submit-image/ImagePutController",
       "arguments": ["@shared.CommandBus"]     
     },
-    "apps.backoffice.SpotifyUserPutController": {
-      "class": "../../controllers/login-spotify-user/SpotifyUserPutController",
+    "apps.backoffice.SpotifyUserPostController": {
+      "class": "../../controllers/login-spotify-user/SpotifyUserPostController",
       "arguments": ["@shared.CommandBus"]     
     }
   }

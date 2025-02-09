@@ -5,8 +5,13 @@
       "arguments": ["@backoffice.shared.TypeOrmClientFactory"]
     },
     "backoffice.spotify-user.SpotifyUserRegistar": {
-      "class": "../../../../../../../contexts/backoffice/spotify-user/application/log-in/SpotifyUserRegistar",
+      "class": "../../../../../../../contexts/backoffice/spotify-user/application/log-in/SpotifyUserLogIner",
       "arguments": ["@backoffice.spotify-user.SpotifyUserRepository", "@backoffice.shared.EventBus"]
+    },
+    "andergi.backoffice.spotify-user.event.spotify-user-logged-in.1": {
+      "class": "../../../../../../../contexts/backoffice/spotify-user/application/log-in/SpotifyUserLoggedInDomainEvent",
+      "arguments": [""],
+      "tags": [{"name":"domainEvent"}]
     },
     "backoffice.spotify-user.LogInSpotifyUserCommandHandler": {
       "class": "../../../../../../../contexts/backoffice/spotify-user/application/log-in/LogInSpotifyUserCommandHandler",
