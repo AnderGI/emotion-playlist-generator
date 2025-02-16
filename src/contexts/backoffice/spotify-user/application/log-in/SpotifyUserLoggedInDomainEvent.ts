@@ -6,7 +6,6 @@ type SpotifyUserLoggedInDomainEventAttributes = {
 	readonly spotifyDisplayName: string;
 	readonly country: string;
 	readonly refreshToken: string;
-	readonly accessToken: string;
 };
 
 export class SpotifyUserLoggedInDomainEvent extends DomainEvent {
@@ -17,14 +16,12 @@ export class SpotifyUserLoggedInDomainEvent extends DomainEvent {
 	readonly spotifyDisplayName: string;
 	readonly country: string;
 	readonly refreshToken: string;
-	readonly accessToken: string;
 	constructor({
 		aggregateId,
 		spotifyEmail,
 		spotifyDisplayName,
 		country,
 		refreshToken,
-		accessToken,
 		eventId,
 		occurredOn
 	}: {
@@ -33,7 +30,6 @@ export class SpotifyUserLoggedInDomainEvent extends DomainEvent {
 		spotifyDisplayName: string;
 		country: string;
 		refreshToken: string;
-		accessToken: string;
 		eventId?: string;
 		occurredOn?: Date;
 	}) {
@@ -47,7 +43,6 @@ export class SpotifyUserLoggedInDomainEvent extends DomainEvent {
 		this.spotifyDisplayName = spotifyDisplayName;
 		this.country = country;
 		this.refreshToken = refreshToken;
-		this.accessToken = accessToken;
 	}
 
 	static fromPrimitives(params: {
@@ -64,21 +59,19 @@ export class SpotifyUserLoggedInDomainEvent extends DomainEvent {
 			spotifyDisplayName: attributes.spotifyDisplayName,
 			country: attributes.country,
 			refreshToken: attributes.refreshToken,
-			accessToken: attributes.accessToken,
 			eventId,
 			occurredOn
 		});
 	}
 
 	toPrimitives(): SpotifyUserLoggedInDomainEventAttributes {
-		const { spotifyEmail, spotifyDisplayName, country, refreshToken, accessToken } = this;
+		const { spotifyEmail, spotifyDisplayName, country, refreshToken } = this;
 
 		return {
 			spotifyEmail,
 			spotifyDisplayName,
 			country,
-			refreshToken,
-			accessToken
+			refreshToken
 		};
 	}
 

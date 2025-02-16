@@ -1,18 +1,14 @@
 import LogInSpotifyUserCommand from '../../../../apps/backoffice/backend/controllers/login-spotify-user/LogInSpotifyUserCommand';
 import SpotifyId from './SpotifyId';
-import SpotifyUserAccessToken from './SpotifyUserAccessToken';
 import SpotifyUserCountryCode from './SpotifyUserCountryCode';
 import SpotifyUserDisplayName from './SpotifyUserDisplayName';
 import SpotifyUserEmail from './SpotifyUserEmail';
-import SpotifyUserRefreshToken from './SpotifyUserRefreshToken';
 
 export type SpotifyUserPrimitives = {
 	spotifyId: string;
 	spotifyEmail: string;
 	spotifyDisplayName: string;
 	country: string;
-	refreshToken: string;
-	accessToken: string;
 };
 
 export default class SpotifyUser {
@@ -20,22 +16,17 @@ export default class SpotifyUser {
 		readonly spotifyId: SpotifyId,
 		readonly spotifyMail: SpotifyUserEmail,
 		readonly spotifyDisplayName: SpotifyUserDisplayName,
-		readonly countryCode: SpotifyUserCountryCode,
-		readonly refreshToken: SpotifyUserRefreshToken,
-		readonly accessToken: SpotifyUserAccessToken
+		readonly countryCode: SpotifyUserCountryCode
 	) {}
 
 	public static create(command: LogInSpotifyUserCommand): SpotifyUser {
-		const { spotifyId, spotifyEmail, spotifyDisplayName, country, refreshToken, accessToken } =
-			command.params;
+		const { spotifyId, spotifyEmail, spotifyDisplayName, country } = command.params;
 
 		return new SpotifyUser(
 			new SpotifyId(spotifyId),
 			new SpotifyUserEmail(spotifyEmail),
 			new SpotifyUserDisplayName(spotifyDisplayName),
-			new SpotifyUserCountryCode(country),
-			new SpotifyUserRefreshToken(refreshToken),
-			new SpotifyUserAccessToken(accessToken)
+			new SpotifyUserCountryCode(country)
 		);
 	}
 
@@ -43,17 +34,13 @@ export default class SpotifyUser {
 		spotifyId,
 		spotifyEmail,
 		spotifyDisplayName,
-		country,
-		refreshToken,
-		accessToken
+		country
 	}: SpotifyUserPrimitives): SpotifyUser {
 		return new SpotifyUser(
 			new SpotifyId(spotifyId),
 			new SpotifyUserEmail(spotifyEmail),
 			new SpotifyUserDisplayName(spotifyDisplayName),
-			new SpotifyUserCountryCode(country),
-			new SpotifyUserRefreshToken(refreshToken),
-			new SpotifyUserAccessToken(accessToken)
+			new SpotifyUserCountryCode(country)
 		);
 	}
 
@@ -62,9 +49,7 @@ export default class SpotifyUser {
 			spotifyId: this.spotifyId.value,
 			spotifyEmail: this.spotifyMail.value,
 			spotifyDisplayName: this.spotifyDisplayName.value,
-			country: this.countryCode.value,
-			refreshToken: this.refreshToken.value,
-			accessToken: this.accessToken.value
+			country: this.countryCode.value
 		};
 	}
 }

@@ -6,24 +6,23 @@ import { SpotifyUserMother } from '../../domain/SpotifyUserMother';
 import { LogInSpotifyUserCommandMother } from './LogInSpotifyUserCommandMother';
 import { SpotifyUserLoggedInDomainEventMother } from './SpotifyUserLoggedInDomainEventMother';
 
-describe('SpotifyUserRegistar', () => {
+describe('SpotifyUserLogIner', () => {
 	describe('#logIn', () => {
-		it('should register a non existing user', async () => {
-			const spotifyUser = SpotifyUserMother.create();
+		it('should upsert a user', async () => {
 			const spotifyUserRepository = new MockSpotifyUserRepository();
 			const spotifyUserEventBus = new SpotifyUserMockEventBus();
-			const spotifyUserRegister = new SpotifyUserLogIner(
-				spotifyUserRepository,
-				spotifyUserEventBus
-			);
-			const registerSpotifyUserCommand = LogInSpotifyUserCommandMother.fromUser(spotifyUser);
+
+			const command = LogInSpotifyUserCommandMother.create();
+			const spotifyUser = SpotifyUserMother.fromCommand(command);
 			const spotifyUserLoggedInDomainEvent =
-				SpotifyUserLoggedInDomainEventMother.fromSpotifyUser(spotifyUser);
+				SpotifyUserLoggedInDomainEventMother.fromCommand(command);
+
+			const spotifyUserLogIner = new SpotifyUserLogIner(spotifyUserRepository, spotifyUserEventBus);
 			const registerSpotifyUserCommandHandler = new LogInSpotifyUserCommandHandler(
-				spotifyUserRegister
+				spotifyUserLogIner
 			);
 
-			await registerSpotifyUserCommandHandler.handle(registerSpotifyUserCommand);
+			await registerSpotifyUserCommandHandler.handle(command);
 			spotifyUserRepository.ensureRegisterHasBeenCalledWith(spotifyUser);
 			spotifyUserEventBus.assertBusHasBeenCalledWith(spotifyUserLoggedInDomainEvent);
 		});

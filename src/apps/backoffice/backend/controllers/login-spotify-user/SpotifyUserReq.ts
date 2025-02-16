@@ -4,5 +4,4 @@ export default interface SpotifyUserReq {
 	spotifyDisplayName: string;
 	country: string;
 	refreshToken: string;
-	accessToken: string;
 }

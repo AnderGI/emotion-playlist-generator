@@ -11,15 +11,13 @@ export default class SpotifyUserSaver {
 			logger.info('SpotifyUserSaver#save');
 			const spotifyUser = SpotifyUser.create(command);
 			await repository.save(spotifyUser);
-			const { spotifyId, spotifyEmail, spotifyDisplayName, country, refreshToken, accessToken } =
-				spotifyUser.toPrimitives();
+			const { spotifyId, spotifyEmail, spotifyDisplayName, country, refreshToken } = command.params;
 			const event = new SpotifyUserLoggedInDomainEvent({
 				aggregateId: spotifyId,
 				spotifyEmail,
 				spotifyDisplayName,
 				country,
-				refreshToken,
-				accessToken
+				refreshToken
 			});
 			logger.info('Created event before being published');
 			logger.info(JSON.stringify(event));

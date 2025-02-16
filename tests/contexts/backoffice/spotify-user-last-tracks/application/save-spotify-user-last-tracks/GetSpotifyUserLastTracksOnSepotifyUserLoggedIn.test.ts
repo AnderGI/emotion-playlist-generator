@@ -1,7 +1,7 @@
 import { SpotifyUserLoggedInDomainEvent } from '../../../../../../src/contexts/backoffice/spotify-user/application/log-in/SpotifyUserLoggedInDomainEvent';
 import GetSpotifyUserLastTracksOnSpotifyUserLoggedIn from '../../../../../../src/contexts/backoffice/spotify-user-last-tracks/application/save-spotify-user-last-tracks/GetSpotifyUserLastTracksOnSpotifyUserLoggedIn';
 import SpotifyUserLastTracksUpserter from '../../../../../../src/contexts/backoffice/spotify-user-last-tracks/application/save-spotify-user-last-tracks/SpotifyUserLastTracksUpserter';
-import { SpotifyUserLoggedInDomainEventMother } from '../../../spotify-user/application/register/SpotifyUserLoggedInDomainEventMother';
+import { SpotifyUserLoggedInDomainEventMother } from '../../../spotify-user/application/log-in/SpotifyUserLoggedInDomainEventMother';
 import { SpotifyUserMother } from '../../../spotify-user/domain/SpotifyUserMother';
 import MockSpotifyUserLastTracksRepository from '../../__mocks__/MockSpotifyUserLastTracksRepository';
 import MockSpotifyUserLastTracksRetriever from '../../__mocks__/MockSpotifyUserLMockSpotifyUserLastTracksRetrieverastTracksRepository';
